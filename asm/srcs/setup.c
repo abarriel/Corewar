@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/19 06:07:00 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/20 01:13:45 by abarriel         ###   ########.fr       */
+/*   Created: 2017/03/19 19:36:08 by abarriel          #+#    #+#             */
+/*   Updated: 2017/03/19 19:38:18 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
-# include "libft.h"
+#include "asm.h"
 
-typedef struct	s_asm
+t_asm	*init_asm(void)
 {
-	char		*champ_name;
-	int			fd_champ;
-	int			fd_cor;
-	char		*cor;
-}				t_asm;
-t_asm			*init_asm(void);
-#endif
+	t_asm		*a;
+
+	if (!(a = (t_asm*)malloc(sizeof(t_asm))))
+		ft_exit("Failed to Malloc Asm/Struct");
+	return (a);
+}

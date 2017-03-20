@@ -6,21 +6,21 @@
 #    By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/19 11:33:06 by abarriel          #+#    #+#              #
-#    Updated: 2017/03/19 06:09:44 by abarriel         ###   ########.fr        #
+#    Updated: 2017/03/19 23:14:51 by abarriel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
 
-SRC		= asm.c
+SRC		= asm.c setup.c
 
-OBJ		= $(addprefix ,$(SRC:.c=.o))
+OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
 INCLUDES = ../includes/asm.h
 
 CFLAGS	=  -Wall -Wextra  -I../includes/ -I../libft/includes/
 
-all: makefile libft $(NAME)
+all: $(INCLUDES) makefile libft $(NAME)
 
 libft:
 	@make -C ../libft
