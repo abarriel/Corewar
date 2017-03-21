@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 05:41:54 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/19 05:53:01 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/21 01:51:29 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char				*ft_stock_the_new_line(char *str)
 		i++;
 	}
 	new[i] = '\0';
-	ft_putendl(new);
 	return (new);
 }
 
@@ -82,10 +81,7 @@ int					get_next_line(const int fd, char **line)
 		if (*new != '\0')
 			break ;
 		else
-		{
-			ft_putendl(new);
 			return (0);
-		}
 	}
 	*line = ft_stock_the_new_line(new);
 	new = ft_clean_new(new);

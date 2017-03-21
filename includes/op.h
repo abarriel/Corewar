@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 01:16:29 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/20 01:18:11 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/21 12:48:21 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,15 @@ typedef struct			s_header
 	unsigned int		prog_size;
 	char				comment[COMMENT_LENGTH + 1];
 }						t_header;
+
+// struct  op_s
+// {
+//    char         *mnemonique;
+//    char         nbr_args;
+//    args_type_t  type[MAX_ARGS_NUMBER];
+//    char         code;
+//    int          nbr_cycles;
+//    char         *comment;
+// };
 
 #endif

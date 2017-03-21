@@ -6,17 +6,17 @@
 #    By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/19 11:33:06 by abarriel          #+#    #+#              #
-#    Updated: 2017/03/19 23:14:51 by abarriel         ###   ########.fr        #
+#    Updated: 2017/03/21 07:08:49 by abarriel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
 
-SRC		= asm.c setup.c
+SRC		= asm.c setup.c header.c
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
-INCLUDES = ../includes/asm.h
+INCLUDES = ../includes/asm.h ../includes/op.h
 
 CFLAGS	=  -Wall -Wextra  -I../includes/ -I../libft/includes/
 
