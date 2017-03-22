@@ -6,33 +6,43 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 01:44:25 by abarriel          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2017/03/22 01:15:13 by lcharvol         ###   ########.fr       */
-=======
 /*   Updated: 2017/03/22 01:17:15 by lcharvol         ###   ########.fr       */
->>>>>>> abarriel
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include "locale.h"
+
 void 	header_name(char *line, t_header *h, t_asm *a)
 {
 	skip_space(&line);
 	if (*line != '"' && !ft_strchr(LABEL_CHARS, *line))
 		return (lexical_error(a->count_line, a->len_line - ft_strlen(line)));
 	line++;
+	if ((ft_strlen(line) - 1) > PROG_NAME_LENGTH)
+		ft_printf("Champion name too long (Max length %d)\n", PROG_NAME_LENGTH);
 	ft_bzero(h->prog_name, PROG_NAME_LENGTH);
-	ft_strccpy(h->prog_name, line, 34);
+	ft_strccpy(h->prog_name, line, '"');
 	write(a->fd_cor, &(h->prog_name), sizeof(h->prog_name));
 }
 
 void 	header_comment(char *line, t_header *h, t_asm *a)
 {
-	int to_del;
+	static int tmp = 0;
 
+	if (tmp == 1)
+		return (lexical_error(a->count_line, a->len_line - ft_strlen(line)));
 	skip_space(&line);
-	ft_printf("{7}%s\n", line);
+	if (*line != '"' && !ft_strchr(LABEL_CHARS, *line))
+		return (lexical_error(a->count_line, a->len_line - ft_strlen(line)));
+	line++;
+	if ((ft_strlen(line) - 1) > COMMENT_LENGTH)
+		ft_printf("Champion comment too long (Max length %d)\n", COMMENT_LENGTH);
+	ft_bzero(h->comment, COMMENT_LENGTH);
+	ft_strccpy(h->comment, line, '"');
+	write(a->fd_cor, &(h->comment), sizeof(h->comment));
+	tmp = 1;
 }
 
 int 	header_parser(char *line, t_header *h, t_asm *a)
@@ -41,9 +51,14 @@ int 	header_parser(char *line, t_header *h, t_asm *a)
 	skip_space(&line);
 	if (!ft_strncmp(line,NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)))
 		header_name(line + ft_strlen(NAME_CMD_STRING), h, a);
-	if (!ft_strncmp(line,COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)))
+	else if (!ft_strncmp(line,COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)))
 		header_comment(line + ft_strlen(COMMENT_CMD_STRING), h, a);
 	return (0);
+}
+
+void	header_magic_code(t_asm *a)
+{
+	write(a->fd_cor, (const void *)0xea83f3, sizeof(COREWAR_EXEC_MAGIC));
 }
 
 void 	header_champ(t_asm *a, t_header *h)
@@ -51,6 +66,7 @@ void 	header_champ(t_asm *a, t_header *h)
 	char	*line;
 
 	a->count_line = 1;
+	header_magic_code(a);
 	while (get_next_line(a->fd_champ, &line))
 	{
 		if (*line != COMMENT_CHAR)
