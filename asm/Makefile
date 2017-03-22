@@ -6,13 +6,13 @@
 #    By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/19 11:33:06 by abarriel          #+#    #+#              #
-#    Updated: 2017/03/22 22:19:38 by abarriel         ###   ########.fr        #
+#    Updated: 2017/03/22 22:55:28 by lcharvol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
 
-SRC		= asm.c setup.c header.c label.c
+SRC		= asm.c setup.c header.c header2.c label.c
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 

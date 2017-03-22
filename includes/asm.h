@@ -14,9 +14,11 @@
 # define ASM_H
 # include "libft.h"
 # include "op.h"
+# include "locale.h"
 
 typedef struct	s_asm
 {
+	int 		header_passage;
 	char		*champ_name;
 	int			fd_champ;
 	int 		len_line;
@@ -24,6 +26,11 @@ typedef struct	s_asm
 	int			fd_cor;
 	char		*cor;
 }				t_asm;
+
+int 			check_full_space_line(char *str);
+void			header_verif_name_comment(char *line, t_asm *a);
+void 			length_error(int i);
+void 			syntax_error(char *str, int line, int character);
 t_asm			*init_asm(void);
 t_header		*init_header(void);
 int 			skip_space(char **s);
