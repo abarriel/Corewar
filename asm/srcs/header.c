@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 01:44:25 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/21 12:56:22 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/22 01:14:03 by lcharvol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void 	header_name(char *line, t_header *h, t_asm *a)
 
 void 	header_comment(char *line, t_header *h, t_asm *a)
 {
+	int to_del;
+
 	skip_space(&line);
 	ft_printf("{7}%s\n", line);
 }
