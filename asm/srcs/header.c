@@ -6,12 +6,13 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 01:44:25 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/21 12:56:22 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/22 01:13:59 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include "locale.h"
+
 void 	header_name(char *line, t_header *h, t_asm *a)
 {
 	skip_space(&line);
@@ -21,6 +22,13 @@ void 	header_name(char *line, t_header *h, t_asm *a)
 	ft_bzero(h->prog_name, PROG_NAME_LENGTH);
 	ft_strccpy(h->prog_name, line, 34);
 	write(a->fd_cor, &(h->prog_name), sizeof(h->prog_name));
+	ft_printf("%d",4);
+	ok
+		okko
+		okok
+		okok
+		ok
+		ok
 }
 
 void 	header_comment(char *line, t_header *h, t_asm *a)
