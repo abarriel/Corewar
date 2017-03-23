@@ -6,42 +6,59 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 19:36:08 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/21 09:30:02 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/23 03:59:00 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** RID RDI FOR SILENCE WARNING
+**/
 #include "asm.h"
+#define RID T_REG | T_IND | T_DIR
+#define RDI T_REG | T_DIR | T_IND
 
-void			lexical_error(int line, int character)
+void	init_op(void **res)
 {
-	ft_dprintf(2, "Lexical error at [%d:%d]\n", line, character);
-	exit(0);
+	static const t_op op[] = {{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
+		{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
+		{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
+		{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0},
+		{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0},
+		{"and", 3, {RDI, RID, T_REG}, 6, 6, "r1,r2,r3. r1&r2 -> r3", 1, 0},
+		{"or", 3, {RID, RID, T_REG}, 7, 6, "r1,r2,r3. r1 | r2 -> r3", 1, 0},
+		{"xor", 3, {RID, RID, T_REG}, 8, 6, "r1,r2,r3. r1^r2 -> r3", 1, 0},
+		{"zjmp", 1, {T_DIR}, 9, 20, "jump if zero", 0, 1},
+		{"ldi", 3, {RDI, T_DIR | T_REG, T_REG}, 10, 25, "load index", 1, 1},
+		{"sti", 3, {T_REG, RDI, T_DIR | T_REG}, 11, 25, "store index", 1, 1},
+		{"fork", 1, {T_DIR}, 12, 800, "fork", 0, 1},
+		{"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, "long load", 1, 0},
+		{"lldi", 3, {RDI, T_DIR | T_REG, T_REG}, 14, 50, "lng lod idx", 1, 1},
+		{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
+		{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
+		{0, 0, {0}, 0, 0, 0, 0, 0}};
+
+	*res = (void*)op;
 }
 
-void			syntax_error(char *str, int line, int character)
+t_op	*get_op(void)
 {
-	ft_printf("Syntax error at token [TOKEN][%d:%d] LABEL ''%s''\n",
-		line ,character ,str);
-	exit(0);
+	void **get_op;
+	t_op *res;
+
+	*get_op = NULL;
+	init_op(get_op);
+	res = (t_op*)*get_op;
+	return (res);
 }
 
-void			length_error(int i)
-{
-	if (i == 1)
-		ft_printf("Comment too long (Max length %d)\n", COMMENT_LENGTH);
-	if (i == 2)
-		ft_printf("Champion name too long (Max length %d)\n", PROG_NAME_LENGTH);
-	exit(0);
-}
-
-int 			skip_space(char **s)
+int		skip_space(char **s)
 {
 	while ((**s) == ' ' || (**s) == '\t')
 		(*s)++;
 	return (0);
 }
 
-t_asm			*init_asm(void)
+t_asm	*init_asm(void)
 {
 	t_asm		*a;
 
@@ -66,3 +83,27 @@ t_header		*init_header(void)
 	return (h);
 }
 
+t_lab		*init_lab(void)
+{
+	t_lab	*l;
+
+	if (!(l = (t_lab*)malloc(sizeof(t_lab))))
+		ft_exit("Failed to Malloc Asm/Struct");
+	l->next = NULL;
+	return (l);
+}
+
+void 		add_back_lab(t_lab **l_t)
+{
+	t_lab *l;
+
+	l = *l_t;
+	if(*l)
+	{
+		(*l_t) = init_lab();
+		return ;
+	}
+	while (l->next)
+		l = l->next;
+	l->next = init_lab();
+}

@@ -6,19 +6,21 @@
 #    By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/19 11:33:06 by abarriel          #+#    #+#              #
-#    Updated: 2017/03/22 22:55:28 by lcharvol         ###   ########.fr        #
+#    Updated: 2017/03/23 03:54:06 by abarriel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
 
-SRC		= asm.c setup.c header.c header2.c label.c
+SRC		= asm.c setup.c header.c header2.c label.c error.c op.c
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
 INCLUDES = ../includes/asm.h ../includes/op.h
 
-CFLAGS	=  -Wall -Wextra  -I../includes/ -I../libft/includes/
+INIB_FLAGS = -Wno-error=unused-parameter -Wno-error=unused-variable
+ALL_FLAGS = -Wextra -Werror
+CFLAGS	=  $(INIB_FLAGS) -Wall  -I../includes/ -I../libft/includes/
 
 all: $(INCLUDES) makefile libft $(NAME)
 
