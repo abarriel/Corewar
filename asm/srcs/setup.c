@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 19:36:08 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/23 03:59:00 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/23 04:06:15 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void 		add_back_lab(t_lab **l_t)
 	t_lab *l;
 
 	l = *l_t;
-	if(*l)
+	if(!l)
 	{
 		(*l_t) = init_lab();
 		return ;
@@ -106,4 +106,5 @@ void 		add_back_lab(t_lab **l_t)
 	while (l->next)
 		l = l->next;
 	l->next = init_lab();
+	l = l->next;
 }
