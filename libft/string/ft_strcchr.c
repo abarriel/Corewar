@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_strcchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 01:24:51 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/23 05:48:18 by abarriel         ###   ########.fr       */
+/*   Created: 2017/03/23 05:16:38 by abarriel          #+#    #+#             */
+/*   Updated: 2017/03/23 05:31:59 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *src, int c, size_t n)
+char	*ft_strcchr(const char *s, int c, char stop)
 {
-	unsigned char	*s;
-	unsigned char	c1;
-
-	c1 = (unsigned char)c;
-	s = (unsigned char *)src;
-	while (n != '\0')
-	{
-		if (*s != c1)
-			s++;
-		else
-			return (s);
-		n--;
-	}
-	return (NULL);
+	return (ft_memchr(s, c, ft_strclen(s, stop) + 1));
 }

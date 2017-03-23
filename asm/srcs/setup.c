@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 19:36:08 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/23 04:06:15 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/23 08:32:10 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,17 @@ t_op	*get_op(void)
 
 int		skip_space(char **s)
 {
+	int len;
+
+	len = 1;
 	while ((**s) == ' ' || (**s) == '\t')
+	{
+		len++;
 		(*s)++;
-	return (0);
+	}
+	if (**s == '\0')
+		return (0);
+	return (len);
 }
 
 t_asm	*init_asm(void)
@@ -83,28 +91,30 @@ t_header		*init_header(void)
 	return (h);
 }
 
-t_lab		*init_lab(void)
+t_lab		*init_lab(char *label, t_asm *a)
 {
 	t_lab	*l;
 
 	if (!(l = (t_lab*)malloc(sizeof(t_lab))))
 		ft_exit("Failed to Malloc Asm/Struct");
+	l->label = label;
+	l->count_line = a->count_line;
 	l->next = NULL;
 	return (l);
 }
 
-void 		add_back_lab(t_lab **l_t)
+void 		add_back_lab(t_lab **l_t, char *label, t_asm *a)
 {
 	t_lab *l;
 
 	l = *l_t;
 	if(!l)
 	{
-		(*l_t) = init_lab();
+		(*l_t) = init_lab(label, a);
 		return ;
 	}
 	while (l->next)
 		l = l->next;
-	l->next = init_lab();
-	l = l->next;
+	l->next = init_lab(label, a);
+	// l = l->next;
 }

@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 06:07:00 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/23 03:58:52 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/23 08:53:12 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,14 @@ typedef struct 		s_cmd
 typedef struct		s_lab
 {
 	char 			*label;
+	int 			count_line;
 	t_cmd 			*cmd;
 	struct s_lab	*next;
 }					t_lab;
 t_op				*get_op(void);
+void 				print_label(t_lab *lab);
 void				get_label(t_asm *a);
-t_lab				*init_lab(void);
+void 				add_back_lab(t_lab **l_t, char *label, t_asm *a);
 int 				check_full_space_line(char *str);
 void				header_verif_name_comment(char *line, t_asm *a);
 void 				length_error(int i);

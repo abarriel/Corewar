@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 01:24:51 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/23 05:48:18 by abarriel         ###   ########.fr       */
+/*   Created: 2017/03/23 08:51:24 by abarriel          #+#    #+#             */
+/*   Updated: 2017/03/23 08:56:07 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "asm.h"
 
-void	*ft_memchr(const void *src, int c, size_t n)
+void print_label(t_lab *lab)
 {
-	unsigned char	*s;
-	unsigned char	c1;
-
-	c1 = (unsigned char)c;
-	s = (unsigned char *)src;
-	while (n != '\0')
+	if(lab)
+		ft_printf("{8} %s:  Recup ligne : %d\n","Label Vide", lab->count_line);
+	lab = lab->next;
+	while(lab)
 	{
-		if (*s != c1)
-			s++;
-		else
-			return (s);
-		n--;
+		ft_printf("{8} %s:  Recup ligne : %d\n",lab->label, lab->count_line);
+		lab = lab->next;
 	}
-	return (NULL);
 }

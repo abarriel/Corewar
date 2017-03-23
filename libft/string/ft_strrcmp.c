@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 21:36:09 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/20 01:09:48 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/23 05:48:22 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,22 @@ int		ft_strrncmp(const char *s1, const char *s2, size_t n)
 	i = r1[i] - s2[i];
 	ft_strdel(&r1);
 	return (i);
+}
+
+int		ft_strrcmp(char *s1, char *s2, size_t n)
+{
+	unsigned char	*d1;
+	unsigned char	*d2;
+
+	d1 = (unsigned char *)s1;
+	d2 = (unsigned char *)s2;
+	while (n)
+	{
+		if (*d1 != *d2)
+			return (*d1 - *d2);
+		++d1;
+		++d2;
+		--n;
+	}
+	return (0);
 }
