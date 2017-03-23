@@ -22,7 +22,7 @@ void print_label(t_lab *lab)
 		ft_printf("{8} %s:  Recup ligne : %d\n",lab->label, lab->count_line);
 		// while(lab->cmd)
 		// {
-			ft_printf("{9}\e %s\n",lab->cmd->op);
+			// ft_printf("{9}\e %s\n",lab->cmd->op);
 			// lab->cmd = lab->cmd->next;
 		// }
 		lab = lab->next;
