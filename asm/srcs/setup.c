@@ -100,6 +100,7 @@ t_lab		*init_lab(char *label, t_asm *a)
 	l->label = label;
 	l->count_line = a->count_line;
 	l->next = NULL;
+	l->cmd = NULL;
 	return (l);
 }
 

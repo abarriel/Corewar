@@ -14,12 +14,17 @@
 
 void print_label(t_lab *lab)
 {
-	if(lab)
+	if (lab)
 		ft_printf("{8} %s:  Recup ligne : %d\n","Label Vide", lab->count_line);
 	lab = lab->next;
-	while(lab)
+	while (lab)
 	{
 		ft_printf("{8} %s:  Recup ligne : %d\n",lab->label, lab->count_line);
+		// while(lab->cmd)
+		// {
+			ft_printf("{9}\e %s\n",lab->cmd->op);
+			// lab->cmd = lab->cmd->next;
+		// }
 		lab = lab->next;
 	}
 }

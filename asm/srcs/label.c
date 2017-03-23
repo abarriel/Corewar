@@ -25,6 +25,44 @@
 #include "asm.h"
 #define SP " \t"
 
+
+// t_cmd	*init_cmd(char *s)
+// {
+// 	t_cmd	*cmd;
+
+// 	if (!(cmd = (t_cmd*)malloc(sizeof(t_cmd))))
+// 		ft_exit("Failed to Malloc");
+// 	cmd->op = ft_strdup(s);
+// 	// u->op = s;
+// 	cmd->next = NULL;
+// 	return (cmd);
+// }
+
+// t_cmd	*add_cmd(t_cmd **t, char *s)
+// {
+// 	t_cmd	*tmp;
+// 	t_cmd	*r;
+
+// 	tmp = *t;
+// 	r = *t;
+// 	if (!tmp)
+// 	{
+// 		*t = init_cmd(s);
+// 		return (*t);
+// 	}
+// 	while (tmp->next)
+// 		tmp = tmp->next;
+// 	tmp->next = init_cmd(s);
+// 	return (r);
+// }
+
+// void 	get_cmd(t_lab **b, char *s)
+// {
+// 	// b->cmd = add_cmd(b->cmd, s);
+// 	// je pense quon pourrai faire un traitement ici 
+// 	// pour linstant juste rempli name
+// }
+
 int		check_label_name(char *s)
 {
 	int i;
@@ -54,12 +92,26 @@ void 	check_label(char *s, t_lab *lab, t_asm *a)
 	i = 0;
 	len = ft_strlchr(s,LABEL_CHAR);
 	if (len == 0 && *s != ':')
+	{
+				// doic etre s dans lab->args, mais jai la flemme
 		return ;
+	}
 	a->len_line = (a->len_line == 1 && *s != ':') ? 0 : a->len_line;
 	// ft_printf("{8}%s - %d\n",s,a->count_line);
 	if ((i = check_label_name(s)) || *s == ':')
 		return (lexical_error(a->count_line, i + a->len_line));
+	if (s[len - 1] == DIRECT_CHAR && ft_strchr(LABEL_CHARS,s[len + 1]))
+	{
+				// doic etre s dans lab->args, mais jai la flemme
+				return ;
+	}
+	/*
+	** JE NEXT LES %:LABEL_CHARS car je c que meme en analyse lexical 
+	** ca ne sera JAMAIS un label "%:LABELCHAR"
+	** donc sa sert a rien de le mettre dans la struct
+	*/ 
 	name = ft_strndup(s,len);
+	// ft_printf("{8}%s\n",name);
 	add_back_lab(&lab,name,a);
 
 }
@@ -73,10 +125,13 @@ void	get_label(t_asm *a)
 	op = get_op();
 	lab = NULL;
 	add_back_lab(&lab, "", a);
-	while (get_next_line(a->fd_cor, &line) > 0)
+	while (get_next_line(a->fd_champ, &line) > 0)
 	{
 		if ((a->len_line = skip_space(&line)) && *line != COMMENT_CHAR)
-			check_label(line, lab, a);
+			{
+				// ft_printf("%s\n",line);
+				check_label(line, lab, a);
+			}
 		a->count_line++;
 	}
 	// DEBUG
