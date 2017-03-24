@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 06:07:00 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/24 06:01:52 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/24 10:18:28 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct 		s_cmd
 {
 	char 			*op;
 	char 			*args;
+	int 			nb_struct;
 	char 			*type[MAX_ARGS_NUMBER];
 	// struct s_op		*op;
 	struct s_cmd 	*next;
@@ -63,7 +64,7 @@ void 				add_back_lab(t_lab **l_t, char *label, t_asm *a);
 int 				check_full_space_line(char *str);
 void				header_verif_name_comment(char *line, t_asm *a);
 void 				length_error(int i);
-void 				syntax_error(char *str, int line, int character);
+void 				token_error(char *str, int line, int character);
 t_asm				*init_asm(void);
 t_header			*init_header(void);
 int 				skip_space(char **s);

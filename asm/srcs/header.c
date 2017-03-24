@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 22:27:52 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/24 05:17:38 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/24 10:04:08 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int				header_parser(char *line, t_header *h, t_asm *a)
 	else if (check_full_space_line(line) == 0)
 		;
 	else
-		syntax_error(line, a->count_line, a->len_line - ft_strlen(line));
+		token_error(line, a->count_line, a->len_line - ft_strlen(line));
 		return (0);
 }
 

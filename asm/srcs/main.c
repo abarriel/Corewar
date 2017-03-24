@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 06:00:18 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/24 08:19:33 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/24 08:36:00 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ int		main(int av, char **ac)
 	get_info_asm(ac[1], a);
 	create_file(a);
 	header_champ(a, h);
-	
 	l = get_label(a);
 	check_operation(a, l);
-	// while(1)
-	// 	;
+
 	return (0);
 }

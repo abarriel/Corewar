@@ -6,21 +6,23 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 02:15:32 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/23 02:15:55 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/24 10:12:07 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
+/* 
+**ERREYR DOIVE ETRE CHANGER CAR ISNTRUCTION PEUT ETRE ALBEL
+*/
 void			lexical_error(int line, int character)
 {
 	ft_dprintf(2, "Lexical error at [%d:%d]\n", line, character);
 	exit(0);
 }
 
-void			syntax_error(char *str, int line, int character)
+void			token_error(char *str, int line, int character)
 {
-	ft_printf("Syntax error at token [TOKEN][%d:%d] LABEL ''%s''\n",
+	ft_printf("Invalid instruction at token [TOKEN][%03d:%03d] INSTRUCTION \"%s\"\n",
 		line ,character ,str);
 	exit(0);
 }
