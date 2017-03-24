@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/visualisateur.h"
+#include "visualisateur.h"
 
 void		ft_draw_map(t_env *p)
 {

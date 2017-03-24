@@ -10,4 +10,4 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/visualisateur.h"
+#include "visualisateur.h"

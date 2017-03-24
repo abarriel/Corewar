@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/visualisateur.h"
+#include "visualisateur.h"
 
 void		init_but(t_env *p)
 {

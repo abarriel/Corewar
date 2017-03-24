@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/visualisateur.h"
+#include "visualisateur.h"
 
 void		print_players(t_env *p)
 {

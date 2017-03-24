@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/visualisateur.h"
+#include "visualisateur.h"
 
 void		ft_draw_rectangle(int start_x, int start_y, t_env *p)
 {

@@ -10,30 +10,37 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = visualisateur
+NAME	= visualisateur
 
-SRCS =	srcs/aff.c \
-		srcs/draw.c \
-		srcs/print.c \
-		srcs/main.c \
-		srcs/other.c \
-		srcs/other2.c \
-	   
+SRC		= aff.c draw.c print.c main.c other.c other2.c 
 
-FLAGS = -Wall -Werror -Wextra -I./includes
+OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
-OBJ = $(SRCS:.c=.o)
+INCLUDES = includes/visualisateur.h
 
-all: $(NAME)
+INIB_FLAGS = -Wno-error=unused-parameter -Wno-error=unused-variable
+ALL_FLAGS = -Wall -Wextra -Werror
+CFLAGS	=  -Iincludes/ -Ilibft/includes/
 
-$(NAME): $(OBJ)
-	gcc -o $(NAME) $(FLAGS) $(OBJ) -L../includes/mlx/  -framework OpenGL -framework AppKit ../libft/libft.a includes/mlx/libmlx.a
-	echo "visualisateur done"
+all:  makefile libft minilx $(NAME) $(INCLUDES)
+
+libft:
+	@make -C ../libft
+
+minilx:
+	@make -C ./includes/mlx
+
+$(NAME): libft minilx $(OBJ) $(INCLUDES)
+	@gcc $(OBJ) -o $(NAME)  -L../libft -lft  -framework OpenGL -framework AppKit -L./includes/mlx -lm -lmlx
 
 clean:
-	rm -f $(OBJ)
+	@make clean -C ../libft
+	@rm -rf $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -rf $(NAME) $(OBJ)
+	@make fclean -C ../libft
 
 re: fclean all
+
+.PHONY: clean fclean re libft all

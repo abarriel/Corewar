@@ -13,7 +13,8 @@
 #ifndef VISUALISATEUR_H
 # define VISUALISATEUR_H
 
-# include "../../includes/asm.h"
+// # include "../../includes/asm.h"
+# include "../../libft/includes/libft.h"
 # include "mlx/mlx.h"
 # define WIDTH 2000
 # define HEIGHT 1250
