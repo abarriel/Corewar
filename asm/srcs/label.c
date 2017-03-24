@@ -6,13 +6,11 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 22:19:11 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/24 03:54:20 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/24 08:11:35 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-#define SP " \t"
-
 
 t_cmd	*init_cmd(char *op, char *args)
 {
@@ -55,7 +53,7 @@ void 	get_cmd(t_lab *b, char *s)
 	op = ft_strndup(s, ft_strslen(s,SP));
 	s = s + ft_strlen(op);
 	skip_space(&s);
-	args = s;
+	args = ft_strdup(s);
 	add_cmd(&b->cmd, op, args);
 }
 
@@ -87,6 +85,7 @@ void 	check_label(char *s, t_lab *lab, t_asm *a)
 
 	i = 0;
 	name = NULL;
+	a->len_line = skip_space(&s);
 	len = ft_strlchr(s,LABEL_CHAR);
 	if (len == 0 && *s != ':')
 	{
@@ -110,20 +109,40 @@ void 	check_label(char *s, t_lab *lab, t_asm *a)
 
 }
 
-void	get_label(t_asm *a)
+void 	remove_first_label(t_lab **begin)
+{
+	t_lab	*temp;
+
+	if (*begin != NULL)
+	{
+		if (!(*begin)->cmd)
+		{
+			temp = *begin;
+			*begin = (*begin)->next;
+			free(temp);
+			// ft_lstdelone(&temp, ft_del);
+		}
+	}
+}
+
+t_lab	*get_label(t_asm *a)
 {
 	char	*line;
-	t_op	*op;
 	t_lab	*lab;
 
-	op = get_op();
 	lab = NULL;
-	add_back_lab(&lab, "Premier Maillon", a);
+	add_back_lab(&lab, "@@", a);
 	while (get_next_line(a->fd_champ, &line) > 0)
 	{
-		if ((a->len_line = skip_space(&line)) && *line != COMMENT_CHAR)
-				check_label(line, lab, a);
-				a->count_line++;
+		if (*line != COMMENT_CHAR)
+			check_label(line, lab, a);
+		free(line);
+		a->count_line++;
 	}
-	print_label(lab);
+	
+	remove_first_label(&lab);
+	while(1)
+		;
+	// sup_(lab);
+	return(lab);
 }

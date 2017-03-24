@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 06:07:00 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/24 03:00:35 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/24 06:01:52 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "libft.h"
 # include "op.h"
 # include "locale.h"
-
+# define SP " \t"
 typedef struct		s_op
 {
    char         	*mnemonique;
@@ -56,8 +56,9 @@ typedef struct		s_lab
 	struct s_lab	*next;
 }					t_lab;
 t_op				*get_op(void);
+void 				check_operation(t_asm *a, t_lab *l);
 void 				print_label(t_lab *lab);
-void				get_label(t_asm *a);
+t_lab				*get_label(t_asm *a);
 void 				add_back_lab(t_lab **l_t, char *label, t_asm *a);
 int 				check_full_space_line(char *str);
 void				header_verif_name_comment(char *line, t_asm *a);

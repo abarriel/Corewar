@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/23 08:51:24 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/24 04:05:43 by abarriel         ###   ########.fr       */
+/*   Created: 2017/03/24 04:06:20 by abarriel          #+#    #+#             */
+/*   Updated: 2017/03/24 04:38:01 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void print_cmd(t_cmd *cmd)
+void check_operation(t_asm *a, t_lab *l)
 {
-	while (cmd)
-		{
-			ft_printf("{9}\t%s - ",cmd->op);
-			ft_printf("{5}%s\n",cmd->args);
-			cmd = cmd->next;
-		}
-}
+	// 	t_op	*op;
+	// t_lab	*lab;
 
-void print_label(t_lab *lab)
-{
-	while (lab)
-	{
-		ft_printf("{8} %s:  line: %d\n",lab->label, lab->count_line);
-		print_cmd(lab->cmd);
-		lab = lab->next;
-	}
-}
+	// op = get_op();
+	print_label(l);
+	// ft_printf("\n");
+	// print_label(lab);
+}	

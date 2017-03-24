@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 19:36:08 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/23 08:32:10 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/24 07:10:01 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_op	*get_op(void)
 int		skip_space(char **s)
 {
 	int len;
+	char *tmp;
 
 	len = 1;
 	while ((**s) == ' ' || (**s) == '\t')
@@ -109,7 +110,7 @@ void 		add_back_lab(t_lab **l_t, char *label, t_asm *a)
 	t_lab *l;
 
 	l = *l_t;
-	if(!l)
+	if (!l)
 	{
 		(*l_t) = init_lab(label, a);
 		return ;
@@ -117,5 +118,4 @@ void 		add_back_lab(t_lab **l_t, char *label, t_asm *a)
 	while (l->next)
 		l = l->next;
 	l->next = init_lab(label, a);
-	// l = l->next;
 }
