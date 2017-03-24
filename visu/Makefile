@@ -13,6 +13,8 @@
 NAME = visualisateur
 
 SRCS =	srcs/aff.c \
+		srcs/draw.c \
+		srcs/print.c \
 		srcs/main.c \
 		srcs/other.c \
 		srcs/other2.c \
@@ -25,7 +27,7 @@ OBJ = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -o $(NAME) $(FLAGS) $(OBJ) -L../includes/mlx/ -lmlx -framework OpenGL -framework AppKit ../libft/libft.a
+	gcc -o $(NAME) $(FLAGS) $(OBJ) -L../includes/mlx/  -framework OpenGL -framework AppKit ../libft/libft.a includes/mlx/libmlx.a
 	echo "visualisateur done"
 
 clean:

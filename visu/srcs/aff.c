@@ -64,45 +64,42 @@ void		ft_draw_square(int start_x, int start_y, int size, t_env *p)
 	}
 }
 
-void 		ft_draw_arena(t_env *p)
+void		ft_draw_title(t_env *p)
 {
-	p->r = 255;
-	p->v = 255;
-	p->b = 255;
-	p->h = (HEIGHT) - 20;
-	p->l = (WIDTH  * 0.7) - 20;
-	ft_draw_rectangle(10, 10, p);
+	int		n;
+	int		r;
+
+	p->img2 = mlx_xpm_file_to_image(p->mlx, "title2.xpm", &n, &r);
+	p->ret2 = mlx_get_data_addr(p->img, &(p->bits_per_pixel),
+		&(p->size_line), &(p->endian));
 }
 
-void		ft_draw_menu(t_env *p)
+void		ft_draw_button(t_env *p)
 {
-	p->r = 55;
-	p->v = 55;
-	p->b = 55;
-	p->h = 200;
-	p->l = WIDTH - (WIDTH * 0.7) - 10;
-	ft_draw_rectangle((WIDTH  * 0.7), 10, p);
-	p->r = 55;
-	p->v = 55;
-	p->b = 55;
-	p->h = (HEIGHT) - 230;
-	p->l = WIDTH - (WIDTH * 0.7) - 10;
-	ft_draw_rectangle((WIDTH  * 0.7), 220, p);
-}
+	ft_modif_color(25, 25, 25, p);
+	ft_draw_square((HEIGHT) + 20,(HEIGHT) - 135 , 100, p);
+	ft_modif_color(35, 35, 35, p);
+	ft_draw_square(p->but->btn1_px, p->but->btn1_py , p->but->btn1_s, p);
 
-void		ft_draw_background(t_env *p)
-{
-	int		i;
+	ft_modif_color(25, 25, 25, p);
+	ft_draw_square((HEIGHT) + 170,(HEIGHT) - 135 , 100, p);
+	ft_modif_color(35, 35, 35, p);
+	ft_draw_square(p->but->btn2_px, p->but->btn2_py, p->but->btn2_s, p);
 
-	i = 0;
-	while (i < (HEIGHT * WIDTH * 4))
-	{
-		(p->ret)[i] = 32;
-		(p->ret)[i + 1] = 32;
-		(p->ret)[i + 2] = 32;
-		(p->ret)[i + 3] = 0;
-		i += 4;
-	}
+	ft_modif_color(25, 25, 25, p);
+	ft_draw_square((HEIGHT) + 320,(HEIGHT) - 135 , 100, p);
+	ft_modif_color(35, 35, 35, p);
+	ft_draw_square(p->but->btn3_px, p->but->btn3_py, p->but->btn3_s, p);
+
+	ft_modif_color(25, 25, 25, p);
+	ft_draw_square((HEIGHT) + 470,(HEIGHT) - 135 , 100, p);
+	ft_modif_color(35, 35, 35, p);
+	ft_draw_square(p->but->btn4_px, p->but->btn4_py, p->but->btn4_s, p);
+
+	ft_modif_color(25, 25, 25, p);
+	ft_draw_square((HEIGHT) + 620,(HEIGHT) - 135 , 100, p);
+	ft_modif_color(35, 35, 35, p);
+	ft_draw_square(p->but->btn5_px, p->but->btn5_py, p->but->btn5_s, p);
 }
 
 void		ft_draw(t_env *p)
@@ -110,4 +107,7 @@ void		ft_draw(t_env *p)
 	ft_draw_background(p);
 	ft_draw_arena(p);
 	ft_draw_menu(p);
+	ft_draw_score(p);
+	ft_draw_title(p);
+	ft_draw_button(p);
 }
