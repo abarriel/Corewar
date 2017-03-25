@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/25 08:02:04 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/25 08:24:53 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include "op.h"
 
 # define CYC_SEC_ST 50
+
+t_core *new_core(t_player *players);
+void  init_core(t_core *core);
+t_core	*parcing(int argc, char **argv, t_core *c);
 
 typedef struct 		s_process
 {
@@ -35,7 +39,7 @@ typedef struct    s_player
   char      id[REG_SIZE];
   int       last_live;
   int       nb_live;
-  t_player  *next;
+  struct s_player  *next;
 }                 t_player;
 
 typedef struct 		s_core
@@ -43,8 +47,8 @@ typedef struct 		s_core
   t_process *process;
   t_player  *player;
   int       nb_player;
-  char      mem[MAX_SIZE]
-  char      mem_c[MAX_SIZE]
+  char      mem[MEM_SIZE];
+  char      mem_c[MEM_SIZE];
   int       cycle;
   int       cycle_sec;
   int       dump;

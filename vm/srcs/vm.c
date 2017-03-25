@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:29:02 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/25 08:01:44 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/25 08:23:20 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void run(t_core *core)
 {
-	while (nb_player != 0)
+	while (core->nb_player != 0)
 	{
 		//lunch_op(core);
 		//decrease(core);
