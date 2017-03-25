@@ -41,6 +41,7 @@ typedef struct 		s_asm
 	char			*champ_name;
 	int				fd_champ;
 	int 			len_line;
+	int 			line_;
 	int 			line;
 	int 			count_line;
 	int				fd_cor;
@@ -70,6 +71,7 @@ typedef struct		s_lab
 	struct s_lab	*next;
 }					t_lab;
 t_op				*get_op(void);
+int		skip_space_len(char **s);
 void		no_label_error(char *arg, char *str, int line, int character);
 void				syntax_error(char *str, int line, int character);
 int					check_label_name(char *s);

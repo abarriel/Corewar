@@ -133,6 +133,8 @@ void 	check_label(char *s, t_lab *lab, t_asm *a)
 		return (lexical_error(a->count_line, i + a->len_line));
 	if (len == 0 && *s != ':')
 	{
+		if(*s == '\0')
+			return;
 		// lab->charac = a->len;
 		get_cmd(lab, s, a);
 		return ;
@@ -202,6 +204,7 @@ t_lab	*get_label(t_asm *a)
 	{
 		if (*line != COMMENT_CHAR && *line != '\0')
 		{
+			// ft_printf("{4}[%s]\n",line);
 			// a->len++;
 			check_label(line, lab, a);
 

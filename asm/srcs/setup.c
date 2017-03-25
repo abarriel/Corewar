@@ -65,6 +65,20 @@ int		skip_space(char **s)
 	return (len);
 }
 
+int		skip_space_len(char **s)
+{
+	int len;
+	char *tmp;
+
+	len = 0;
+	while ((**s) == ' ' || (**s) == '\t')
+	{
+		len++;
+		(*s)++;
+	}
+	return (len);
+}
+
 t_asm	*init_asm(void)
 {
 	t_asm		*a;
@@ -75,6 +89,7 @@ t_asm	*init_asm(void)
 	a->cor = NULL;
 	a->fd_champ = -1;
 	a->len_line = 0;
+	a->line_= 0;
 	a->nb_label = 1;
 	a->count_line = 0;
 	a->header_passage = 0;

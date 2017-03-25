@@ -421,7 +421,7 @@ brain:
 	ld		%0, r2
 	sti		r1, %:lasertop, %1
 	sti     r9, %:dec1, %1
-	si     r10, %:dec2, %1
+	sti     r10, %:dec2, %1
 	sti     r11, %:laser, %6
 	fork	%:lasertop
 	zjmp	%:atf
