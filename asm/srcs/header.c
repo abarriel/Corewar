@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 22:27:52 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/24 10:04:08 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/25 23:09:55 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void			header_name(char *line, t_header *h, t_asm *a)
 		length_error(2);
 	ft_bzero(h->prog_name, PROG_NAME_LENGTH);
 	ft_strccpy(h->prog_name, line, '"');
-	// write(a->fd_cor, &(h->prog_name), sizeof(h->prog_name));	
+	// write(a->fd_cor, &(h->prog_name), sizeof(h->prog_name));
 	header_verif_name_comment(line, a);
 }
 
@@ -52,21 +52,15 @@ int				header_parser(char *line, t_header *h, t_asm *a)
 	a->len_line = ft_strlen(line) + 1;
 	skip_space(&line);
 	if (!ft_strncmp(line, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)))
-	{
 		header_name(line + ft_strlen(NAME_CMD_STRING), h, a);
-
-	}
 	else if (!ft_strncmp(line, COMMENT_CMD_STRING,
 				ft_strlen(COMMENT_CMD_STRING)))
-	{
 		header_comment(line + ft_strlen(COMMENT_CMD_STRING), h, a);
-	
-	}
 	else if (check_full_space_line(line) == 0)
 		;
 	else
 		token_error(line, a->count_line, a->len_line - ft_strlen(line));
-		return (0);
+	return (0);
 }
 
 void			header_magic_code(t_asm *a, t_header *h)
@@ -103,5 +97,4 @@ void			header_champ(t_asm *a, t_header *h)
 		a->count_line++;
 		free(line);
 	}
-
 }

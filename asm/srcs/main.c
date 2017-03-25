@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/19 06:00:18 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/24 08:36:00 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/25 23:10:26 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	get_info_asm(char *s, t_asm *a)
 
 int		main(int av, char **ac)
 {
-	t_asm	*a;
-	t_header *h;
-	t_lab *l;
+	t_asm		*a;
+	t_header	*h;
+	t_lab		*l;
 
 	l = NULL;
 	a = init_asm();
@@ -46,6 +46,5 @@ int		main(int av, char **ac)
 	header_champ(a, h);
 	l = get_label(a);
 	check_operation(a, l);
-
 	return (0);
 }

@@ -12,8 +12,10 @@
 
 NAME	= asm
 
-SRC		= main.c setup.c header.c header2.c label_lex.c tools.c op.c error.c \
-			operations.c
+SRC		= main.c setup.c header.c header2.c label_lex.c tools.c error.c \
+			operations.c operations_.c error_.c operations__.c setup_.c \
+			label_lex_.c
+
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
