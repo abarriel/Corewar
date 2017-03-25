@@ -17,6 +17,7 @@
 
 # define CYC_SEC_ST 50
 
+t_core  *parcing(int argc, char **argv, t_core *c);
 t_core *new_core(t_player *players);
 void  init_core(t_core *core);
 t_core	*parcing(int argc, char **argv, t_core *c);
