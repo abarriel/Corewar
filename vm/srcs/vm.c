@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   vm.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcharvol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:29:02 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/25 03:29:04 by lcharvol         ###   ########.fr       */
+/*   Updated: 2017/03/25 06:38:25 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int		main(void)
+int		main(int argc, char **argv)
 {
-	ft_printf("COUCOU BITE\n");
+	char **players;
+	t_core	*core;
+
+	core = init_core(players);
 	return (0);
 }
