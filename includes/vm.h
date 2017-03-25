@@ -17,11 +17,6 @@
 
 # define CYC_SEC_ST 50
 
-t_core  *parcing(int argc, char **argv, t_core *c);
-t_core *new_core(t_player *players);
-void  init_core(t_core *core);
-t_core	*parcing(int argc, char **argv, t_core *c);
-
 typedef struct 		s_process
 {
   char      pc;
@@ -55,5 +50,11 @@ typedef struct 		s_core
   int       dump;
   char      run;
 }                 t_core;
+
+t_core  *parcing(int argc, char **argv, t_core *c);
+t_core *new_core();
+void    init_core(t_core *core);
+t_core  *parcing(int argc, char **argv, t_core *c);
+
 
 #endif
