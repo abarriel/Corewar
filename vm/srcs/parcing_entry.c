@@ -14,14 +14,7 @@
 
 int		is_a_champ(char *str, t_core *c)
 {
-	int i;
-
-	i = 0;
-	while (str[i] || str[i] != '.')
-		i++;
-	if (str[i] == '\0')
-		return (1);
-	if (!ft_strequ(str + i, ".cor"))
+	if ((ft_strrncmp(str, "roc.", 4)) || ft_strlen(str) == 4)
 		return (1);
 	return (0);
 }
@@ -40,7 +33,6 @@ void	stock_name(char **str, t_core *c)
 		i++;
 	}
 	c->player->name[i] = '\0';
-	str++;
 }
 
 void	stock_comment(char **str, t_core *c)
@@ -99,16 +91,19 @@ void	get_the_champ(char *str, t_core *c)
 	int fd;
 	int ret;
 	char *line;
+	char	buff[PROG_NAME_LENGTH + 1];
 
-	if ((fd = open(str, O_WRONLY)) < 0)
+	ret = 0;
+	line = NULL;
+	ft_printf("valeur de la chaine: %s\n", str);
+	if ((fd = open(str, O_RDONLY)) < 0)
+		ft_exit("Can't open source file");
+	if ((read(fd, buff, PROG_NAME_LENGTH + COMMENT_LENGTH + 12)) < 0)
 		ft_exit("Can't read source file");
-	get_next_line(fd, &line);
-	str += 4;
 	stock_name(&line, c);
 	chatoli(&line);
-	str += 8;
 	stock_comment(&line, c);
-	stock_prog(&line, c);
+	//stock_prog(&line, c);
 }
 
 t_core	*parcing(int argc, char **argv, t_core *c)
@@ -130,7 +125,9 @@ t_core	*parcing(int argc, char **argv, t_core *c)
 			c->run = 0;
 		else if (is_a_champ(argv[i], c) == 0)
 		{
+			ft_printf("1\n");
 			get_the_champ(argv[i], c);
+			ft_printf("2\n");
 			c->nb_player += 1;
 		}
 		else
