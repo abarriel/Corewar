@@ -12,7 +12,7 @@
 
 #include "vm.h"
 
-int		is_a_champ(char *str)
+int		is_a_champ(char **str, t_core *c)
 {
 	int i;
 
@@ -26,7 +26,7 @@ int		is_a_champ(char *str)
 	return (0);
 }
 
-void	stock_name(char **str)
+void	stock_name(char **str, t_core *c)
 {
 	int i;
 
@@ -43,7 +43,7 @@ void	stock_name(char **str)
 	str++;
 }
 
-void	stock_comment(char **str)
+void	stock_comment(char **str, t_core *c)
 {
 	int i;
 
@@ -60,13 +60,14 @@ void	stock_comment(char **str)
 	str++;
 }
 
-void	stock_prog(char **str)
+void	stock_prog(char **str, t_core *c)
 {
 	int i;
 
 	i = 0;
 	if (!(c->prog = (char *)malloc(sizeof(char) * ft_strlen(*str) + 1)))
 		ft_exit("Malloc error");
+
 	while (i < ft_strlen(*str))
 	{
 		c-prog[i] == **str;
@@ -77,16 +78,37 @@ void	stock_prog(char **str)
 	str++;
 }
 
+unsigned long int		chatoli(char **str)
+{
+	unsigned long int final;
+
+	final = 0;
+	final |= ((*str) << 66);
+	final |= ((*str) + 1 << 48);
+	final |= ((*str) + 2 <<  40);
+	final |= ((*str) + 3 << 32);
+	final |= ((*str) + 4 << 24 );
+	final |= ((*str) + 5 << 16 );
+	final |= ((*str) + 6 <<  8 );
+	final |= (*str) + 7;
+	return (final);
+}
+
 void	get_the_champ(char *str, t_core *c)
 {
 	int fd;
 	int ret;
+	char *line;
 
 	if (fd = open(str, O_WRONLY) < 0)
 		ft_exit("Can't read source file");
-	stock_name(&str, c);
-	stock_comment(&str, c);
-	stock_prog(&str, c);
+	get_next_line(fd, &line);
+	str += 4;
+	stock_name(&line, c);
+	chatoi(&line, c);
+	str += 8;
+	stock_comment(&line, c);
+	stock_prog(&line, c);
 }
 
 t_core	*parcing(int argc, char **argv, t_core *c)
