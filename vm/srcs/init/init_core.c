@@ -21,15 +21,20 @@ void  init_core(t_core *core)
 {
 	t_player *tmp_p;
 	t_process *tmp_r;
+	int i;
 
 	core->process = init_process(core->player, core->nb_player, 0);
 	tmp_p = core->player;
 	tmp_r = core->process;
+	i = 1;
 	while (tmp_p)
 	{
 		ft_memcpy(core->mem[tmp_r->pc], tmp_p->prog, tmp_p->weight);
+		ft_memset(core->mem_c[tmp_r->pc], i, tmp_p->weight);
+		core->mem_c[tmp_r->pc] = 10 * i;
 		tmp_p = tmp_p->next;
 		tmp_r = tmp_r->next;
+		i++;
 	}
 }
 
@@ -40,10 +45,12 @@ t_core *new_core(t_player *players)
 	if (!(res = malloc(sizeof(t_core))))
 		exit(write(1, "Bad malloc\n", 11));
 	ft_bzero(res->mem, MAX_SIZE);
+	ft_bzero(res->mem_c, MAX_SIZE);
 	res->player = NULL;
 	res->process = NULL;
 	res->dump = -1;
 	res->cycles = 0;
+	res->run = 1;
 	res->cycles_sec = CYC_SEC_ST;
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/25 07:18:13 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/25 08:02:04 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ typedef struct 		s_core
   t_player  *player;
   int       nb_player;
   char      mem[MAX_SIZE]
+  char      mem_c[MAX_SIZE]
   int       cycle;
   int       cycle_sec;
   int       dump;
+  char      run;
 }                 t_core;
 
 #endif
