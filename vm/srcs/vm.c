@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:29:02 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/25 06:38:25 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/25 06:54:01 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int		main(int argc, char **argv)
 {
-	char **players;
 	t_core	*core;
 
-	core = init_core(players);
+	core = new_core();
+	parcing(argc, argv, core);
+	init_cre(core);
 	return (0);
 }

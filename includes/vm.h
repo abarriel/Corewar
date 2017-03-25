@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/25 06:38:48 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/25 07:18:13 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct 		s_process
 typedef struct    s_player
 {
   char      *name;
-  int       weight;
+  size_t    weight;
   char      *comment;
   char      *prog;
   char      id[REG_SIZE];
@@ -42,9 +42,11 @@ typedef struct 		s_core
 {
   t_process *process;
   t_player  *player;
+  int       nb_player;
   char      mem[MAX_SIZE]
   int       cycle;
   int       cycle_sec;
+  int       dump;
 }                 t_core;
 
 #endif
