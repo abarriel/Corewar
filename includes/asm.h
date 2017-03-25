@@ -16,6 +16,11 @@
 # include "op.h"
 # include "locale.h"
 # define SP " \t"
+# define ENDLINE "ENDLINE"
+# define INSTRUCTION "INSTRUCTION"
+# define SEP_CHAR "SEPERATOR CHAR"
+# define RID T_REG | T_IND | T_DIR
+# define RDI T_REG | T_DIR | T_IND
 typedef struct		s_op
 {
    char         	*mnemonique;
@@ -31,9 +36,12 @@ typedef struct		s_op
 typedef struct 		s_asm
 {
 	int 			header_passage;
+	char 			**label;
+	int 			nb_label;
 	char			*champ_name;
 	int				fd_champ;
 	int 			len_line;
+	int 			line;
 	int 			count_line;
 	int				fd_cor;
 	char			*cor;
@@ -43,8 +51,11 @@ typedef struct 		s_cmd
 {
 	char 			*op;
 	char 			*args;
+	int 			reg;
 	int 			nb_struct;
-	char 			*type[MAX_ARGS_NUMBER];
+	int 			line;
+	int 			colon;
+	t_arg_type		*type[MAX_ARGS_NUMBER];
 	// struct s_op		*op;
 	struct s_cmd 	*next;
 }					t_cmd;
@@ -53,10 +64,16 @@ typedef struct		s_lab
 {
 	char 			*label;
 	int 			count_line;
+	int 			colon;
+	int 			line;
 	t_cmd 			*cmd;
 	struct s_lab	*next;
 }					t_lab;
 t_op				*get_op(void);
+void		no_label_error(char *arg, char *str, int line, int character);
+void				syntax_error(char *str, int line, int character);
+int					check_label_name(char *s);
+void				invalid_error(char *str, int nb);
 void 				check_operation(t_asm *a, t_lab *l);
 void 				print_label(t_lab *lab);
 t_lab				*get_label(t_asm *a);

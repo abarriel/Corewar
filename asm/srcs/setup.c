@@ -14,8 +14,6 @@
 ** RID RDI FOR SILENCE WARNING
 **/
 #include "asm.h"
-#define RID T_REG | T_IND | T_DIR
-#define RDI T_REG | T_DIR | T_IND
 
 void	init_op(void **res)
 {
@@ -77,6 +75,7 @@ t_asm	*init_asm(void)
 	a->cor = NULL;
 	a->fd_champ = -1;
 	a->len_line = 0;
+	a->nb_label = 1;
 	a->count_line = 0;
 	a->header_passage = 0;
 	a->fd_cor = -1;
@@ -102,6 +101,8 @@ t_lab		*init_lab(char *label, t_asm *a)
 	l->count_line = a->count_line;
 	l->next = NULL;
 	l->cmd = NULL;
+	l->colon = 0;
+	l->line = 0;
 	return (l);
 }
 

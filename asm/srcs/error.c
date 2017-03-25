@@ -27,6 +27,26 @@ void			token_error(char *str, int line, int character)
 	exit(0);
 }
 
+void		no_label_error(char *arg,char *str, int line, int character)
+{
+	ft_printf("No such label %3s while attempting to dereference token [TOKEN][%03d:%03d] DIRECT_LABEL \"%s\"\n",
+		arg ,line, character ,str);
+	exit(0);
+}
+
+void			invalid_error(char *str, int nb)
+{
+	ft_printf("Invalid parameter %d for instruction %s\n", nb , str);
+	exit(0);
+}
+
+void			syntax_error(char *str, int line, int character)
+{
+	ft_printf("Syntax error at token [TOKEN][%03d:%03d] INSTRUCTION \"%s\"\n",
+		line ,character ,str);
+	exit(0);
+}
+
 void			length_error(int i)
 {
 	if (i == 1)
