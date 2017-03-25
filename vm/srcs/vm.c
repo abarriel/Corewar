@@ -29,7 +29,7 @@ int		main(int argc, char **argv)
 
 	core = new_core();
 	parcing(argc, argv, core);
-	init_cre(core);
+	init_core(core);
 	run(core);
 	//print_res(core);
 	return (0);

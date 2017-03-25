@@ -38,7 +38,7 @@ void  init_core(t_core *core)
 	}
 }
 
-t_core *new_core(t_player *players)
+t_core *new_core()
 {
 	t_core *res;
 

@@ -12,29 +12,29 @@
 
 #include "vm.h"
 
-voidprint_winner(t_player *p)
+void 	print_winner(t_player *p)
 {
-	printf("Constestant %d, \"%s\",		has won !\n", (unsigned int)p->id, p->name);
+	ft_printf("Constestant %d, \"%s\",		has won !\n", (unsigned int)p->id, p->name);
 }
 
-voidprint_is_alive(cha	r *name)
+void 	print_is_alive(char *name)
 {
 	ft_printf("Le joueur %s est en vie\n", name);
 }
 
-voidnbr_a	llready_used(int nb)
+void 	nbr_allready_used(int nb)
 {
 	ft_printf("Prog number %d already used\n", nb);
 	exit(0);
 }
 
-voiderror_executable(void)
+void 	error_executable(void)
 {
 	ft_printf("File_name is not	 a corewar executable\n");
 	exit(0);
 }
 
-voidprint_players_start(t_env	*p)
+void 	print_players_start(t_player	*p)
 {
 	while (p)
 	{
