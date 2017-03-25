@@ -1,19 +1,19 @@
 #include "vm.h"
 
-t_process *init_process(t_players *players, int nb_player, int i)
+t_process *init_process(t_player *players, int nb_player, int i)
 {
-	t_core *res;
+	t_process *res;
 
 	if (!(res = malloc(sizeof(t_process))))
 		exit(write(1, "Bad malloc\n", 11));
 	res->pc = i * (MEM_SIZE / nb_player);
 	res->cycle_left = 0;
 	ft_bzero(res->reg, REG_NUMBER * REG_SIZE);
-	res->reg[0] = players->id;
+	ft_memcpy(players->id, res->reg[0], 4);
 	res->carry = 0;
 	res->next = NULL;
 	if (players->next)
-		res->next = init_process(players->next);
+		res->next = init_process(players->next, nb_player, i + 1);
 	return (res);
 }
 
@@ -29,8 +29,8 @@ void  init_core(t_core *core)
 	i = 1;
 	while (tmp_p)
 	{
-		ft_memcpy(core->mem[tmp_r->pc], tmp_p->prog, tmp_p->weight);
-		ft_memset(core->mem_c[tmp_r->pc], i, tmp_p->weight);
+		ft_memcpy(&core->mem[tmp_r->pc], tmp_p->prog, tmp_p->weight);
+		ft_memset(&core->mem_c[tmp_r->pc], i, tmp_p->weight);
 		core->mem_c[tmp_r->pc] = 10 * i;
 		tmp_p = tmp_p->next;
 		tmp_r = tmp_r->next;
@@ -49,8 +49,8 @@ t_core *new_core()
 	res->player = NULL;
 	res->process = NULL;
 	res->dump = -1;
-	res->cycles = 0;
+	res->cycle = 0;
 	res->run = 1;
-	res->cycles_sec = CYC_SEC_ST;
+	res->cycle_sec = CYC_SEC_ST;
 	return (res);
 }

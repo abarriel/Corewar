@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/25 08:24:53 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/25 09:23:19 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct 		s_core
   char      run;
 }                 t_core;
 
+void 	error_executable(void);
 t_core  *parcing(int argc, char **argv, t_core *c);
 t_core *new_core();
 void    init_core(t_core *core);

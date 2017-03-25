@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parcing_enrty.c                                    :+:      :+:    :+:   */
+/*   parcing_entry.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcharvol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 05:41:30 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/25 05:41:34 by lcharvol         ###   ########.fr       */
+/*   Updated: 2017/03/25 09:23:00 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,6 @@ t_core	*parcing(int argc, char **argv, t_core *c)
 		i++;
 	}
 	if (c->nb_player > 4)
-		ft_error("Too many players!");
+		ft_exit("Too many players!");
 	return (c);
 }
