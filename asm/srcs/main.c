@@ -46,5 +46,6 @@ int		main(int av, char **ac)
 	header_champ(a, h);
 	l = get_label(a);
 	check_operation(a, l);
+	write_op(a, l);
 	return (0);
 }

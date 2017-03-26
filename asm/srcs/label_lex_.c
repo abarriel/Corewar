@@ -20,6 +20,8 @@ t_cmd	*init_cmd(char *op, char *args, int line, int colon)
 		ft_exit("Failed to Malloc");
 	cmd->op = op;
 	cmd->line = line;
+	cmd->code = 0;
+	cmd->typs = 0;
 	cmd->colon = colon;
 	cmd->args = args;
 	cmd->nb_struct = -1;

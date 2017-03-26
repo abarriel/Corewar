@@ -53,7 +53,7 @@ void	check_instructions(t_asm *a, t_cmd *c, t_op *op_struct)
 	short	index;
 
 	index = 0;
-	while (c->type[index])
+	while (index != op_struct[c->nb_struct].nbr_args)
 	{
 		check_type(a, c, op_struct, index);
 		index++;

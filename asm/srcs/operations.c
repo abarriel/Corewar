@@ -48,7 +48,7 @@ void	handles_instructions(t_asm *a, t_cmd *c, t_op *op_struct)
 		c->type[index] = args[index];
 		index++;
 	}
-	c->type[index] = NULL;
+	// c->type[index] = NULL;
 }
 
 void	handles_cmd_name(t_asm *a, t_cmd *c, t_op *op_struct, int count_line)
@@ -87,5 +87,5 @@ void	check_operation(t_asm *a, t_lab *l)
 
 	op_struct = get_op();
 	handles_op(a, l, op_struct);
-	print_label(l);
+	// print_label(l);
 }

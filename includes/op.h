@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 01:16:29 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/23 03:48:40 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/26 00:01:48 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 ** Ok
 */
 
-typedef char	t_arg_type;
+typedef char			t_arg_type;
 
 # define T_REG					1
 # define T_DIR					2
