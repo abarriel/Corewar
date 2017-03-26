@@ -58,7 +58,7 @@ void	handles_cmd_name(t_asm *a, t_cmd *c, t_op *op_struct, int count_line)
 	i = 0;
 	while (c)
 	{
-		if ((c->nb_struct = cmp_struct_op(c->op, op_struct)) == -1)
+		if ((c->nb_struct = cmp_struct_op(c->op, op_struct)) <= -1)
 			return (token_error(c->op, count_line + i, ft_strlen(c->op) + 1));
 		else
 		{

@@ -26,7 +26,7 @@ int		handles_reg(t_asm *a, char *arg, t_cmd *c)
 	(c->reg <= REG_NUMBER) ? NULL : syntax_error(str, c->colon, c->line);
 	if (*arg != '\0' && *arg != ';' && *arg != ' ' && *arg != '\t')
 		syntax_error(str, c->colon, c->line);
-	return (1);
+	return (T_REG);
 }
 
 void	check_type(t_asm *a, t_cmd *c, t_op *op_struct, short index)
@@ -46,6 +46,8 @@ void	check_type(t_asm *a, t_cmd *c, t_op *op_struct, short index)
 		ft_printf("-LAB-");
 	if (red == 0)
 		syntax_error(c->type[index], c->colon, c->line);
+	c->typs[index] = red;
+	// ft_printf("{c->args %s}[%d]\n",c->type[index],red);
 }
 
 void	check_instructions(t_asm *a, t_cmd *c, t_op *op_struct)
