@@ -40,7 +40,9 @@ int		main(int argc, char **argv)
 
 	core = new_core();
 	parcing(argc, argv, core);
-	print_player(core);
+	if (core->visu == 1)
+		visu(core);
+	//print_player(core);
 	//init_core(core);
 	//run(core);
 	//print_res(core);

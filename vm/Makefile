@@ -12,7 +12,7 @@
 
 NAME	= vm
 
-SRC		= vm.c messages.c parcing_entry.c init/init_core.c
+SRC		= vm.c messages.c parcing_entry.c init/init_core.c visu/aff.c visu/draw.c visu/main.c visu/other.c visu/other2.c visu/print.c
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
@@ -28,7 +28,7 @@ libft:
 	@make -C ../libft
 
 $(NAME): libft $(OBJ) $(INCLUDES)
-	@gcc $(OBJ) -o $(NAME)  -L../libft -lft
+	@gcc $(OBJ) -o $(NAME)  -L../libft -lft -framework OpenGL -framework AppKit -L../includes/mlx -lm -lmlx
 
 clean:
 	@make clean -C ../libft

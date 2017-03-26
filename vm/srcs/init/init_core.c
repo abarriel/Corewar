@@ -60,6 +60,7 @@ t_core *new_core()
 	ft_bzero(res->mem_c, MEM_SIZE);
 	res->process = NULL;
 	res->dump = -1;
+	res->visu = 0;
 	res->cycle = 0;
 	res->run = 1;
 	res->cycle_sec = CYC_SEC_ST;
