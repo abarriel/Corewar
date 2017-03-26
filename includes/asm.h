@@ -51,13 +51,18 @@ typedef struct		s_asm
 typedef struct 		s_cmd
 {
 	char			*op;
-	char			*args;
+	char			*args; 
 	int				reg;
 	int				nb_struct;
 	int				line;
 	int				colon;
 	char 			code;
-	char 			typs;
+	unsigned char	r[MAX_ARGS_NUMBER];
+	unsigned short	ind[MAX_ARGS_NUMBER];
+	unsigned short	d2[MAX_ARGS_NUMBER];
+	unsigned int	d4[MAX_ARGS_NUMBER];
+	char 			typs[MAX_ARGS_NUMBER];
+	unsigned char 	barg;
 	t_arg_type		*type[MAX_ARGS_NUMBER];
 	// struct s_op		*op;
 	struct s_cmd	*next;
