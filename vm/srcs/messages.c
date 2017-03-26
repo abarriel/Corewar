@@ -30,7 +30,7 @@ void 	nbr_allready_used(int nb)
 
 void 	error_executable(void)
 {
-	ft_printf("File_name is not	 a corewar executable\n");
+	ft_printf("File_name is not a corewar executable\n");
 	exit(0);
 }
 

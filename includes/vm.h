@@ -19,38 +19,40 @@
 
 typedef struct			s_process
 {
-	char				pc;
-	int					cycle_left;
-	char				reg[REG_NUMBER][REG_SIZE];
-	char				carry;
-	struct s_process	*next;
+	char				       pc;
+	int					       cycle_left;
+	char				       reg[REG_NUMBER][REG_SIZE];
+	char				       carry;
+	struct s_process   *next;
 }						t_process;
 
 typedef struct			s_player
 {
-  char				*name;
-  size_t			weight;
-  char					*comment;
-  char					*prog;
-  char					id[REG_SIZE];
-  int					last_live;
-  int					nb_live;
+  unsigned int      magic;
+  char				      *name;
+  size_t		      	weight;
+  char					    *comment;
+  char					    *prog;
+  char					    id[REG_SIZE];
+  int					      last_live;
+  int					      nb_live;
   struct s_player		*next;
 }						t_player;
 
 typedef struct			s_core
 {
-  t_process				*process;
-  t_player				*player;
-  int					nb_player;
-  char					mem[MEM_SIZE];
-  char					mem_c[MEM_SIZE];
+  t_process   *process;
+  t_player    *player;
+  int	        nb_player;
+  char        mem[MEM_SIZE];
+  char        mem_c[MEM_SIZE];
   int					cycle;
   int					cycle_sec;
   int					dump;
-  char					run;
+  char        run;
 }						t_core;
 
+void           init_player(t_player *p);
 void					error_executable(void);
 t_core					*parcing(int argc, char **argv, t_core *c);
 t_core					*new_core();

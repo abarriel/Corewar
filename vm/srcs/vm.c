@@ -23,14 +23,26 @@ void run(t_core *core)
 	}
 }
 
+void	print_player(t_core *core)
+{
+	while (core->player)
+	{
+		ft_printf("Name: [%s]\n", core->player->name);
+		ft_printf("Comment: [%s]\n", core->player->comment);
+		ft_printf("prog_size: [%d]\n\n", core->player->weight);
+		core->player = core->player->next;
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	t_core	*core;
 
 	core = new_core();
 	parcing(argc, argv, core);
-	init_core(core);
-	run(core);
+	print_player(core);
+	//init_core(core);
+	//run(core);
 	//print_res(core);
 	return (0);
 }

@@ -17,6 +17,17 @@ t_process *init_process(t_player *players, int nb_player, int i)
 	return (res);
 }
 
+void	init_player(t_player *p)
+{
+  p->magic = 0;
+  p->name = NULL;
+  p->weight = 0;
+  p->comment = NULL;
+  p->prog = NULL;
+  p->last_live = 0;
+  p->nb_live = 0;
+}
+
 void  init_core(t_core *core)
 {
 	t_player *tmp_p;
@@ -44,9 +55,9 @@ t_core *new_core()
 
 	if (!(res = malloc(sizeof(t_core))))
 		exit(write(1, "Bad malloc\n", 11));
+	res->player = NULL;
 	ft_bzero(res->mem, MEM_SIZE);
 	ft_bzero(res->mem_c, MEM_SIZE);
-	res->player = NULL;
 	res->process = NULL;
 	res->dump = -1;
 	res->cycle = 0;
