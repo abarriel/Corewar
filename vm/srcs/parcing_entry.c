@@ -47,6 +47,17 @@ size_t	ft_endian(size_t n)
 	return (r);
 }
 
+t_player	*get_the_prog(int fd, char *str, t_core *c, t_player *new)
+{
+	unsigned char buff[new->weight];
+
+	if ((read(fd, &buff, new->weight) < new->weight))
+		ft_exit("Can't read source file");
+	new->prog = (unsigned char *)malloc(sizeof(unsigned char) * new->weight);
+	ft_memcpy(new->prog, buff, new->weight + 1);
+	return (new);
+}
+
 void	get_the_champ(char *str, t_core *c)
 {
 	int fd;
@@ -66,6 +77,7 @@ void	get_the_champ(char *str, t_core *c)
 	if (new->weight > CHAMP_MAX_SIZE)
 		ft_exit("Wrong prog size");
 	ft_memcpy(new->comment, header.comment, COMMENT_LENGTH + 1);
+	new = get_the_prog(fd, str, c, new);
 	if (c->player == NULL)
 	{
 		c->player = new;
