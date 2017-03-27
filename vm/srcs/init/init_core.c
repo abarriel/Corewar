@@ -17,15 +17,23 @@ t_process *init_process(t_player *players, int nb_player, int i)
 	return (res);
 }
 
-void	init_player(t_player *p)
+void	init_player(t_player *p, t_core *c)
 {
-  p->magic = 0;
-  p->name = NULL;
-  p->weight = 0;
-  p->comment = NULL;
-  p->prog = NULL;
-  p->last_live = 0;
-  p->nb_live = 0;
+	size_t petit;
+
+	petit = 0xFFFFFFFF - (c->nb_player);
+	p->magic = 0;
+	p->name = NULL;
+	p->weight = 0;
+	p->comment = NULL;
+	p->prog = NULL;
+	p->last_live = 0;
+	p->nb_live = 0;
+	petit = swap_st(petit);
+	ft_memcpy(p->id, &petit, 4);
+	p->next = NULL;
+	p->name = ft_strnew(PROG_NAME_LENGTH + 1);
+	p->comment = ft_strnew(COMMENT_LENGTH + 1);
 }
 
 void  init_core(t_core *core)
