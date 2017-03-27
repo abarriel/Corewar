@@ -57,16 +57,34 @@ void 	write_arg(t_cmd *c, t_op op_t)
 			tmp = (c->type[index] + 1);
 			get_reg = ft_atoi(tmp);
 			c->r[index] = get_reg;
-			ft_printf("{9}[%s]{%p}-",c->type[index],c->r);
+			ft_dprintf(2,"{RED}[%s]{%p}-",c->type[index],c->r[index]);
+			write(1,&(c->r[index]),sizeof(unsigned char));
 		}
 		if (c->typs[index] & T_DIR)
 		{
-			ft_printf("{8}[%s] -",c->type[index]);
+			tmp = (c->type[index] + 1);
+			ft_dprintf(2,"{8}[%s]",c->type[index]);
+			if (!op_t.idk)
+			{
+			c->d4[index] = ft_atoi(tmp);
+			ft_dprintf(2,"{3}{%p}-",c->d4[index]);
+			// swap_usint
+			write(1,&(c->d4[index]),sizeof(c->d2[index]));
+			}
+			else
+			{
+			c->d2[index] = ft_atoi(tmp);
+			ft_dprintf(2,"{8}{%p}-",c->d2[index]);	
+			write(1,&(c->d2[index]),sizeof(c->d2[index]));
+			}
+			
 		}
 		if (c->typs[index] & T_IND)
 		{
-			c->r = 		
-			ft_printf("{6}[%s] -",c->type[index]);
+			c->ind[index] = ft_atoi(c->type[index]);
+			ft_dprintf(2,"{6}[%s]{%p} -",c->type[index],c->ind[index]);
+			c->ind[index] = swap_usint(c->ind[index]);
+			write(1,&(c->ind[index]),sizeof(c->ind[index]));
 		}
 		index++;
 	}
@@ -79,15 +97,17 @@ void	handles_code(t_asm *a, t_cmd *c, t_op *op_struct)
 	i = 0;
 	while (c)
 	{
-		// ft_printf("{9}{%s}{%d}{%s}\n",c->op, c->nb_struct,op_struct[c->nb_struct].mnemonique);
 		c->code = op_struct[c->nb_struct].code;
-		ft_printf("{9}[%p]",c->code);
-		// ft_printf("{8}{T_REG | T_IND | T_DIR = %d}{T_DIR | T_REG %d}",T_REG | T_IND | T_DIR, T_DIR | T_REG );
+		ft_dprintf(2,"{9}[%p]",c->code);
+		write(1,&(c->code),sizeof(c->code));
 		if (op_struct[c->nb_struct].idk == 1)
+		{
 			write_c(c,op_struct[c->nb_struct]);
+			ft_dprintf(2,"{5}[%p]",(int)c->barg);
+			write(1,&(c->barg),sizeof(c->barg));
+		}
 		write_arg(c, op_struct[c->nb_struct]);
-		ft_printf("{8}[%p]",(int)c->barg);
-		ft_printf("\n");
+		ft_dprintf(2,"\n");
 		c = c->next;
 	}
 }
