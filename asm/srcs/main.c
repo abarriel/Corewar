@@ -12,26 +12,11 @@
 
 #include "asm.h"
 
-// void	create_file(t_asm *a, t_lab *l)
-// {
-// 	if ((a->fd_cor = open(a->cor, O_CREAT | O_WRONLY | O_APPEND, 0644)) < 0)
-// 		ft_exit("Cannot create file");
-// 	// write(a->fd_cor, &(str), sizeof(COREWAR_EXEC_MAGIC));
-// 	// write(a->fd_cor, &(h->prog_name), sizeof(h->prog_name));
-// 	// write(a->fd_cor, &(h->comment), sizeof(h->comment));
-// 	while(l)
-// 	{
-// 		while(l->cmd)
-// 		{
-// 			write(a->fd->c)
-// 			write(1,&(typs),sizeof(typs));		
-// 			l->cmd = l->cmd->next;
-// 		}
-// 		l = l->next;
-		
-// 	}
-
-// }
+void	create_file(t_asm *a, t_lab *l)
+{
+	if ((a->fd_cor = open(a->cor, O_CREAT | O_WRONLY | O_APPEND, 0644)) < 0)
+		ft_exit("Cannot create file");
+}
 
 void	get_info_asm(char *s, t_asm *a)
 {
@@ -49,11 +34,14 @@ int		main(int av, char **ac)
 {
 	t_asm		*a;
 	t_header	*h;
+	t_op        *op;
 	t_lab		*l;
 
 	l = NULL;
 	a = init_asm();
 	h = init_header();
+	op = get_op();
+
 	if (av != 2)
 		ft_exit("Usage: ./asm <champion.s>");
 	get_info_asm(ac[1], a);
@@ -62,6 +50,8 @@ int		main(int av, char **ac)
 	l = get_label(a);
 	check_operation(a, l);
 	write_op(a, l);
-	// create_file(a, l);
+	write_label(a, l, op);
+	create_file(a, l);
+	final_write(a, h, l, op);
 	return (0);
 }

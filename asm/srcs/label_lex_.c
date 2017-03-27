@@ -22,6 +22,8 @@ t_cmd	*init_cmd(char *op, char *args, int line, int colon)
 	cmd->line = line;
 	cmd->code = -1;
 	cmd->barg = 0;
+	cmd->bytes = 0;
+	cmd->t_bytes = 0;
 	// cmd->tymake ps = 0;
 	cmd->colon = colon;
 	cmd->args = args;
