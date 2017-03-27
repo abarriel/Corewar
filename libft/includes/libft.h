@@ -26,6 +26,11 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 int 				btoi(int bin);
+size_t 				swap_st(size_t val);
+unsigned short int 	swap_usint(unsigned short int val);
+short int 			swap_sint(short int val);
+unsigned int 		swap_uint(unsigned int val);
+int 				swap_int(int val);
 size_t				ft_strslen(const char *s, char *c);
 size_t				ft_strlchr(char *s, int c);
 char				*ft_strcchr(const char *s, int c, char stop);

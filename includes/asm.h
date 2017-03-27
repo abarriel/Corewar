@@ -15,12 +15,14 @@
 # include "libft.h"
 # include "op.h"
 # include "locale.h"
+# include "vm.h"
 # define SP " \t"
 # define ENDLINE "ENDLINE"
 # define INSTRUCTION "INSTRUCTION"
 # define SEP_CHAR "SEPERATOR CHAR"
 # define RID T_REG | T_IND | T_DIR
 # define RDI T_REG | T_DIR | T_IND
+
 typedef struct		s_op
 {
 	char			*mnemonique;
@@ -36,6 +38,7 @@ typedef struct		s_op
 typedef struct		s_asm
 {
 	int				header_passage;
+	unsigned short	total_bytes;
 	char			**label;
 	int				nb_label;
 	char			*champ_name;
@@ -51,17 +54,19 @@ typedef struct		s_asm
 typedef struct 		s_cmd
 {
 	char			*op;
+	short 			bytes;
+	short 			t_bytes;
 	char			*args; 
 	int				reg;
 	int				nb_struct;
 	int				line;
 	int				colon;
-	char 			code;
-	unsigned char	r[MAX_ARGS_NUMBER];
-	unsigned short	ind[MAX_ARGS_NUMBER];
-	unsigned short	d2[MAX_ARGS_NUMBER];
-	unsigned int	d4[MAX_ARGS_NUMBER];
-	char 			typs[MAX_ARGS_NUMBER];
+	unsigned char 		code;
+	unsigned char		r[MAX_ARGS_NUMBER];
+	unsigned short int 	ind[MAX_ARGS_NUMBER];
+	unsigned short int 	d2[MAX_ARGS_NUMBER];
+	unsigned int		d4[MAX_ARGS_NUMBER];
+	char 				typs[MAX_ARGS_NUMBER];
 	unsigned char 	barg;
 	t_arg_type		*type[MAX_ARGS_NUMBER];
 	// struct s_op		*op;
@@ -71,14 +76,15 @@ typedef struct 		s_cmd
 typedef struct		s_lab
 {
 	char			*label;
+	int 			bytes;
 	int				count_line;
 	int				colon;
 	int				line;
 	t_cmd 			*cmd;
 	struct s_lab	*next;
 }					t_lab;
-t_op				*get_op(void);
-void write_op(t_asm *a, t_lab *l);
+t_op		*get_op(void);
+void				 write_op(t_asm *a, t_lab *l);
 void				remove_first_label(t_asm *a, t_lab **begin);
 char				**add_label(t_lab **l, t_asm *a);
 void				get_cmd(t_lab *b, char *s, t_asm *a);
@@ -103,5 +109,6 @@ t_header			*init_header(void);
 int					skip_space(char **s);
 void				header_champ(t_asm *a, t_header *h);
 void				lexical_error(int line, int character);
-
+void				write_label(t_asm *a, t_lab *l, t_op *op);
+void 				final_write(t_asm *a, t_header *h, t_lab *l, t_op *op_struct);
 #endif
