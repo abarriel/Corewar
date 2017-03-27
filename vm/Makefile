@@ -12,7 +12,7 @@
 
 NAME	= vm
 
-SRC		= vm.c messages.c parcing_entry.c init/init_core.c visu/aff.c visu/draw.c visu/visu.c visu/other.c visu/other2.c visu/print.c
+SRC		= vm.c messages.c parcing_entry.c swap_bit.c init/init_core.c visu/aff.c visu/draw.c visu/visu.c visu/other.c visu/other2.c visu/print.c
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 

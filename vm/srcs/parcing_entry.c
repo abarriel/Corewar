@@ -53,22 +53,19 @@ void	get_the_champ(char *str, t_core *c)
 	t_header	header;
 	t_player	*new;
 
-	new = (t_player *)malloc(sizeof(t_player));
-	init_player(new);
-	new->next = NULL;
+	if (!(new = (t_player *)malloc(sizeof(t_player))))
+		ft_exit("Malloc Error");
+	init_player(new, c);
 	if ((fd = open(str, O_RDONLY)) < 0)
 		ft_exit("Can't open source file");
 	if ((read(fd, &header, sizeof(t_header)) < (long)sizeof(t_header)))
 		ft_exit("Can't read source file");
-	new->magic = header.magic;
-	new->name = ft_strnew(PROG_NAME_LENGTH + 1);
+	new->magic = ft_endian(header.magic);
 	ft_memcpy(new->name, header.prog_name, PROG_NAME_LENGTH + 1);
 	new->weight = ft_endian(header.prog_size);
 	if (new->weight > CHAMP_MAX_SIZE)
 		ft_exit("Wrong prog size");
-	new->comment = ft_strnew(COMMENT_LENGTH + 1);
 	ft_memcpy(new->comment, header.comment, COMMENT_LENGTH + 1);
-	close(fd);
 	if (c->player == NULL)
 	{
 		c->player = new;
@@ -77,6 +74,7 @@ void	get_the_champ(char *str, t_core *c)
 	}
 	new->next = c->player;
 	c->player = new;
+	close(fd);
 }
 
 void	ft_get_flag(t_core *c, char *str)
