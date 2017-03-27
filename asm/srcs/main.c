@@ -51,6 +51,7 @@ int		main(int av, char **ac)
 	check_operation(a, l);
 	write_op(a, l);
 	write_label(a, l, op);
+	h->prog_size = a->total_bytes;
 	create_file(a, l);
 	final_write(a, h, l, op);
 	return (0);
