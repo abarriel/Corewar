@@ -25,6 +25,7 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+int 				btoi(int bin);
 size_t				ft_strslen(const char *s, char *c);
 size_t				ft_strlchr(char *s, int c);
 char				*ft_strcchr(const char *s, int c, char stop);

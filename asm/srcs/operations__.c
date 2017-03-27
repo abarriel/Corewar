@@ -40,7 +40,7 @@ int		handles_dir(t_asm *a, char *arg, t_cmd *c)
 			return (0);
 			// no_label_error(arg,str,c->colon,c->line - (ft_strlen(str) - 1));
 		}
-		return (1);
+		return (T_DIR);
 	}
 	else
 	{
@@ -53,7 +53,7 @@ int		handles_dir(t_asm *a, char *arg, t_cmd *c)
 		len -= skip_space_len(&arg);
 		if (i != len)
 			return (0);
-		return (1);
+		return (T_DIR);
 	}
 }
 
@@ -75,7 +75,7 @@ int		handles_ind(t_asm *a, char *arg, t_cmd *c)
 		}
 		if (i == a->nb_label)
 			no_label_error(arg, str, c->colon, c->line - (ft_strlen(str) - 1));
-		return (1);
+		return (T_IND);
 	}
 	else
 	{
@@ -91,6 +91,6 @@ int		handles_ind(t_asm *a, char *arg, t_cmd *c)
 			return (0);
 			// syntax_error(arg,c->colon, c->line - i);
 		}
-		return (1);
+		return (T_IND);
 	}
 }
