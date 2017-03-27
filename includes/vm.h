@@ -37,7 +37,7 @@ typedef struct			s_player
   char				      *name;
   size_t		      	weight;
   char					    *comment;
-  char					    *prog;
+  unsigned char					    *prog;
   unsigned char		  id[REG_SIZE];
   int					      last_live;
   int					      nb_live;
