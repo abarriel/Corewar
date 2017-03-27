@@ -108,7 +108,7 @@ unsigned int        swap_uint(unsigned int val);
 int                 swap_int(int val);
 size_t              ft_endian(size_t n);
 unsigned long int   chatoli(char **str);
-void           init_player(t_player *p);
+void           init_player(t_player *p, t_core *c);
 void					error_executable(void);
 t_core					*parcing(int argc, char **argv, t_core *c);
 t_core					*new_core();
