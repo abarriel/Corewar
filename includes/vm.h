@@ -102,7 +102,6 @@ typedef struct    s_but
 }         t_but;
 
 
-int           visu(t_core *c);
 void           init_player(t_player *p);
 void					error_executable(void);
 t_core					*parcing(int argc, char **argv, t_core *c);
@@ -112,6 +111,9 @@ t_core					*parcing(int argc, char **argv, t_core *c);
 
 //visu
 
+static int  ft_loop_key_hook(t_env *p);
+int     visu(t_core *c);
+void    ft_start_struct(t_env *p, t_but *but);
 void        ft_draw_rectangle(int start_x, int start_y, t_env *p);
 void        ft_draw_score(t_env *p);
 void        ft_draw_menu(t_env *p);

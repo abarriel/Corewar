@@ -30,17 +30,17 @@ static const GLfloat pixel_vertexes[8] =
 int get_mouse_button(NSEventType eventtype)
 {
   switch (eventtype) {
-  case NSEventTypeLeftMouseDown:
-  case NSEventTypeLeftMouseUp:
-  case NSEventTypeLeftMouseDragged:
+  case NSLeftMouseDown:
+  case NSLeftMouseUp:
+  case NSLeftMouseDragged:
     return 1;
-  case NSEventTypeRightMouseDown:
-  case NSEventTypeRightMouseUp:
-  case NSEventTypeRightMouseDragged:
+  case NSRightMouseDown:
+  case NSRightMouseUp:
+  case NSRightMouseDragged:
     return 2;
-  case NSEventTypeOtherMouseDown:
-  case NSEventTypeOtherMouseUp:
-  case NSEventTypeOtherMouseDragged:
+  case NSOtherMouseDown:
+  case NSOtherMouseUp:
+  case NSOtherMouseDragged:
     return 3;
   default:
     return 0;
@@ -343,7 +343,7 @@ int get_mouse_button(NSEventType eventtype)
 
   if ((self = [super initWithFrame:rect pixelFormat:pixFmt]) != nil)
     {
-      NSUInteger windowStyle = NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskMiniaturizable;
+      NSUInteger windowStyle = NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask;
 
       win = [[NSWindowEvent alloc] initWithContentRect:rect
 				   styleMask:windowStyle

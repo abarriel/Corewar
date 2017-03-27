@@ -123,7 +123,7 @@ void	mlx_int_loop_once()
   thedate = [NSDate dateWithTimeIntervalSinceNow:0.1];
   while (42)
     {
-      event = [NSApp nextEventMatchingMask:NSEventMaskAny
+      event = [NSApp nextEventMatchingMask:NSAnyEventMask
 		     untilDate:thedate
 		     inMode:NSDefaultRunLoopMode
 		     dequeue:YES];
