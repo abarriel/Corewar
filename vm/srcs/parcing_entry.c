@@ -35,6 +35,18 @@ unsigned long int		chatoli(char **str)
 	return (final);
 }
 
+size_t	ft_endian(size_t n)
+{
+	size_t	r;
+
+	r = 0;
+	r += ((n & 0xff000000) / 0x1000000);
+	r += ((n & 0xff0000) / 0x100);
+	r += ((n & 0xff00) * 0x100);
+	r += ((n & 0xff) * 0x10000);
+	return (r);
+}
+
 void	get_the_champ(char *str, t_core *c)
 {
 	int fd;
@@ -51,7 +63,9 @@ void	get_the_champ(char *str, t_core *c)
 	new->magic = header.magic;
 	new->name = ft_strnew(PROG_NAME_LENGTH + 1);
 	ft_memcpy(new->name, header.prog_name, PROG_NAME_LENGTH + 1);
-	new->weight = header.prog_size;
+	new->weight = ft_endian(header.prog_size);
+	if (new->weight > CHAMP_MAX_SIZE)
+		ft_exit("Wrong prog size");
 	new->comment = ft_strnew(COMMENT_LENGTH + 1);
 	ft_memcpy(new->comment, header.comment, COMMENT_LENGTH + 1);
 	close(fd);
