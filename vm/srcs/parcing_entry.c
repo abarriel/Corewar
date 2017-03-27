@@ -97,6 +97,7 @@ int	ft_get_flag(t_core *c, char **argv, int i)
 	{
 		if (ft_sdigit(argv[i + 1]) == 1)
 			ft_exit("Flag error");
+		c->tmp_id = ft_atoi(argv[i + 1]);
 		return (i + 1);
 	}
 	else
@@ -112,9 +113,7 @@ t_core	*parcing(int argc, char **argv, t_core *c)
 	while (++i < argc)
 	{
 		if (argv[i][0] == '-')
-		{
 			i = ft_get_flag(c, argv, i);
-		}
 		else if (is_a_champ(argv[i], c) == 0)
 		{
 			get_the_champ(argv[i], c);
