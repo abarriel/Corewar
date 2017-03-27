@@ -38,7 +38,7 @@ typedef struct			s_player
   size_t		      	weight;
   char					    *comment;
   char					    *prog;
-  char					    id[REG_SIZE];
+  unsigned char		  id[REG_SIZE];
   int					      last_live;
   int					      nb_live;
   struct s_player		*next;
@@ -101,7 +101,13 @@ typedef struct    s_but
   int       btn5_py;
 }         t_but;
 
-
+size_t              swap_st(size_t val);
+unsigned short int  swap_usint(unsigned short int val) ;
+short int           swap_sint(short int val);
+unsigned int        swap_uint(unsigned int val);
+int                 swap_int(int val);
+size_t              ft_endian(size_t n);
+unsigned long int   chatoli(char **str);
 void           init_player(t_player *p);
 void					error_executable(void);
 t_core					*parcing(int argc, char **argv, t_core *c);
