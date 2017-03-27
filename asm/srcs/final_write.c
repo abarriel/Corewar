@@ -38,10 +38,11 @@ void final_write(t_asm *a, t_header *h, t_lab *l, t_op *op_struct)
 	// t_op	*op_struct;
 
 	// op_struct = get_op();
-	write(a->fd_cor, &(h->magic), sizeof(COREWAR_EXEC_MAGIC));
-	write(a->fd_cor, &(h->prog_name), sizeof(h->prog_name));
-	write(a->fd_cor, &(a->total_bytes), sizeof(a->total_bytes));
-	write(a->fd_cor, &(h->comment), sizeof(h->comment));
+	write(a->fd_cor, h, sizeof(t_header));
+	// write(a->fd_cor, &(h->magic), sizeof(COREWAR_EXEC_MAGIC));
+	// write(a->fd_cor, &(h->prog_name), sizeof(h->prog_name + 1));
+	// write(a->fd_cor, &(a->total_bytes), sizeof(a->total_bytes));
+	// write(a->fd_cor, &(h->comment), sizeof(h->comment));
 	while(l)
 	{
 		while(l->cmd)

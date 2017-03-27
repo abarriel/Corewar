@@ -38,7 +38,7 @@ typedef struct		s_op
 typedef struct		s_asm
 {
 	int				header_passage;
-	unsigned short	total_bytes;
+	unsigned int	total_bytes;
 	char			**label;
 	int				nb_label;
 	char			*champ_name;

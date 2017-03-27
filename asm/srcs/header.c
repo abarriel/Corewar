@@ -14,6 +14,9 @@
 
 void			header_name(char *line, t_header *h, t_asm *a)
 {
+	unsigned int i;
+
+	i = 0;
 	a->header_passage += 1;
 	skip_space(&line);
 	if (*line != '"' && !ft_strchr(LABEL_CHARS, *line))
@@ -21,15 +24,18 @@ void			header_name(char *line, t_header *h, t_asm *a)
 	line++;
 	if ((ft_strlen(line) - 1) > PROG_NAME_LENGTH)
 		length_error(2);
-	ft_bzero(h->prog_name, PROG_NAME_LENGTH);
-	ft_strccpy(h->prog_name, line, '"');
-	// write(a->fd_cor, &(h->prog_name), sizeof(h->prog_name));
+	ft_bzero(h->prog_name, PROG_NAME_LENGTH + 1);
+	i = ft_strlchr(line, '"');
+	ft_strncpy(h->prog_name, line, i);
+	// write(1, &(h->prog_name), sizeof(h->prog_name));
+	// exit(0);
 	header_verif_name_comment(line, a);
 }
 
 void			header_comment(char *line, t_header *h, t_asm *a)
 {
 	static int	tmp = 0;
+	unsigned int i;
 
 	a->header_passage += 1;
 	if (tmp == 1)
@@ -40,8 +46,9 @@ void			header_comment(char *line, t_header *h, t_asm *a)
 	line++;
 	if ((ft_strlen(line) - 1) > COMMENT_LENGTH)
 		length_error(1);
-	ft_bzero(h->comment, COMMENT_LENGTH);
-	ft_strccpy(h->comment, line, '"');
+	ft_bzero(h->comment, COMMENT_LENGTH + 1);
+	i = ft_strlchr(line, '"');
+	ft_strncpy(h->comment, line, i);
 	// write(a->fd_cor, &(h->comment), sizeof(h->comment));
 	header_verif_name_comment(line, a);
 	tmp = 1;
