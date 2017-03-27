@@ -35,26 +35,30 @@ void decrease(t_core *core)
   }
 }
 
-void moove_last(t_core *core, t_process *pro)
+t_process *moove_last(t_core *core, t_process *pro)
 {
   t_process *tmp;
   t_process *last;
+  t_process *res;
 
   last = NULL;
-  tmp = ore->process;
+  tmp = core->process;
   while (tmp != pro)
   {
     last = tmp;
     tmp = tmp->next;
   }
+  res = tmp->next;
   if (last)
     last->next = tmp->next;
   else
-    core->process = tmp;
+    core->process = tmp->next;
   last = tmp;
-  while (tmp->next)
+  while (tmp && tmp->next)
     tmp = tmp->next;
   tmp->next = last;
+  last->next = NULL;
+  return (res);
 }
 
 void exec(t_core *core)
@@ -66,12 +70,13 @@ void exec(t_core *core)
   {
     if (pro->op && pro->cycle_left == 0)
     {
-      exec_op(core, pro);
+      //exec_op(core, pro);
       ft_printf("op : %s at cycle : %d from plaayer : %d\n", pro->op->mnemonique, core->cycle, pro->player->nb);
       pro->op = NULL;
-      moove_last(core, pro);
+      pro = moove_last(core, pro);
     }
-    pro = pro->next;
+    else
+      pro = pro->next;
   }
 }
 
@@ -93,9 +98,19 @@ int count_live(t_player *players)
 
 void free_process(t_process **pro)
 {
-  free(pro->mnemonique);
-  free(pro->comment);
-  free(pro);
+  t_process *tmp;
+  int i;
+
+  i = 0;
+  tmp = *pro;
+  while (i < REG_NUMBER)
+  {
+    free(tmp->reg[i]);
+    i++;
+  }
+  free(tmp->reg);
+  free(tmp);
+  tmp = NULL;
 }
 
 void check_proces(t_process **pro)
@@ -112,13 +127,18 @@ void check_proces(t_process **pro)
       if (last)
         last->next = tmp->next;
       else
-        *pro = tmp;
+        *pro = tmp->next;
       free_process(&tmp);
-      tmp = NULL;
     }
-    tmp->life_flag = 0;
-    last = tmp;
-    tmp = tmp->next;
+    else
+    {
+      tmp->life_flag = 0;
+      last = tmp;
+    }
+    if (tmp)
+      tmp = tmp->next;
+    else
+      tmp = *pro;
   }
 }
 

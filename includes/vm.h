@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/26 00:05:33 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/27 08:52:59 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,20 @@
 # define MAP_SIZE_Y 64
 # define CYC_SEC_ST 50
 
-typedef struct			s_process
+# define RID T_REG | T_IND | T_DIR
+# define RDI T_REG | T_DIR | T_IND
+
+typedef struct		s_op
 {
-	char				       pc;
-	int					       cycle_left;
-	char				       reg[REG_NUMBER][REG_SIZE];
-	char				       carry;
-	struct s_process   *next;
-}						t_process;
+	char			*mnemonique;
+	char			nbr_args;
+	char			type[MAX_ARGS_NUMBER];
+	char			code;
+	int				nbr_cycles;
+	char			*comment;
+	int				cde_oct;
+	int				l_size;
+}					t_op;
 
 typedef struct			s_player
 {
@@ -37,25 +43,42 @@ typedef struct			s_player
   char				      *name;
   size_t		      	weight;
   char					    *comment;
-  unsigned char					    *prog;
+  unsigned char			*prog;
   unsigned char		  id[REG_SIZE];
   int					      last_live;
   int					      nb_live;
+	int								nb;
   struct s_player		*next;
 }						t_player;
+
+typedef struct			s_process
+{
+	int				       	pc;
+	int								life_flag;
+	int					       cycle_left;
+	t_op							 *op;
+	unsigned char			 **reg;
+	char				       carry;
+	t_player					 *player;
+	struct s_process   *next;
+}						t_process;
 
 typedef struct			s_core
 {
   t_process   *process;
   t_player    *player;
+	int         tmp_id;
   int         visu;
   int	        nb_player;
-  char        mem[MEM_SIZE];
+  unsigned char        mem[MEM_SIZE];
   char        mem_c[MEM_SIZE];
   int					cycle;
+	int					die_cycle;
+	int					last_check;
   int					cycle_sec;
   int					dump;
   char        run;
+	t_op				*op;
 }						t_core;
 
 typedef struct    s_env
@@ -117,6 +140,7 @@ t_core					*parcing(int argc, char **argv, t_core *c);
 
 //visu
 
+void run(t_core *core);
 static int  ft_loop_key_hook(t_env *p);
 int     visu(t_core *c);
 void    ft_start_struct(t_env *p, t_but *but);
