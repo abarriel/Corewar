@@ -41,6 +41,8 @@ t_process *moove_last(t_core *core, t_process *pro)
   t_process *last;
   t_process *res;
 
+  if (!core->process->next)
+    return (core->process);
   last = NULL;
   tmp = core->process;
   while (tmp != pro)
@@ -68,10 +70,11 @@ void exec(t_core *core)
   pro = core->process;
   while (pro)
   {
-    if (pro->op && pro->cycle_left == 0)
+    if (pro->op != NULL && pro->cycle_left == 0)
     {
+      ft_printf("op : %s at cycle : %d from player : %d\n", pro->op->mnemonique, core->cycle, pro->player->nb);
       exec_op(core, pro);
-      ft_printf("op : %s at cycle : %d from plaayer : %d\n", pro->op->mnemonique, core->cycle, pro->player->nb);
+      ft_printf("\n");
       pro->op = NULL;
       pro = moove_last(core, pro);
     }
@@ -158,7 +161,6 @@ void run(t_core *core)
 {
 	while (core->nb_player != 0)
 	{
-    printf("%s\n", "vache");
     core->cycle += 1;
 		lunch_op(core);
 		decrease(core);
