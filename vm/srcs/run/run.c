@@ -70,7 +70,7 @@ void exec(t_core *core)
   {
     if (pro->op && pro->cycle_left == 0)
     {
-      //exec_op(core, pro);
+      exec_op(core, pro);
       ft_printf("op : %s at cycle : %d from plaayer : %d\n", pro->op->mnemonique, core->cycle, pro->player->nb);
       pro->op = NULL;
       pro = moove_last(core, pro);
@@ -158,6 +158,7 @@ void run(t_core *core)
 {
 	while (core->nb_player != 0)
 	{
+    printf("%s\n", "vache");
     core->cycle += 1;
 		lunch_op(core);
 		decrease(core);

@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/27 08:52:59 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/28 04:54:56 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct		s_op
 	char			*comment;
 	int				cde_oct;
 	int				l_size;
+	int				(*f)(void*, void*);
 }					t_op;
 
 typedef struct			s_player
@@ -124,6 +125,9 @@ typedef struct    s_but
   int       btn5_py;
 }         t_but;
 
+int  exec_live(void *core, void *pro);
+
+void exec_op(t_core *core, t_process *pro);
 size_t              swap_st(size_t val);
 unsigned short int  swap_usint(unsigned short int val) ;
 short int           swap_sint(short int val);
