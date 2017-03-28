@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/28 04:54:56 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/28 09:05:49 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,9 @@ void print_map(t_core *core);
 int checker_arg(t_core *core, t_process *pro);
 int  exec_live(void *core, void *pro);
 int exec_add(void *core, void *pro);
+int  exec_zjmp(void *core, void *pro);
+int  exec_fork(void *core, void *pro);
+int  exec_lfork(void *core, void *pro);
 void  print_usage(void);
 void exec_op(t_core *core, t_process *pro);
 size_t              swap_st(size_t val);
