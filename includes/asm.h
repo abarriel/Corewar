@@ -75,7 +75,7 @@ typedef struct 		s_cmd
 typedef struct		s_lab
 {
 	char			*label;
-	int 			bytes;
+	short			bytes;
 	int				count_line;
 	int				colon;
 	int				line;
