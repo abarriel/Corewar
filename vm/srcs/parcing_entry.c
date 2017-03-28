@@ -89,6 +89,17 @@ void	get_the_champ(char *str, t_core *c)
 	close(fd);
 }
 
+void	print_usage(void)
+{
+	ft_printf("Usage: ./corewar [-dump N -n N -v] <champion1.cor> <...>\n\n");
+	ft_printf("    -dump nbr_cycles : Au bout de nbr_cycles cycles ");
+	ft_printf("d’exécution, dump la mémoire sur la sortie standard,");
+	ft_printf(" puis quitte la partie.\n");
+	ft_printf("    -n numer         : Fixe le numéro du prochain joueur.\n");
+	ft_printf("    -v               : interface graphique mlx\n");
+	exit(0);
+}
+
 int	ft_get_flag(t_core *c, char **argv, int i)
 {
 	if (ft_strequ(argv[i], "-f"))
