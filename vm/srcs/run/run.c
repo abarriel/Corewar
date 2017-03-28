@@ -72,8 +72,10 @@ void exec(t_core *core)
   {
     if (pro->op != NULL && pro->cycle_left == 0)
     {
+      print_map(core);
       ft_printf("op : %s at cycle : %d from player : %d\n", pro->op->mnemonique, core->cycle, pro->player->nb);
       exec_op(core, pro);
+      print_map(core);
       ft_printf("\n");
       pro->op = NULL;
       pro = moove_last(core, pro);
@@ -161,6 +163,7 @@ void run(t_core *core)
 {
 	while (core->nb_player != 0)
 	{
+    // print_map(core);
     core->cycle += 1;
 		lunch_op(core);
 		decrease(core);

@@ -86,8 +86,8 @@ int		main(int argc, char **argv)
 	parcing(argc, argv, core);
 	print_player(core);
 	init_core(core);
-	print_map(core);
+	// print_map(core);
 	run(core);
-	//print_res(core);
+	// print_res(core);
 	return (0);
 }

@@ -11,7 +11,11 @@
 /* ************************************************************************** */
 
 #include "asm.h"
-
+/*
+** LABEL SANS ARG , NE TROUVER PAS QUAND JE CHERCHE LE LABEL NORMAL
+** JE DOIS FOUTRE CMD->BYTES DANS LE LABEL->BYTES
+** ARGS SANS LABEL A GERER AUSSI JE DOI NEXT LE PARSER DE LABEL ET C TOUT
+**/
 void f_write_cmd(t_asm *a, t_cmd *c, t_op op_t)
 {
 	short index;

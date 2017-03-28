@@ -5,7 +5,7 @@ void		init_op(void **res)
 	static const t_op op[] = {{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0, &exec_live},
 		{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0, &exec_live},
 		{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0, &exec_live},
-		{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0, &exec_live},
+		{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0, &exec_add},
 		{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0, &exec_live},
 		{"and", 3, {RDI, RID, T_REG}, 6, 6, "r1,r2,r3. r1&r2 -> r3", 1, 0, &exec_live},
 		{"or", 3, {RID, RID, T_REG}, 7, 6, "r1,r2,r3. r1 | r2 -> r3", 1, 0, &exec_live},
