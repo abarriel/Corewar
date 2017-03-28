@@ -26,3 +26,18 @@ int exec_add(void *core, void *pro)
   // exit(0);
   return (1);
 }
+
+int exec_lld(void *core, void *pro)
+{
+  t_process *pr;
+  t_core *cr;
+
+  cr = (t_core*)core;
+  pr = (t_process*)pro;
+
+  if(!checker_arg(cr, pr))
+      return (0);
+ 
+  // exit(0);
+  return (1);
+}
