@@ -127,6 +127,7 @@ typedef struct    s_but
 
 int  exec_live(void *core, void *pro);
 
+void  print_usage(void);
 void exec_op(t_core *core, t_process *pro);
 size_t              swap_st(size_t val);
 unsigned short int  swap_usint(unsigned short int val) ;
