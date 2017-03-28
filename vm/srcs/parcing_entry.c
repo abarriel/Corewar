@@ -89,12 +89,14 @@ void	get_the_champ(char *str, t_core *c)
 	close(fd);
 }
 
-int	ft_get_flag(t_core *c, char **argv, int i)
+int	ft_get_flag(t_core *c, int argc, char **argv, int i)
 {
 	if (ft_strequ(argv[i], "-f"))
 		c->visu = 1;
 	else if (ft_strequ(argv[i], "-n"))
 	{
+		if (argc <= i + 1)
+			print_usage();
 		if (ft_sdigit(argv[i + 1]) == 1)
 			ft_exit("Flag error");
 		c->tmp_id = ft_atoi(argv[i + 1]);
@@ -110,10 +112,12 @@ t_core	*parcing(int argc, char **argv, t_core *c)
 	int i;
 
 	i = 0;
+	if (argc <= 1)
+		print_usage();
 	while (++i < argc)
 	{
 		if (argv[i][0] == '-')
-			i = ft_get_flag(c, argv, i);
+			i = ft_get_flag(c, argc, argv, i);
 		else if (is_a_champ(argv[i], c) == 0)
 		{
 			get_the_champ(argv[i], c);
@@ -122,6 +126,8 @@ t_core	*parcing(int argc, char **argv, t_core *c)
 		else
 			error_executable();
 	}
+	if (c->nb_player == 0)
+		print_usage();
 	if (c->nb_player > 4)
 		ft_exit("Too many players!");
 	return (c);
