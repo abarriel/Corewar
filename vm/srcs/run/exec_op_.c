@@ -59,11 +59,6 @@ int size_arg(unsigned char oc_cde, int d_size, int i)
   return (d_size);
 }
 
-unsigned int get_n_arg(t_core *cr, t_process *pr, int i, int j)
-{
-  return (0);
-}
-
 int size_args(unsigned char oc_cde, int d_size)
 {
   int res;
