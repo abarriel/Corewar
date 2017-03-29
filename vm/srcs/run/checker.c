@@ -47,6 +47,10 @@ int check_all_arg(t_core *core, t_process *pro, int i, int index, int *ok)
   		}
   		// ft_printf("T_DIR");	
   	}
+  	if( index & T_IND)
+  	{
+  		(*ok) += 1;
+  	}
   	// exit(0);
 	return (1);
 }
@@ -74,8 +78,7 @@ int check_cde_oct(t_core *core, t_process *pro)
   		{
     			if(!(check_all_arg(core,pro,i + 1, index, &ok)))
   				return(0);
-  		
-  			// ft_printf("{8}[%08b] - ",index);
+  		  			// ft_printf("{8}[%08b] - ",index);
   			// exit(0);
   		}
   		else
@@ -91,17 +94,6 @@ int check_cde_oct(t_core *core, t_process *pro)
   	// exit(0);
 	return(1);
 }
-
-// int check_arg(t_core *core, t_process *pro, int pc)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while(i != pro->op->nbr_args)
-// 		i++;
-// 	return(0);
-// 	return (1);
-// }
 
 int checker_arg(t_core *core, t_process *pro)
 { 	
