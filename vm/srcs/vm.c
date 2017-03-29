@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:29:02 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/27 08:11:04 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/29 10:12:58 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,22 @@ void	print_player(t_core *core)
 	}
 }
 
+void print_res(t_core *core)
+{
+	t_player *player;
+	t_player *winner;
+
+	player = core->player;
+	winner = core->player;
+	while (player)
+	{
+		if (player->last_live > winner->last_live)
+			winner = player;
+		player = player->next;
+	}
+	print_winner(winner);
+}
+
 int		main(int argc, char **argv)
 {
 	t_core	*core;
@@ -88,6 +104,6 @@ int		main(int argc, char **argv)
 	init_core(core);
 	// print_map(core);
 	run(core);
-	// print_res(core);
+	print_res(core);
 	return (0);
 }

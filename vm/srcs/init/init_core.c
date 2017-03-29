@@ -97,6 +97,7 @@ void  init_core(t_core *core)
 	{
 		ft_memcpy(&core->mem[tmp_r->pc], tmp_p->prog, tmp_p->weight);
 		ft_memset(&core->mem_c[tmp_r->pc], i, tmp_p->weight);
+		ft_bzero(&core->mem_c[tmp_r->pc + tmp_p->weight], 10);
 		core->mem_c[tmp_r->pc] = 10 * i;
 		tmp_p = tmp_p->next;
 		tmp_r = tmp_r->next;
@@ -110,9 +111,9 @@ t_core *new_core()
 
 	if (!(res = malloc(sizeof(t_core))))
 		exit(write(1, "Bad malloc\n", 11));
-	res->player = NULL;
 	ft_bzero(res->mem, MEM_SIZE);
 	ft_bzero(res->mem_c, MEM_SIZE);
+	res->player = NULL;
 	res->process = NULL;
 	res->dump = -1;
 	res->last_check = 0;

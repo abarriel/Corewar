@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   messages.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcharvol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 05:27:34 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/25 05:27:44 by lcharvol         ###   ########.fr       */
+/*   Updated: 2017/03/29 10:12:37 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void 	print_winner(t_player *p)
 {
-	ft_printf("Constestant %d, \"%s\",		has won !\n", (unsigned int)p->id, p->name);
+	ft_printf("Constestant %d, \"%s\", has won !\n", (unsigned int)p->nb, p->name);
 }
 
 void 	print_is_alive(char *name)

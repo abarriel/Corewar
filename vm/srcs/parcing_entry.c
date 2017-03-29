@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 05:41:30 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/25 09:23:00 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/29 10:22:01 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,15 @@ int	ft_get_flag(t_core *c, int argc, char **argv, int i)
 		if (ft_sdigit(argv[i + 1]) == 1)
 			ft_exit("Flag error");
 		c->tmp_id = ft_atoi(argv[i + 1]);
+		return (i + 1);
+	}
+	else if (ft_strequ(argv[i], "-dump"))
+	{
+		if (argc <= i + 1)
+			print_usage();
+		if (ft_sdigit(argv[i + 1]) == 1)
+			ft_exit("Flag error");
+		c->dump = ft_atoi(argv[i + 1]);
 		return (i + 1);
 	}
 	else
