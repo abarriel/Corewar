@@ -36,10 +36,13 @@ unsigned int chatoi(unsigned char *str)
 
 void insert_in_reg(unsigned char *reg, unsigned int cpy)
 {
+  ft_printf("trois\n");
+  ft_printf("%02x\n", reg[0]);
   reg[0] = (cpy & 0xFF000000) >> 24;
   reg[1] = (cpy & 0x00FF0000) >> 16;
   reg[2] = (cpy & 0x0000FF00) >> 8;
   reg[3] = (cpy & 0x000000FF);
+  ft_printf("quatre\n");
 }
 
 int size_arg(unsigned char oc_cde, int d_size, int i)
@@ -52,7 +55,7 @@ int size_arg(unsigned char oc_cde, int d_size, int i)
     cde = (oc_cde & 48) >> 4;
   else
     cde = (oc_cde & 12) >> 2;
-  ft_printf("cde : %d\n", cde);
+  ft_printf("cde : %02x\n", oc_cde);
   if (cde == 1)
     return (1);
   if (cde == 3)
@@ -69,8 +72,11 @@ int size_args(unsigned char oc_cde, int d_size)
   ft_printf("1 : %d\n", res);
   res += size_arg(oc_cde, d_size, 2);
   ft_printf("2 : %d\n", res);
+  if(oc_cde & 12)
+  {
   res += size_arg(oc_cde, d_size, 3);
   ft_printf("3 : %d\n", res);
+  }
   return (2 + res);
 }
 
@@ -87,7 +93,9 @@ unsigned char *get_n_reg(t_core *core, t_process *process, int arg)
     dec += size_arg(core->mem[(process->pc + 1) % MEM_SIZE], 4 - 2 * process->op->l_size, i);
     i++;
   }
-  reg = process->reg[core->mem[(process->pc + 2 + dec) % MEM_SIZE]];
+  // ft_printf("{%d}{%d}",i,dec);
+  reg = process->reg[core->mem[(process->pc + 2 + dec) % MEM_SIZE] - 1];
+  // ft_printf("%d\n", core->mem[(process->pc + 2 + dec) % MEM_SIZE] - 1);
   return (reg);
 }
 
@@ -150,14 +158,15 @@ int exec_ld(void *core, void *pro)
 
   cr = (t_core*)core;
   pr = (t_process*)pro;
-  res = chatoi(&(cr->mem[get_n_arg(cr, pr, 1, 1) % MEM_SIZE]));
+  res = get_n_arg(cr,pr,1,1);
+  // ft_printf("{7}{%u}{%02x}\n",res, cr->mem[pr->pc % MEM_SIZE]);
+  // res = chatoi(&(cr->mem[get_n_arg(cr, pr, 1, 1) % MEM_SIZE]));
+ 
   if (get_n_arg(cr, pr, 1, 1) == 0)
     pr->carry = 1;
   else
     pr->carry = 0;
   insert_in_reg(get_n_reg(cr, pr, 2), res);
-  ft_printf("{7)%d\n",size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 4));
-  exit(1);
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 4));
 }
 
@@ -224,11 +233,17 @@ int exec_st(void *core, void *pro)
   if (res == 0)
     pr->carry = 1;
   else
-    pr->carry = 0;
+    pr->carry = 0;  
   if (cr->mem[(pr->pc + 1) % MEM_SIZE] == (unsigned char)80)
-    insert_in_reg(get_n_reg(cr, pr, 3), res);
+  {
+    // ft_printf("d\n");
+    insert_in_reg(get_n_reg(cr, pr, 2), res);
+    // ft_printf("c\n");
+  }
   else
+  {
     insert_in_reg(&cr->mem[get_n_arg(cr, pr, 2, 1) % MEM_SIZE], res);
+  }
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 4));
 }
 
@@ -300,6 +315,8 @@ int exec_aff(void *core, void *pro)
   cr = (t_core*)core;
   pr = (t_process*)pro;
   res = chatoi(pr->reg[cr->mem[(pr->pc + 2) % MEM_SIZE] - 1]) % 256;
-  ft_printf("{9}[%c]", (unsigned char)res);
+  // write(1,&res,1);
+  ft_printf("%c", (unsigned char)res);
+  // exit(0);
   return(3);
 }

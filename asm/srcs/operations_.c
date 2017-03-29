@@ -11,7 +11,9 @@
 /* ************************************************************************** */
 
 #include "asm.h"
-
+/*
+** 	A LA PLACE DE T_REG PEUT ETRE REG_CODE
+*/
 int		handles_reg(t_asm *a, char *arg, t_cmd *c)
 {
 	char *str;

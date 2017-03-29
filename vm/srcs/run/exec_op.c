@@ -130,6 +130,8 @@ void exec_op(t_core *core, t_process *pro)
 
   if (pro->op->mnemonique)
   {
+    ft_printf("{9}\n\nReturn Check  de %s=[%d]\n",pro->op->mnemonique, checker_arg(core, pro));
+    // exit(0);
     if (pro->op->cde_oct == 0 || checker_arg(core, pro))
     {
     //  print_map(core);

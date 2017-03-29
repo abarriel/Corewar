@@ -29,26 +29,33 @@ unsigned int return_arg(t_core *core, t_process *process, int mod, int index, in
 
   // ft_printf("{%d}{%02b}\n",index, cde);
   // ft_printf("{9} [%02x] - %d\n",core->mem[(index) % MEM_SIZE], index);
-  if (cde & T_REG)
+ if ((cde & REG_CODE) == cde)
   {
     // res = index;
-    res = chatoi(process->reg[index - 1]);
+  // ft_printf("{9}{%p}{%d}",process->reg[index - 1],index);
+    res = 0;
+    res |= core->mem[index % MEM_SIZE];
+    res = chatoi(process->reg[res - 1]);
+  // ft_printf("{9}{%p}",process->reg[index - 1]);
+    ft_printf("vache\n");
     return(res);
   // ft_printf("res : %08x\n", res);
   }
-  if (cde & T_IND)
+if ((cde & IND_CODE) == cde)
   {
     res = chatohi(&(core->mem[index & MEM_SIZE]));
     if(mod == 1)
       res %= IDX_MOD;
     res += process->pc;
   }
-  if (cde & T_DIR)
+  if ((cde & DIR_CODE) == cde)
   {
-    // ft_printf("{%d}{%02x}",res, core->mem[index % MEM_SIZE]);
     //      exit(0);
      if(!process->op->l_size)
+     {
        res = chatoi(&(core->mem[index % MEM_SIZE])); 
+    // ft_printf("{%d}{%02x}",res, core->mem[index % MEM_SIZE]);
+     }
     else
     {
      res = chatohi(&(core->mem[index % MEM_SIZE]));
@@ -59,11 +66,11 @@ unsigned int return_arg(t_core *core, t_process *process, int mod, int index, in
 
 unsigned char return_good_value(unsigned char cde, t_process *process)
 {
-  if (cde & T_REG)
+  if ((cde & REG_CODE) == cde)
     return(1);
-  if (cde & T_IND)
+  if ((cde & IND_CODE) == cde)
     return(2);
-  if (cde & T_DIR)
+  if ((cde & DIR_CODE) == cde)
   {
      if(!process->op->l_size)
        return(4);
@@ -84,8 +91,9 @@ unsigned int get_n_arg(t_core *core, t_process *process, int arg, int mod)
   cde = aply_mask(cde, arg);
   if (arg == 1)
   {
-    index =  core->mem[(process->pc + 2) % MEM_SIZE];
-    // ft_printf("{8}{%02x}",cde);
+    index =  process->pc + 2;
+    // if(index > )
+    // ft_printf("{8}{%02x}",core->mem[(process->pc + 2) % MEM_SIZE]);
     // exit(0);
     return(return_arg(core, process, mod, index, cde));
   }
