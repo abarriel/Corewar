@@ -11,7 +11,9 @@
 /* ************************************************************************** */
 
 #include "asm.h"
-
+/*
+** PAS OUBLIER CHAMPIONS AVEC HEADER MAIS INSTRUCTION VIDE
+**/
 void	create_file(t_asm *a, t_lab *l)
 {
 	if ((a->fd_cor = open(a->cor, O_CREAT | O_WRONLY | O_APPEND | O_TRUNC, 0644)) < 0)

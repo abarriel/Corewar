@@ -163,7 +163,7 @@ void die_check(t_core *core)
 
 void run(t_core *core)
 {
-  print_map(core);
+  // print_map(core);
 	while (core->nb_player != 0)
 	{
     //print_map(core);
