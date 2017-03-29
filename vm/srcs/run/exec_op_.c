@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 06:40:45 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/29 11:04:56 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/29 11:51:10 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ int size_arg(unsigned char oc_cde, int d_size, int i)
   unsigned int cde;
 
   if (i == 1)
-    cde = (cde & 192) >> 6;
+    cde = (oc_cde & 192) >> 6;
   else if (i == 2)
-    cde = (cde & 48) >> 4;
+    cde = (oc_cde & 48) >> 4;
   else
-    cde = (cde & 12) >> 2;
+    cde = (oc_cde & 12) >> 2;
+  ft_printf("cde : %d\n", cde);
   if (cde == 1)
     return (1);
   if (cde == 3)
@@ -65,8 +66,11 @@ int size_args(unsigned char oc_cde, int d_size)
 
   res = 0;
   res += size_arg(oc_cde, d_size, 1);
+  ft_printf("1 : %d\n", res);
   res += size_arg(oc_cde, d_size, 2);
+  ft_printf("2 : %d\n", res);
   res += size_arg(oc_cde, d_size, 3);
+  ft_printf("3 : %d\n", res);
   return (2 + res);
 }
 
@@ -235,12 +239,14 @@ int exec_sti(void *core, void *pro)
   cr = (t_core*)core;
   pr = (t_process*)pro;
   res = get_n_arg(cr, pr, 1, 1);
-  ft_printf("2\n");
+  ft_printf("res : %08x\n", res);
+  ft_printf("to have : %02x %02x %02x %02x\n", pr->reg[0][0], pr->reg[0][1], pr->reg[0][2], pr->reg[0][3]);
   if (res == 0)
     pr->carry = 1;
   else
     pr->carry = 0;
   insert_in_reg(&cr->mem[(get_n_arg(cr, pr, 2, 1) + get_n_arg(cr, pr, 3, 1)) % MEM_SIZE], res);
+  ft_printf("return : %d\n", size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));
 }
 

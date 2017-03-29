@@ -114,13 +114,18 @@ int  exec_zjmp(void *core, void *pro)
   unsigned short int jmp;
 
   pr = (t_process*)pro;
-  if (pr->carry == 0)
-    return (3);
+  //if (pr->carry == 0)
+  //  return (3);
+  ft_printf("jejump\n");
   jmp = 0;
   cor = (t_core*)core;
   jmp += (unsigned int)(cor->mem[(pr->pc + 1) % MEM_SIZE]) * 256;
+  ft_printf("first oct : %02x\n", cor->mem[(pr->pc + 1) % MEM_SIZE] * 256);
   jmp += (unsigned int)(cor->mem[(pr->pc + 2) % MEM_SIZE]);
+  ft_printf("scd oct : %02x\n", cor->mem[(pr->pc + 2) % MEM_SIZE]);
+  ft_printf("jmp : %04x\n", jmp % MEM_SIZE);
   pr->pc = (pr->pc + (jmp % MEM_SIZE)) % MEM_SIZE;
+  ft_printf("ici : %d\n",pr->pc);
   return (0);
 }
 
@@ -131,7 +136,10 @@ void exec_op(t_core *core, t_process *pro)
   if (pro->op->mnemonique)
   {
     if (pro->op->cde_oct == 0 || checker_arg(core, pro))
+    {
+      print_map(core);
       exec = pro->op->f(core, pro);
+    }
     else
       exec = -1;
   }
