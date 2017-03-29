@@ -74,8 +74,15 @@ void exec(t_core *core)
   {
     if (pro->op != NULL && pro->cycle_left == 0)
     {
+<<<<<<< HEAD
       ft_printf("op : %s at cycle : %d from player : %d\n", pro->op->mnemonique, core->cycle, pro->player->nb);
       exec_op(core, pro);
+=======
+      // print_map(core);
+      ft_printf("op : %s at cycle : %d from player : %d\n", pro->op->mnemonique, core->cycle, pro->player->nb);
+      exec_op(core, pro);
+      // print_map(core);
+>>>>>>> 1b32915e3cc3f1dc25826c73cd983962f2a23b05
       ft_printf("\n");
       pro->op = NULL;
       pro = moove_last(core, pro);

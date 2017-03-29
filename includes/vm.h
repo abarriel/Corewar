@@ -124,6 +124,7 @@ typedef struct    s_but
   int       btn4_py;
   int       btn5_py;
 }         t_but;
+int exec_lld(void *core, void *pro);
 void print_map(t_core *core);
 int checker_arg(t_core *core, t_process *pro);
 int  exec_live(void *core, void *pro);
