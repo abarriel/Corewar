@@ -143,7 +143,7 @@ next_wall:
 	st		r2, 511
 	st		r2, 511
 	st		r2, 511
-	zjmp	%:next_wall
+	zjm	%:next_wall
 
 
 

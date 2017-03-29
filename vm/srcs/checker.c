@@ -30,10 +30,14 @@ int check_cde_oct(t_core *core, t_process *pro)
   	{
 		index = mem & mask;
 		index = index >> decalage;
-  		// ft_printf("{9}[%08b]\n",index);
-  		// ft_printf("{9}[%08b]\n",pro->op->type[i]);
+  	;
   		if(index & pro->op->type[i])
-  			ft_printf("MATCH\n");
+  		{
+  			ft_printf("MATCH\n");	
+  			ft_printf("{7}%x",core->mem[(pro->pc + 1) % MEM_SIZE]);	
+  			ft_printf("{8}[%08b] - ",index);
+  			ft_printf("{9}[%08b][%]\n",pro->op->type[i]);
+  		}
   		else
   		{
   			ft_printf("NO MATCH\n");
