@@ -172,7 +172,8 @@ void die_check(t_core *core)
 
 void run(t_core *core)
 {
-  // print_map(core);
+  print_map(core);
+  //exit(1);
 	while (core->nb_player != 0 && core->dump != 0)
 	{
     core->cycle += 1;

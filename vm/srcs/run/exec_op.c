@@ -134,7 +134,7 @@ void exec_op(t_core *core, t_process *pro)
     // exit(0);
     if (pro->op->cde_oct == 0 || checker_arg(core, pro))
     {
-    //  print_map(core);
+     print_map(core);
       exec = pro->op->f(core, pro);
     }
     else
