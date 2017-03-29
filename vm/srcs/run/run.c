@@ -151,11 +151,17 @@ void check_proces(t_process **pro)
 
 void die_check(t_core *core)
 {
+  static int nb_check = 0;
+
   if ((core->cycle - core->last_check) % core->die_cycle == 0)
   {
+    nb_check++;
     core->nb_player = count_live(core->player);
-    if (core->nb_player >= NBR_LIVE)
+    if (core->nb_player >= NBR_LIVE || nb_check == MAX_CHECKS)
+    {
+      nb_check = 0;
       core->die_cycle -= CYCLE_DELTA;
+    }
     check_proces(&core->process);
     core->last_check = core->cycle;
   }

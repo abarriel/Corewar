@@ -6,7 +6,7 @@ void		init_op(void **res)
 		{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0, &exec_live},
 		{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0, &exec_live},
 		{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0, &exec_add},
-		{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0, &exec_live},
+		{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction", 1, 0, &exec_sub},
 		{"and", 3, {RDI, RID, T_REG}, 6, 6, "r1,r2,r3. r1&r2 -> r3", 1, 0, &exec_live},
 		{"or", 3, {RID, RID, T_REG}, 7, 6, "r1,r2,r3. r1 | r2 -> r3", 1, 0, &exec_live},
 		{"xor", 3, {RID, RID, T_REG}, 8, 6, "r1,r2,r3. r1^r2 -> r3", 1, 0, &exec_live},
@@ -17,7 +17,7 @@ void		init_op(void **res)
 		{"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, "long load", 1, 0, &exec_live},
 		{"lldi", 3, {RDI, T_DIR | T_REG, T_REG}, 14, 50, "lng lod idx", 1, 1, &exec_live},
 		{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1, &exec_lfork},
-		{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0, &exec_live},
+		{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0, &exec_aff},
 		{0, 0, {0}, 0, 0, 0, 0, 0, NULL}};
 
 	*res = (void*)op;
