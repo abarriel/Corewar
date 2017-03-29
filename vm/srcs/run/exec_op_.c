@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 06:40:45 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/29 09:46:21 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/29 11:04:56 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,9 @@ int exec_sti(void *core, void *pro)
   t_core *cr;
   unsigned int res;
 
+  ft_printf("1\n");
   res = get_n_arg(cr, pr, 1, 1);
+  ft_printf("2\n");
   if (res == 0)
     pr->carry = 1;
   else

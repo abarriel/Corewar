@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_n_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:19:44 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/29 08:19:45 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/29 10:57:40 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ unsigned char return_good_value(unsigned char cde, t_process *process)
     else
       return(2);
   }
+  return (0);
 }
 
 unsigned int get_n_arg(t_core *core, t_process *process, int arg, int mod)
@@ -74,7 +75,7 @@ unsigned int get_n_arg(t_core *core, t_process *process, int arg, int mod)
   {
     cde = ((core->mem[(process->pc + 1) % MEM_SIZE]) & 192 >> 6);
     i = return_good_value(cde, process);
-    index = (process->pc + 1) + i; 
+    index = (process->pc + 1) + i;
     return(return_arg(core, process, mod, index, cde));
   }
   if (arg == 3)
@@ -83,7 +84,7 @@ unsigned int get_n_arg(t_core *core, t_process *process, int arg, int mod)
     i = return_good_value(cde, process);
     cde = ((core->mem[(process->pc + 1) % MEM_SIZE]) & 48 >> 4);
     i += return_good_value(cde, process);
-    index = (process->pc + 1) + i; 
+    index = (process->pc + 1) + i;
     return(return_arg(core, process, mod, index, cde));
   }
   return (res);

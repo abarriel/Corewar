@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm.h                                               :+:      :+:    :+:   */
+/*   vm2.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/29 11:00:27 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/29 10:56:10 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,26 +124,19 @@ typedef struct    s_but
   int       btn4_py;
   int       btn5_py;
 }         t_but;
-unsigned int chatoi(unsigned char *str);
-unsigned int chatohi(unsigned char *str);
+
+
+void 	print_winner(t_player *p);
 unsigned int get_n_arg(t_core *core, t_process *process, int arg, int mod);
+int exec_lld(void *core, void *pro);
 void print_map(t_core *core);
 int checker_arg(t_core *core, t_process *pro);
-int exec_lld(void *core, void *pro);
 int  exec_live(void *core, void *pro);
 int exec_add(void *core, void *pro);
 int exec_sub(void *core, void *pro);
 int exec_aff(void *core, void *pro);
 int  exec_zjmp(void *core, void *pro);
 int  exec_fork(void *core, void *pro);
-int  exec_st(void *core, void *pro);
-int  exec_sti(void *core, void *pro);
-int  exec_and(void *core, void *pro);
-int  exec_or(void *core, void *pro);
-int  exec_xor(void *core, void *pro);
-int  exec_lldi(void *core, void *pro);
-int  exec_ld(void *core, void *pro);
-int  exec_ldi(void *core, void *pro);
 int  exec_lfork(void *core, void *pro);
 void  print_usage(void);
 void exec_op(t_core *core, t_process *pro);
@@ -163,7 +156,6 @@ t_core					*parcing(int argc, char **argv, t_core *c);
 
 //visu
 
-void 	print_winner(t_player *p);
 void run(t_core *core);
 static int  ft_loop_key_hook(t_env *p);
 int     visu(t_core *c);
