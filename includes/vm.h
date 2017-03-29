@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/28 09:05:49 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/29 05:39:25 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,14 @@ typedef struct    s_but
   int       btn4_py;
   int       btn5_py;
 }         t_but;
+
 int exec_lld(void *core, void *pro);
 void print_map(t_core *core);
 int checker_arg(t_core *core, t_process *pro);
 int  exec_live(void *core, void *pro);
 int exec_add(void *core, void *pro);
+int exec_sub(void *core, void *pro);
+int exec_aff(void *core, void *pro);
 int  exec_zjmp(void *core, void *pro);
 int  exec_fork(void *core, void *pro);
 int  exec_lfork(void *core, void *pro);
