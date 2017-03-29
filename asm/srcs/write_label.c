@@ -22,9 +22,15 @@ unsigned short int 	get_pos_label(short bytes, char *s, t_lab *l)
 		{
 			if (l->cmd)
 			{
+				ft_printf("{8}{%d}{%d}",l->cmd->t_bytes - l->cmd->bytes, bytes);
 				return((l->cmd->t_bytes - l->cmd->bytes) - bytes);
 				// ft_printf("{9}{%s}{%d}\n",l->label, l->cmd->t_bytes - l->cmd->bytes);
 				// ft_printf("{8}{%s}{%d}",s, bytes);
+			}
+			else
+			{
+				ft_printf("{8}{%d}{%d}",l->bytes, bytes);
+				return(l->bytes - bytes);
 			}
 			// ft_printf("{%s}[%s]",)
 		}
@@ -49,6 +55,7 @@ void 	recup_label(t_cmd *c, t_op op_t, t_lab *tmp)
 			{
 				new = new + 1;
 				c->d2[index] = get_pos_label(c->t_bytes - c->bytes,new, tmp);
+				ft_printf("{9}{%d}\n",c->d2[index]);
 				c->d2[index] = swap_usint(c->d2[index]);
 			}		
 		}
@@ -64,7 +71,7 @@ void	handles_label(t_asm *a, t_cmd *c, t_op *op_struct, t_lab *tmp)
 	while (c)
 	{	
 		recup_label(c, op_struct[c->nb_struct], tmp);
-		ft_printf("\n");
+		//ft_printf("\n");
 		c = c->next;
 	}
 }

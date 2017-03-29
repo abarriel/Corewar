@@ -132,6 +132,8 @@ void	write_op(t_asm *a, t_lab *l)
 	{
 		handles_code(a, l->cmd, op_struct);
 		l = l->next;
+		if(l)
+		l->bytes = a->total_bytes;
 	}
 	a->total_bytes = swap_uint(a->total_bytes);
 }

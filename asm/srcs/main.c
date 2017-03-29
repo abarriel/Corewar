@@ -14,7 +14,7 @@
 
 void	create_file(t_asm *a, t_lab *l)
 {
-	if ((a->fd_cor = open(a->cor, O_CREAT | O_WRONLY | O_APPEND, 0644)) < 0)
+	if ((a->fd_cor = open(a->cor, O_CREAT | O_WRONLY | O_APPEND | O_TRUNC, 0644)) < 0)
 		ft_exit("Cannot create file");
 }
 
@@ -27,7 +27,7 @@ void	get_info_asm(char *s, t_asm *a)
 	if (!(a->champ_name = ft_strndup(s, ft_strlen(s) - 2)))
 		ft_exit("Error strdup");
 	a->cor = a->champ_name;
-	ft_strcat(a->cor, ".cor");
+	ft_strcat(a->cor, ".cor\0");
 }
 
 int		main(int av, char **ac)
@@ -48,12 +48,14 @@ int		main(int av, char **ac)
 	header_champ(a, h);
 	l = get_label(a);
 	check_operation(a, l);
-	print_label(l);
+	//print_label(l);
 	// exit(0);
-	// write_op(a, l);
-	// write_label(a, l, op);
-	// h->prog_size = a->total_bytes;
-	// create_file(a, l);
-	// final_write(a, h, l, op);
+	write_op(a, l);
+	write_label(a, l, op);
+	h->prog_size = a->total_bytes;
+	create_file(a, l);
+	final_write(a, h, l, op);
+	close(a->fd_champ);
+	close(a->fd_cor);
 	return (0);
 }
