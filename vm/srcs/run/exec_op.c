@@ -124,8 +124,6 @@ int  exec_zjmp(void *core, void *pro)
   return (0);
 }
 
-
-
 void exec_op(t_core *core, t_process *pro)
 {
   int exec;
