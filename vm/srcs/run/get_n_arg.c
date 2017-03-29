@@ -37,7 +37,12 @@ unsigned int return_arg(t_core *core, t_process *process, int mod, int index, in
   // ft_printf("res : %08x\n", res);
   }
   if (cde & T_IND)
+  {
     res = chatohi(&(core->mem[index & MEM_SIZE]));
+    if(mod == 1)
+      res %= IDX_MOD;
+    res += process->pc;
+  }
   if (cde & T_DIR)
   {
     // ft_printf("{%d}{%02x}",res, core->mem[index % MEM_SIZE]);
@@ -102,5 +107,5 @@ unsigned int get_n_arg(t_core *core, t_process *process, int arg, int mod)
     // ft_printf()
     return(return_arg(core, process, mod, index, cde));
   }
-  return (res);
+  return (0);
 }
