@@ -75,10 +75,10 @@ void exec(t_core *core)
     if (pro->op != NULL && pro->cycle_left == 0)
     {
       // print_map(core);
-      ft_printf("op : %s at cycle : %d from player : %d\n", pro->op->mnemonique, core->cycle, pro->player->nb);
+      //ft_printf("op : %s at cycle : %d from player : %d\n", pro->op->mnemonique, core->cycle, pro->player->nb);
       exec_op(core, pro);
       // print_map(core);
-      ft_printf("\n");
+      //ft_printf("\n");
       pro->op = NULL;
       pro = moove_last(core, pro);
     }
@@ -108,6 +108,7 @@ void free_process(t_process **pro)
   t_process *tmp;
   int i;
 
+  ft_printf("%s\n", "vache");
   i = 0;
   tmp = *pro;
   while (i < REG_NUMBER)
@@ -153,14 +154,16 @@ void die_check(t_core *core)
 {
   static int nb_check = 0;
 
-  if ((core->cycle - core->last_check) % core->die_cycle == 0)
+  if ((core->cycle - core->last_check) == core->die_cycle || core->die_cycle < 0)
   {
     nb_check++;
     core->nb_player = count_live(core->player);
+    ft_printf("nb_player : %d\n", count_live(core->player));
     if (core->nb_player >= NBR_LIVE || nb_check == MAX_CHECKS)
     {
       nb_check = 0;
       core->die_cycle -= CYCLE_DELTA;
+      ft_printf("%d at cycle : %d\n", core->die_cycle, core->cycle);
     }
     check_proces(&core->process);
     core->last_check = core->cycle;
