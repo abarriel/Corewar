@@ -170,10 +170,10 @@ void die_check(t_core *core)
 void run(t_core *core)
 {
   ft_printf("vache\n");
-  print_map(core);
+  // print_map(core);
 	while (core->nb_player != 0 && core->dump != 0)
 	{
-    print_map(core);
+    // print_map(core);
     core->cycle += 1;
 		lunch_op(core);
 		decrease(core);

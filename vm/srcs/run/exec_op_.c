@@ -144,6 +144,8 @@ int exec_ld(void *core, void *pro)
   t_core *cr;
   unsigned int res;
 
+  cr = (t_core*)core;
+  pr = (t_process*)pro;
   res = chatoi(&(cr->mem[get_n_arg(cr, pr, 1, 1) % MEM_SIZE]));
   if (get_n_arg(cr, pr, 1, 1) == 0)
     pr->carry = 1;
@@ -159,6 +161,8 @@ int exec_lld(void *core, void *pro)
   t_core *cr;
   unsigned int res;
 
+  cr = (t_core*)core;
+  pr = (t_process*)pro;
   res = chatoi(&(cr->mem[get_n_arg(cr, pr, 1, 0) & MEM_SIZE]));
   if (get_n_arg(cr, pr, 1, 1) == 0)
     pr->carry = 1;
@@ -174,6 +178,8 @@ int exec_ldi(void *core, void *pro)
   t_core *cr;
   unsigned int res;
 
+  cr = (t_core*)core;
+  pr = (t_process*)pro;
   res = chatoi(&(cr->mem[(get_n_arg(cr, pr, 1, 1) + get_n_arg(cr, pr, 2, 1)) % MEM_SIZE]));
   if (get_n_arg(cr, pr, 1, 1) + get_n_arg(cr, pr, 2, 1) == 0)
     pr->carry = 1;
@@ -189,6 +195,8 @@ int exec_lldi(void *core, void *pro)
   t_core *cr;
   unsigned int res;
 
+  cr = (t_core*)core;
+  pr = (t_process*)pro;
   res = chatoi(&(cr->mem[(get_n_arg(cr, pr, 1, 0) + get_n_arg(cr, pr, 2, 0)) % MEM_SIZE]));
   if (get_n_arg(cr, pr, 1, 1) + get_n_arg(cr, pr, 2, 1) == 0)
     pr->carry = 1;
@@ -204,6 +212,8 @@ int exec_st(void *core, void *pro)
   t_core *cr;
   unsigned int res;
 
+  cr = (t_core*)core;
+  pr = (t_process*)pro;
   res = get_n_arg(cr, pr, 1, 1);
   if (res == 0)
     pr->carry = 1;
@@ -222,7 +232,8 @@ int exec_sti(void *core, void *pro)
   t_core *cr;
   unsigned int res;
 
-  ft_printf("1\n");
+  cr = (t_core*)core;
+  pr = (t_process*)pro;
   res = get_n_arg(cr, pr, 1, 1);
   ft_printf("2\n");
   if (res == 0)
