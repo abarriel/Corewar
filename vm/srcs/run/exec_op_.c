@@ -156,6 +156,8 @@ int exec_ld(void *core, void *pro)
   else
     pr->carry = 0;
   insert_in_reg(get_n_reg(cr, pr, 2), res);
+  ft_printf("{7)%d\n",size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 4));
+  exit(1);
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 4));
 }
 
@@ -251,7 +253,7 @@ int exec_sti(void *core, void *pro)
   // ft_printf("{7}3Arg(1) =  %d\n",get_n_arg(cr, pr, 3, 1));
   // ft_printf("{9}%d\n",(get_n_arg(cr, pr, 2, 1) + get_n_arg(cr, pr, 3, 1)));
   // exit(0);
-  ft_printf("return : %d\n", size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));
+  // ft_printf("return : %d\n", size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));
 }
 
@@ -298,6 +300,6 @@ int exec_aff(void *core, void *pro)
   cr = (t_core*)core;
   pr = (t_process*)pro;
   res = chatoi(pr->reg[cr->mem[(pr->pc + 2) % MEM_SIZE] - 1]) % 256;
-  ft_printf("%c", (unsigned char)res);
+  ft_printf("{9}[%c]", (unsigned char)res);
   return(3);
 }
