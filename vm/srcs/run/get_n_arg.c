@@ -12,7 +12,7 @@
 
 #include "vm.h"
 
-unsigned char aply_mask(unsigned char cde, int arg)
+unsigned char apply_mask(unsigned char cde, int arg)
 {
   if (arg == 1)
     return ((cde & 192) >> 6);
@@ -37,7 +37,7 @@ unsigned int return_arg(t_core *core, t_process *process, int mod, int index, in
     res |= core->mem[index % MEM_SIZE];
     res = chatoi(process->reg[res - 1]);
   // ft_printf("{9}{%p}",process->reg[index - 1]);
-    ft_printf("vache\n");
+    // ft_printf("vache\n");
     return(res);
   // ft_printf("res : %08x\n", res);
   }
@@ -66,11 +66,13 @@ if ((cde & IND_CODE) == cde)
 
 unsigned char return_good_value(unsigned char cde, t_process *process)
 {
-  if ((cde & REG_CODE) == cde)
+  if ((cde & REG_CODE) == REG_CODE)
     return(1);
-  if ((cde & IND_CODE) == cde)
+  if ((cde & IND_CODE) == IND_CODE)
+   // { ft_printf("%d - %d",cde, IND_CODE);
     return(2);
-  if ((cde & DIR_CODE) == cde)
+  
+  if ((cde & DIR_CODE) == DIR_CODE)
   {
      if(!process->op->l_size)
        return(4);
@@ -88,7 +90,7 @@ unsigned int get_n_arg(t_core *core, t_process *process, int arg, int mod)
   int index;
 
   cde = core->mem[(process->pc + 1) % MEM_SIZE];
-  cde = aply_mask(cde, arg);
+  cde = apply_mask(cde, arg);
   if (arg == 1)
   {
     index =  process->pc + 2;
@@ -99,8 +101,9 @@ unsigned int get_n_arg(t_core *core, t_process *process, int arg, int mod)
   }
   if (arg == 2)
   {
-    // cde = (((core->mem[(process->pc + 1) % MEM_SIZE]) & 192)>> 6);
     i = return_good_value((((core->mem[(process->pc + 1) % MEM_SIZE]) & 192)>> 6), process);
+    // if(!process->op->l_size)
+    //     i += 2;
     // ft_printf("{9}%d = %08b",i, cde);
     index = (process->pc + 2) + i;
     // ft_printf("{9} [%02x] - %d\n",core->mem[(index) % MEM_SIZE], index);

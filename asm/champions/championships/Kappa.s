@@ -57,18 +57,19 @@
 	# 0000 0370		02ff ee03	7003 ffff	0100 0000	0109 ffdf
 	# 880			50327043	1879310335	16777216	17432543
 
-		sti		r1,		%:alive,		%1
-		ld		%75,	r13
-		aff		r13
-		fork	%:init_forward
-		live	%1337
+		# sti		r1,		%:alive,		%1
+		# ld		%75,	r13
+		# aff		r13
+		# fork	%:init_forward
+		# live	%1337
 
-init_backward:
-		ld		%880,			r5		# 7
-		ld		%50327043,		r6		# 7
-		ld		%1879310335,	r7		# 7
-		ld		%16777216,		r8		# 7
-		ld		%17432543,		r9		# 7
+# init_backward:
+		# ld		%880,			r5		# 7
+		# ld		%50327043,		r6		# 7
+		# ld		%1879310335,	r7		# 7
+		# ld		%16777216,		r8		# 7
+		# ld		%17432543,		r9	
+				# zjmp	%-177			# 7
 		st		r5,				-80		# 5
 		st		r6,				-81		# 5
 		st		r7,				-82		# 5
@@ -93,7 +94,7 @@ r_p1:
 r_p1_2:
 		live	%42						# 5
 		fork	%:r_p1_2				# 3
-		zjmp	%-177					# 3
+			# 3
 
 r_p2:
 		live	%42						# 5

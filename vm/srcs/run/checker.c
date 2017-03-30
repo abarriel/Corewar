@@ -16,12 +16,9 @@ int check_all_arg(t_core *core, t_process *pro, int i, int index, int *ok)
 {
   int decal;
 
-  decal = 0;
-    // ft_printf("{8}[%d] -[%d]  - Index=[%b]",i,*ok,index);
-  // ft_printf("{8}[%02x]",core->mem[(pro->pc + 1 + i) % MEM_SIZE]);  
-    // ft_printf("{8}[%08b]\n",index);
-    // ft_printf("{7}%02b ; %02b ; %02b",T_REG,T_DIR,T_IND);
-    // ft_printf("{4}[%02x]\n",core->mem[(pro->pc + 1 + i + *ok) % MEM_SIZE]);  
+  // decal = 0;
+    // ft_printf("{8}[%d] - [%d]  - Index=[%b] - ",i,*ok,index);
+    //  ft_printf("{4}[%02x]\n",core->mem[(pro->pc + 1 + i + *ok) % MEM_SIZE]);  
   if ((index & REG_CODE) == index)
   {
   // ft_printf("{8}[%02x]",core->mem[(pro->pc + 1 + i) % MEM_SIZE]);  
@@ -31,8 +28,8 @@ int check_all_arg(t_core *core, t_process *pro, int i, int index, int *ok)
       // ft_printf("REG NUMBER TROP GRAND");
       return(0);
     }
-    else        
-      (*ok)++;
+    // else        
+      // (*ok)++;
   }
   else if ((index & DIR_CODE) == index)
   {
@@ -68,39 +65,30 @@ int check_all_arg(t_core *core, t_process *pro, int i, int index, int *ok)
 int check_cde_oct(t_core *core, t_process *pro)
 {
   int ok;
+  unsigned char cde;
   unsigned char index;
-  int i;
+  int arg;
   int decalage;
   int mask;
 
-  i = 0;
+  arg = 0;
   ok = 0;
-  mask = 192;
-  index = 0;
-  decalage = 6;
-    // ft_printf("{RED}\n[%02x]\n",core->mem[(pro->pc + 1) % MEM_SIZE]);
-  while(i != pro->op->nbr_args)
+  index = core->mem[(pro->pc + 1) % MEM_SIZE];
+  // ft_printf("{RED}\n[%02x]\n",index);
+  while(arg != pro->op->nbr_args)
   {
-    // ft_printf("{9}[%d]",i);
-    index = core->mem[(pro->pc + 1) % MEM_SIZE] & mask;
-    index = index >> decalage;
-    if(index & pro->op->type[i])
+    // ft_printf("{9}[%d]",arg);
+    cde = apply_mask(index, arg + 1);
+    if(cde & pro->op->type[arg])
     {
-      if(!(check_all_arg(core,pro,i + 1, index, &ok)))
+      if(!(check_all_arg(core,pro,arg + 1, index, &ok)))
         return(0);
-  			// exit(0);
     }
     else
-    {
-  			// ft_printf("\nNO MATCH\n");
      return(0);
-   }	
-   i++;
-  		// ft_printf("{7}[%02x]\n",core->mem[(pro->pc + 1 + i) % MEM_SIZE]);	
-   mask /= 4;
-   decalage -= 2;
+   arg++;
+
  }
-  	// exit(0);
  return(1);
 }
 
@@ -114,7 +102,10 @@ int checker_arg(t_core *core, t_process *pro)
   {
     // ft_printf("{9}%s - ",pro->op->mnemonique);
     if(!(check_cde_oct(core, pro)))
+    {
+      // exit(0);
      return(0);
+    }
    pc += 1;
 		// core->mem[(pro->pc + 2) % MEM_SIZE]
  }

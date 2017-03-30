@@ -25,7 +25,7 @@ int		check_label_name(char *s)
 	{
 		if (ft_strchr(LABEL_CHARS, s[i]))
 			good++;
-		else if ((s[i] == DIRECT_CHAR || s[i] == ' ' || s[i] == SEPARATOR_CHAR) && s[i + 1] == '-')
+		else if ((s[i] == DIRECT_CHAR || ft_strchr(SP, s[i]) ||s[i] == SEPARATOR_CHAR) && s[i + 1] == '-')
 		{
 			if (!(ft_isdigit(s[i + 2]) || !(ft_strchr(LABEL_CHARS, s[i + 2]))))
 				return (i);

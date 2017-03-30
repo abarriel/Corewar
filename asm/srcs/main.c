@@ -28,8 +28,12 @@ void	get_info_asm(char *s, t_asm *a)
 		ft_exit("Not good extension/Not good file");
 	if (!(a->champ_name = ft_strndup(s, ft_strlen(s) - 2)))
 		ft_exit("Error strdup");
-	a->cor = a->champ_name;
-	ft_strcat(a->cor, ".cor\0");
+	a->cor = ft_strnew(ft_strlen(a->champ_name) + 4);
+	ft_strcpy(a->cor, a->champ_name);
+	// a->cor = a->champ_name;
+	ft_strcat(a->cor, ".cor");
+	// ft_printf("{9}[%s]",a->cor);
+	// exit(1);
 }
 
 int		main(int av, char **ac)

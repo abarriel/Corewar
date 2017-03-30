@@ -14,13 +14,13 @@
 
 void insert_in_reg(unsigned char *reg, unsigned int cpy)
 {
-  ft_printf("trois\n");
-  ft_printf("%02x\n", reg[0]);
+  // ft_printf("trois\n");
+  // ft_printf("%02x\n", reg[0]);
   reg[0] = (cpy & 0xFF000000) >> 24;
   reg[1] = (cpy & 0x00FF0000) >> 16;
   reg[2] = (cpy & 0x0000FF00) >> 8;
   reg[3] = (cpy & 0x000000FF);
-  ft_printf("quatre\n");
+  // ft_printf("quatre\n");
 }
 
 int size_arg(unsigned char oc_cde, int d_size, int i)
@@ -33,7 +33,7 @@ int size_arg(unsigned char oc_cde, int d_size, int i)
     cde = (oc_cde & 48) >> 4;
   else
     cde = (oc_cde & 12) >> 2;
-  ft_printf("cde : %02x\n", oc_cde);
+  // ft_printf("cde : %02x\n", oc_cde);
   if (cde == 1)
     return (1);
   if (cde == 3)
@@ -47,13 +47,13 @@ int size_args(unsigned char oc_cde, int d_size)
 
   res = 0;
   res += size_arg(oc_cde, d_size, 1);
-  ft_printf("1 : %d\n", res);
+  // ft_printf("1 : %d\n", res);
   res += size_arg(oc_cde, d_size, 2);
-  ft_printf("2 : %d\n", res);
+  // ft_printf("2 : %d\n", res);
   if(oc_cde & 12)
   {
   res += size_arg(oc_cde, d_size, 3);
-  ft_printf("3 : %d\n", res);
+  // ft_printf("3 : %d\n", res);
   }
   return (2 + res);
 }
@@ -86,6 +86,8 @@ int exec_and(void *core, void *pro)
   cr = (t_core*)core;
   pr = (t_process*)pro;
   res = get_n_arg(cr, pr, 1, 1) & get_n_arg(cr, pr, 2, 1);
+  // ft_printf("res : %08x | %08x\n", get_n_arg(cr, pr, 1, 1), get_n_arg(cr, pr, 2, 1));
+  // exit(0);
   if (res == 0)
     pr->carry = 1;
   else
@@ -294,7 +296,7 @@ int exec_aff(void *core, void *pro)
   pr = (t_process*)pro;
   res = chatoi(pr->reg[cr->mem[(pr->pc + 2) % MEM_SIZE] - 1]) % 256;
   // write(1,&res,1);
-  ft_printf("%c", (unsigned char)res);
+  ft_printf("{8}{%c}\n", (unsigned char)res);
   // exit(0);
   return(3);
 }
