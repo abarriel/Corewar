@@ -170,6 +170,19 @@ void die_check(t_core *core)
   }
 }
 
+void run_visu(t_core *core, t_env *p)
+{
+  core->cycle += 1;
+  lunch_op(core);
+  decrease(core);
+  exec(core);
+  die_check(core);
+  if (core->dump != -1)
+      core->dump--;
+  if (core->dump == 0)
+    print_map(core);
+}
+
 void run(t_core *core)
 {
   print_map(core);

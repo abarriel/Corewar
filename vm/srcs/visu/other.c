@@ -24,7 +24,7 @@ int		go_visu(t_core *core)
   	p->mlx = mlx_init();
   	p->win = mlx_new_window(p->mlx, WIDTH, HEIGHT, "Corewar");
   	p->img = mlx_new_image(p->mlx, WIDTH, HEIGHT);
-  	visu(p, but);
+  	visu(p, but, core);
 	print_player(core);
 	mlx_loop(p->mlx);
 	return (0);

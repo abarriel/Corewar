@@ -131,7 +131,7 @@ static int	ft_loop_key_hook(t_env *p)
 	p->ret = mlx_get_data_addr(p->img, &(p->bits_per_pixel), 
 		&(p->size_line), &(p->endian));
 	ft_draw(p);
-	if (p->pause == 0)
+	if (p->pause == 0 && p->core->nb_player != 0 && p->core->dump != 0)
 	{
 		while (cycle_sec_tmp != 0)
 		{
@@ -145,8 +145,10 @@ static int	ft_loop_key_hook(t_env *p)
 	init_but(p);	
 	return (0);
 }
-int			visu(t_env *p, t_but *but)
+
+int			visu(t_env *p, t_but *but, t_core *c)
 {
+	p->core = c;
 	ft_loop_key_hook(p);
 	mlx_hook(p->win, 2, 2, ft_key_hook, p);
 	mlx_mouse_hook(p->win, ft_mouse_hook, p);

@@ -16,34 +16,18 @@ void print_map(t_core *core)
 {
 	unsigned char *map = core->mem;
 	char *color = core->mem_c;
-	int magic = 4;
 	int i = 0;
 	int j = 0;
+	int magic = 0;
 
 	ft_printf("Map: \n");
-	while (i < ( MEM_SIZE / 6) )
+	while (i < MEM_SIZE)
 	{
 		while (j < 64)
 		{
-			//if(i == core->process->pc)
-			//	ft_putstr("\033[4m");
-			if (color[i] >= 1)
-			{
-				//ft_printf("{%d}[%d]",i, core->process->pc);
-				if (i == core->process->pc)
-				{
-					// BLINK 
-					magic = 5;
-					// Bold
-					//magic = 1;
-					ft_printf("\033[%d;31m%.2x", magic, map[i]);
-					//ft_printf("\033[%d;32m%.2x", magic, map[i]);
-					
-				}
-				else	
-					ft_printf("{1}%.2x", map[i]);
-			}
-			/*else if (color[i] == 2)
+			if (color[i] == 1)
+				ft_printf("{1}%.2x", map[i]);
+			else if (color[i] == 2)
 				ft_printf("{2}%.2x", map[i]);
 			else if (color[i] == 20)
 				ft_printf("\033[4;32m%.2x", map[i]);
@@ -57,12 +41,22 @@ void print_map(t_core *core)
 				ft_printf("\033[4;34m%.2x", map[i]);
 			else if (color[i] == 10)
 			{
-				ft_printf("\033[31m%.2x", map[i]);
-			}*/
+				// if (i == core->process->pc)
+				// {
+				// 	// BLINK 
+				// 	magic = 5;
+				// 	// Bold
+				// 	//magic = 1;
+				// 	ft_printf("\033[%d;31m%.2x", magic, map[i]);
+				// 	//ft_printf("\033[%d;32m%.2x", magic, map[i]);
+					
+				// }
+				// else	
+					ft_printf("{1}%.2x", map[i]);
+			}
 			else
 				ft_printf("%.2x", map[i]);
 			j++;
-			//ft_putstr(RESET);
 			i++;
 		}
 		j = 0;

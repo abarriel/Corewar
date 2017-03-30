@@ -15,10 +15,12 @@
 void		chose_color_case(t_env *p, int i3)
 {
 	ft_modif_color(35, 35, 35, p);
-	if (p->core->mem_c[i3] == 1 || p->core->mem_c[i3] == 11)
+	if (p->core->mem_c[i3] == 1)
 		ft_modif_color(60, 76, 231 , p);
 	if (p->core->mem_c[i3] == 10)
 		ft_modif_color(100, 106, 241 , p);
+	if (p->core->mem_c[i3] == 11)
+		ft_modif_color(255, 255, 255 , p);
 
 	if (p->core->mem_c[i3] == 2 || p->core->mem_c[i3] == 21)
 		ft_modif_color(113, 204, 46 , p);
