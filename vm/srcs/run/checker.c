@@ -18,7 +18,7 @@ int check_all_arg(t_core *core, t_process *pro, int i, int index, int *ok)
 
   // decal = 0;
     // ft_printf("{8}[%d] - [%d]  - Index=[%b] - ",i,*ok,index);
-    //  ft_printf("{4}[%02x]\n",core->mem[(pro->pc + 1 + i + *ok) % MEM_SIZE]);  
+     // ft_printf("{4}[%02x]\n",core->mem[(pro->pc + 1 + i + *ok) % MEM_SIZE]);  
   if ((index & REG_CODE) == index)
   {
   // ft_printf("{8}[%02x]",core->mem[(pro->pc + 1 + i) % MEM_SIZE]);  
@@ -29,7 +29,7 @@ int check_all_arg(t_core *core, t_process *pro, int i, int index, int *ok)
       return(0);
     }
     // else        
-      // (*ok)++;
+    //   (*ok)++;
   }
   else if ((index & DIR_CODE) == index)
   {
@@ -74,14 +74,14 @@ int check_cde_oct(t_core *core, t_process *pro)
   arg = 0;
   ok = 0;
   index = core->mem[(pro->pc + 1) % MEM_SIZE];
-  // ft_printf("{RED}\n[%02x]\n",index);
+  ft_printf("{RED}\n[%02x]\n",index);
   while(arg != pro->op->nbr_args)
   {
-    // ft_printf("{9}[%d]",arg);
+    ft_printf("{9}[%d]",arg);
     cde = apply_mask(index, arg + 1);
     if(cde & pro->op->type[arg])
     {
-      if(!(check_all_arg(core,pro,arg + 1, index, &ok)))
+      if(!(check_all_arg(core,pro,arg + 1, cde, &ok)))
         return(0);
     }
     else
