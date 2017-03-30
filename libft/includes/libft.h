@@ -25,6 +25,10 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+unsigned int chatohi(unsigned char *str);
+unsigned int chatoi(unsigned char *str);
+int cmp_4_oct(unsigned char *one, unsigned char *two);
+int ft_pow_base(int x, unsigned int y);
 int 				btoi(int bin);
 size_t 				swap_st(size_t val);
 unsigned short int 	swap_usint(unsigned short int val);
