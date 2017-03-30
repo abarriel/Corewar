@@ -164,7 +164,7 @@ void        print_player_name(t_env *p);
 void        run(t_core *core);
 void        run_visu(t_core *core, t_env *p);
 static int  ft_loop_key_hook(t_env *p);
-int         visu(t_env *p, t_but *but);
+int     visu(t_env *p, t_but *but, t_core *c);
 void        ft_start_struct(t_env *p, t_but *but);
 void        ft_draw_rectangle(int start_x, int start_y, t_env *p);
 void        ft_draw_score(t_env *p);
