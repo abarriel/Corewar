@@ -243,10 +243,10 @@ int exec_sti(void *core, void *pro)
     pr->carry = 1;
   else
     pr->carry = 0;
-  insert_in_reg(&cr->mem[(get_n_arg(cr, pr, 2, 1) + get_n_arg(cr, pr, 3, 1)) % MEM_SIZE], res);
-  // ft_printf("{7}2Arg(15) =  %d\n",get_n_arg(cr, pr, 2, 1));
+  insert_in_reg(&cr->mem[(get_n_arg(cr, pr, 2, 1) + get_n_arg(cr, pr, 3, 1)) + pr->pc % MEM_SIZE], res);
+  // ft_printf("{7}2Arg(15) =  %02d\n",get_n_arg(cr, pr, 2, 1));
   // ft_printf("{7}3Arg(1) =  %d\n",get_n_arg(cr, pr, 3, 1));
-  // ft_printf("{9}%d\n",(get_n_arg(cr, pr, 2, 1) + get_n_arg(cr, pr, 3, 1)));
+  // ft_printf("{9}[%d]\n",(get_n_arg(cr, pr, 2, 1) + get_n_arg(cr, pr, 3, 1)));
   // exit(0);
   // ft_printf("return : %d\n", size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));
