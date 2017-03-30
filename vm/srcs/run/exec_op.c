@@ -76,7 +76,7 @@ int  exec_lfork(void *core, void *pro)
   jmp += (unsigned int)(cor->mem[(pr->pc + 1) % MEM_SIZE]) * 256;
   jmp += (unsigned int)(cor->mem[(pr->pc + 2) % MEM_SIZE]);
   new->pc = (new->pc + (jmp % MEM_SIZE)) % MEM_SIZE;
-  cor->mem_c[pr->pc] = 10 * pr->player->nb;
+  cor->mem_c[new->pc] = 10 * new->player->nb;
   new->next = cor->process;
   cor->process = new;
   return (3);
@@ -95,7 +95,7 @@ int  exec_fork(void *core, void *pro)
   jmp += (unsigned int)(cor->mem[(pr->pc + 1) % MEM_SIZE]) * 256;
   jmp += (unsigned int)(cor->mem[(pr->pc + 2) % MEM_SIZE]);
   new->pc = (new->pc + ((jmp % MEM_SIZE) % IDX_MOD)) % MEM_SIZE;
-  cor->mem_c[pr->pc] = 10 * pr->player->nb;
+  cor->mem_c[new->pc] = 10 * new->player->nb;
   new->next = cor->process;
   cor->process = new;
   return (3);

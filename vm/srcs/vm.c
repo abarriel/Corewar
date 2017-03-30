@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:29:02 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/30 17:52:36 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/30 18:50:57 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void print_map(t_core *core)
 				ft_printf("{8}%.2x", map[i]);
 			else
 				ft_printf("%.2x", map[i]);
-			ft_printf(" ");
+			ft_printf("\033[0m ");
 			j++;
 			i++;
 		}
