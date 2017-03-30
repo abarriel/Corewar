@@ -102,6 +102,32 @@ void		ft_draw_button(t_env *p)
 	ft_draw_square(p->but->btn5_px, p->but->btn5_py, p->but->btn5_s, p);
 }
 
+void		ft_draw_player_info2(t_env *p)
+{
+	print_player_name(p);
+}
+
+void		ft_draw_player_info(t_env *p)
+{
+	p->l = 335;
+	p->h = 200;
+	ft_modif_color(35, 35, 35, p);
+	ft_draw_rectangle((HEIGHT) + 32, 675, p);
+	p->l = 335;
+	p->h = 200;
+	ft_modif_color(35, 35, 35, p);
+	ft_draw_rectangle((HEIGHT) + 32, 880, p);
+	p->l = 335;
+	p->h = 200;
+	ft_modif_color(35, 35, 35, p);
+	ft_draw_rectangle((HEIGHT) + 372, 675, p);
+	p->l = 335;
+	p->h = 200;
+	ft_modif_color(35, 35, 35, p);
+	ft_draw_rectangle((HEIGHT) + 372, 880, p);
+	ft_draw_player_info2(p);
+}
+
 void		ft_draw(t_env *p)
 {
 	ft_draw_background(p);
@@ -109,5 +135,6 @@ void		ft_draw(t_env *p)
 	ft_draw_menu(p);
 	ft_draw_score(p);
 	ft_draw_title(p);
+	ft_draw_player_info(p);
 	ft_draw_button(p);
 }

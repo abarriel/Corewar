@@ -84,6 +84,7 @@ typedef struct			s_core
 
 typedef struct    s_env
 {
+  t_core    *core;
   int       speed;
   int       pause;
   int       cycle_count;
@@ -156,11 +157,14 @@ t_core					*parcing(int argc, char **argv, t_core *c);
 
 //visu
 
-void 	print_winner(t_player *p);
-void run(t_core *core);
+int         go_visu(t_core *core);
+void        print_nb_live(t_env *p);
+void        print_player_name(t_env *p);
+void        run(t_core *core);
+void        run_visu(t_core *core, t_env *p);
 static int  ft_loop_key_hook(t_env *p);
-int     visu(t_core *c);
-void    ft_start_struct(t_env *p, t_but *but);
+int         visu(t_env *p, t_but *but);
+void        ft_start_struct(t_env *p, t_but *but);
 void        ft_draw_rectangle(int start_x, int start_y, t_env *p);
 void        ft_draw_score(t_env *p);
 void        ft_draw_menu(t_env *p);

@@ -123,7 +123,10 @@ int		main(int argc, char **argv)
 	print_player(core);
 	init_core(core);
 	// print_map(core);
-	run(core);
+	if (core->visu == 0)
+  		run(core);
+	else
+		go_visu(core);
 	print_res(core);
 	return (0);
 }
