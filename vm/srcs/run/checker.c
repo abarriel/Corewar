@@ -16,27 +16,26 @@
 int check_all_arg(t_core *core, t_process *pro, int index, int *ok)
 {
 
-    // ft_printf("{8}[%d] - [%b]   ",*ok,index);
-     // ft_printf("{4}[%02x]\n",core->mem[(pro->pc + 1  + *ok) % MEM_SIZE]);
-  if ((index & REG_CODE) == REG_CODE)
+    ft_printf("{8}[%d] - [%b]   ",*ok,index);
+     ft_printf("{4}[%02x]\n",core->mem[(pro->pc + 1  + *ok) % MEM_SIZE]);
+  if (index == REG_CODE)
   {
     if (core->mem[(pro->pc + 1 + *ok) % MEM_SIZE] > REG_NUMBER)
     {
-      // ft_printf("REG NUMBER TROP GRAND");
+      ft_printf("REG NUMBER TROP GRAND");
       return(0);
     }
     (*ok)++;
   }
-  else if ((index & DIR_CODE) == DIR_CODE)
+  else if (index == DIR_CODE)
   {
     if(!pro->op->l_size)
           (*ok) += 4;
        else
      (*ok) += 2;
   }
-  else if ((index & IND_CODE) == IND_CODE)
+  else if (index == IND_CODE)
     (*ok) += 2;
-
   return (1);
 }
 
@@ -73,7 +72,7 @@ int checker_arg(t_core *core, t_process *pro)
 	int pc;
 
 	pc = pro->pc;
-  // ft_printf("{8}%02x- ",core->mem[(pro->pc) % MEM_SIZE]);
+  ft_printf("{8}%02x- ",core->mem[(pro->pc) % MEM_SIZE]);
   if (pro->op->cde_oct == 1)
   {
     if(!(check_cde_oct(core, pro)))

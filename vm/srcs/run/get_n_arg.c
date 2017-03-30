@@ -29,21 +29,21 @@ unsigned int return_arg(t_core *core, t_process *process, int mod, int index, in
 
   // ft_printf("{%d}{%02b}\n",index, cde);
   // ft_printf("{9} [%02x] - %d\n",core->mem[(index) % MEM_SIZE], index);
- if ((cde & REG_CODE) == REG_CODE)
+ if (cde == REG_CODE)
   {
      res = 0;
     res |= core->mem[index % MEM_SIZE];
     res = chatoi(process->reg[res - 1]);
      return(res);
   }
-if ((cde & IND_CODE) ==  IND_CODE)
+if (cde == IND_CODE)
   {
     res = chatohi(&(core->mem[index & MEM_SIZE]));
     if (mod == 1)
       res %= IDX_MOD;
     res += process->pc;
   }
-  if ((cde & DIR_CODE) == DIR_CODE)
+  if (cde == DIR_CODE)
   {
      if(!process->op->l_size)
        res = chatoi(&(core->mem[index % MEM_SIZE])); 
@@ -55,11 +55,11 @@ if ((cde & IND_CODE) ==  IND_CODE)
 
 unsigned char return_good_value(unsigned char cde, t_process *process)
 {
-  if ((cde & REG_CODE) == REG_CODE)
+  if (cde  == REG_CODE)
     return(1);
-  if ((cde & IND_CODE) == IND_CODE)
+  if (cde  == IND_CODE)
     return(2);
-  if ((cde & DIR_CODE) == DIR_CODE)
+  if (cde == DIR_CODE)
   {
      if(!process->op->l_size)
        return(4);
