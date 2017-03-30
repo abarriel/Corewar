@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:19:44 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/29 10:57:40 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/30 22:58:01 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ unsigned int return_arg(t_core *core, t_process *process, int mod, int index, in
 {
   unsigned int res;
 
-  // ft_printf("{%d}{%02b}\n",index, cde);
-  // ft_printf("{9} [%02x] - %d\n",core->mem[(index) % MEM_SIZE], index);
+
+   //ft_printf("\n la {%d}{%02b}\n",index, cde);
+   //ft_printf("{9} [%02x] - %d\n",core->mem[(index) % MEM_SIZE], index);
  if (cde == REG_CODE)
   {
      res = 0;
@@ -38,17 +39,18 @@ unsigned int return_arg(t_core *core, t_process *process, int mod, int index, in
   }
 if (cde == IND_CODE)
   {
-    res = chatohi(&(core->mem[index & MEM_SIZE]));
-    if (mod == 1)
-      res %= IDX_MOD;
-    res += process->pc;
+    res = chatohi(&(core->mem[index % MEM_SIZE]));
+    ft_printf("res :%d\n", res);
+    ft_printf("%02x %02x\n", core->mem[index % MEM_SIZE], core->mem[(index+1) % MEM_SIZE]);
   }
   if (cde == DIR_CODE)
   {
      if(!process->op->l_size)
-       res = chatoi(&(core->mem[index % MEM_SIZE])); 
+       res = chatoi(&(core->mem[index % MEM_SIZE]));
      else
-      res = chatohi(&(core->mem[index % MEM_SIZE]));
+       res = chatohi(&(core->mem[index % MEM_SIZE]));
+     if (mod == 1)
+      res %= IDX_MOD;
   }
   return(res);
 }
@@ -86,7 +88,8 @@ unsigned int get_n_arg(t_core *core, t_process *process, int arg, int mod)
   {
     i = return_good_value((((core->mem[(process->pc + 1) % MEM_SIZE]) & 192)>> 6), process);
     index = (process->pc + 2) + i;
-      return(return_arg(core, process, mod, index, cde));
+    printf("%02x %02x\n", core->mem[index % MEM_SIZE], core->mem[index % MEM_SIZE + 1]);
+    return(return_arg(core, process, mod, index, cde));
   }
   if (arg == 3)
   {

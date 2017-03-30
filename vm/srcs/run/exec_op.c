@@ -94,7 +94,7 @@ int  exec_fork(void *core, void *pro)
   new = dup_process(pr);
   jmp += (unsigned int)(cor->mem[(pr->pc + 1) % MEM_SIZE]) * 256;
   jmp += (unsigned int)(cor->mem[(pr->pc + 2) % MEM_SIZE]);
-  new->pc = (new->pc + ((jmp % MEM_SIZE) % IDX_MOD)) % MEM_SIZE;
+  new->pc = (new->pc + (((short int)jmp % MEM_SIZE) % IDX_MOD)) % MEM_SIZE;
   cor->mem_c[new->pc] = 10 * new->player->nb;
   new->next = cor->process;
   cor->process = new;
@@ -114,6 +114,7 @@ int  exec_zjmp(void *core, void *pro)
   cor = (t_core*)core;
   jmp += (unsigned int)(cor->mem[(pr->pc + 1) % MEM_SIZE]) * 256;
   jmp += (unsigned int)(cor->mem[(pr->pc + 2) % MEM_SIZE]);
+  cor->mem_c[pr->pc] = pr->player->nb;
   pr->pc = (pr->pc + (jmp % MEM_SIZE)) % MEM_SIZE;
   return (0);
 }
@@ -124,12 +125,12 @@ void exec_op(t_core *core, t_process *pro)
 
   if (pro->op->mnemonique)
   {
-      ft_printf("op : %s at cycle : %d from player : %d\n", pro->op->mnemonique, core->cycle, pro->player->nb);
+      ft_printf("op : %s at cycle : %d from player : %d\n\n", pro->op->mnemonique, core->cycle, pro->player->nb);
 
     ft_printf("{9}\nReturn Check  de %s=[%d]\n",pro->op->mnemonique, checker_arg(core, pro));
     // exit(0);
 
-    if (pro->op->cde_oct == 0 || checker_arg(core, pro))
+    if (pro->op->cde_oct == 0 || checker_arg(core, pro) == 1)
     {
      // print_map(core);
       exec = pro->op->f(core, pro);
@@ -142,15 +143,16 @@ void exec_op(t_core *core, t_process *pro)
   if (exec == -1)
   {
     core->mem_c[pro->pc] /= 10;
-    pro->pc = (pro->pc + pro->op->cde_oct + 1) % MEM_SIZE;
-    core->mem_c[pro->pc] = 10 * pro->player->nb;
+    if (pro->op->cde_oct == 1)
+      pro->pc = (pro->pc + size_args(core->mem[(pro->pc + 1) % MEM_SIZE], 4 - 2 * pro->op->l_size)) % MEM_SIZE;
+    else
+      pro->pc = (pro->pc + 1) % MEM_SIZE;
   }
   else
   {
-    core->mem_c[pro->pc] /= 10;
+    core->mem_c[pro->pc] = pro->player->nb;
     pro->pc += exec;
-    core->mem_c[pro->pc] = 10 * pro->player->nb;
   }
-  print_map(core);
+//  print_map(core);
 
 }

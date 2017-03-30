@@ -79,11 +79,15 @@ void exec(t_core *core)
       exec_op(core, pro);
       // print_map(core);
       // ft_printf("\n");
+      core->mem_c[pro->pc] = pro->player->nb * 10;
       pro->op = NULL;
-      pro = moove_last(core, pro);
+      //pro = moove_last(core, pro);
     }
     else
+    {
+      core->mem_c[pro->pc] = pro->player->nb * 10;
       pro = pro->next;
+    }
   }
 }
 
@@ -194,6 +198,6 @@ void run(t_core *core)
     if (core->dump != -1)
       core->dump--;
 	}
-  if (core->dump == 0)
+  //if (core->dump == 0)
     print_map(core);
 }

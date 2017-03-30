@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 06:22:52 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/30 17:45:12 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/30 23:39:54 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@
 int check_all_arg(t_core *core, t_process *pro, int index, int *ok)
 {
 
-    ft_printf("{8}[%d] - [%b]   ",*ok,index);
-     ft_printf("{4}[%02x]\n",core->mem[(pro->pc + 1  + *ok) % MEM_SIZE]);
+  //  ft_printf("{8}[%d] - [%b]   ",*ok,index);
+  //   ft_printf("{4}[%02x]\n",core->mem[(pro->pc + 1  + *ok) % MEM_SIZE]);
   if (index == REG_CODE)
   {
     if (core->mem[(pro->pc + 1 + *ok) % MEM_SIZE] > REG_NUMBER)
     {
-      ft_printf("REG NUMBER TROP GRAND");
+      ft_printf("REG NUMBER TROP GRAND\n");
       return(0);
+    }
+    if (core->mem[(pro->pc + 1 + *ok) % MEM_SIZE] < 1)
+    {
+      ft_printf("REG NUMBER TROP PETIT\n");
+      return (0);
     }
     (*ok)++;
   }
@@ -51,6 +56,7 @@ int check_cde_oct(t_core *core, t_process *pro)
   arg = 0;
   ok = 1;
   index = core->mem[(pro->pc + 1) % MEM_SIZE];
+  ft_printf("[%08b]\n", index);
   while(arg != pro->op->nbr_args)
   {
     cde = apply_mask(index, arg + 1);
