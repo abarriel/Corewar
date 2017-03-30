@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/29 11:00:27 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/30 17:34:28 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ typedef struct    s_but
   int       btn4_py;
   int       btn5_py;
 }         t_but;
+
+void insert_in_color(char *map, unsigned char color, int len);
 unsigned char apply_mask(unsigned char cde, int arg);
 unsigned int get_n_arg(t_core *core, t_process *process, int arg, int mod);
 void print_map(t_core *core);

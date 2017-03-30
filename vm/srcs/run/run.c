@@ -108,7 +108,6 @@ void free_process(t_process **pro)
   t_process *tmp;
   int i;
 
-  ft_printf("%s\n", "vache");
   i = 0;
   tmp = *pro;
   while (i < REG_NUMBER)
@@ -158,12 +157,10 @@ void die_check(t_core *core)
   {
     nb_check++;
     core->nb_player = count_live(core->player);
-    ft_printf("nb_player : %d\n", count_live(core->player));
     if (core->nb_player >= NBR_LIVE || nb_check == MAX_CHECKS)
     {
       nb_check = 0;
       core->die_cycle -= CYCLE_DELTA;
-      ft_printf("%d at cycle : %d\n", core->die_cycle, core->cycle);
     }
     check_proces(&core->process);
     core->last_check = core->cycle;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 06:22:52 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/28 06:23:04 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/03/30 17:45:12 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,25 @@ int check_all_arg(t_core *core, t_process *pro, int i, int index, int *ok)
 
   // decal = 0;
     // ft_printf("{8}[%d] - [%d]  - Index=[%b] - ",i,*ok,index);
-     // ft_printf("{4}[%02x]\n",core->mem[(pro->pc + 1 + i + *ok) % MEM_SIZE]);  
+     // ft_printf("{4}[%02x]\n",core->mem[(pro->pc + 1 + i + *ok) % MEM_SIZE]);
   if ((index & REG_CODE) == index)
   {
-  // ft_printf("{8}[%02x]",core->mem[(pro->pc + 1 + i) % MEM_SIZE]);  
+  // ft_printf("{8}[%02x]",core->mem[(pro->pc + 1 + i) % MEM_SIZE]);
     // ft_printf("{8}[%08b]\n",index);
-    if (core->mem[(pro->pc + 1 + i + *ok) % MEM_SIZE] > REG_NUMBER) 
+    if (core->mem[(pro->pc + 1 + i + *ok) % MEM_SIZE] > REG_NUMBER)
     {
       // ft_printf("REG NUMBER TROP GRAND");
       return(0);
     }
-    // else        
+    // else
     //   (*ok)++;
   }
   else if ((index & DIR_CODE) == index)
   {
-    // ft_printf("{8}[%02x]",core->mem[(pro->pc + 1 + i) % MEM_SIZE]);  
+    // ft_printf("{8}[%02x]",core->mem[(pro->pc + 1 + i) % MEM_SIZE]);
     // ft_printf("{8}[%08b]\n",index);
-    // ft_printf("{RED}[%02x]\n",core->mem[(pro->pc + 1 + i + *ok) % MEM_SIZE]);  
-    if (!pro->op->l_size)
+    // ft_printf("{RED}[%02x]\n",core->mem[(pro->pc + 1 + i + *ok) % MEM_SIZE]);
+    if(!pro->op->l_size)
     {
       // ft_printf("{8} 4[%08b] - ",index);
         // ft_printf("{RED}4");
@@ -47,13 +47,13 @@ int check_all_arg(t_core *core, t_process *pro, int i, int index, int *ok)
     {
         // ft_printf("{RED}2");
       (*ok) += 2;
-      // exit(0); 
+      // exit(0);
     }
-      // ft_printf("T_DIR");  
+      // ft_printf("T_DIR");
   }
   else if ((index & IND_CODE) == index)
   {
-    // ft_printf("{8}[%02x]",core->mem[(pro->pc + 1 + i) % MEM_SIZE]);  
+    // ft_printf("{8}[%02x]",core->mem[(pro->pc + 1 + i) % MEM_SIZE]);
     // ft_printf("{8}[%08b]\n",index);
     // ft_printf("{8}[%08b]",index);
     (*ok) += 2;
@@ -93,7 +93,7 @@ int check_cde_oct(t_core *core, t_process *pro)
 }
 
 int checker_arg(t_core *core, t_process *pro)
-{ 	
+{
 	int pc;
 
 	pc = pro->pc;

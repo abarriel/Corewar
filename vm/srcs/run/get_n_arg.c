@@ -51,10 +51,10 @@ if ((cde & IND_CODE) == cde)
   if ((cde & DIR_CODE) == cde)
   {
     //      exit(0);
-    // ft_printf("{%d}{%02x}",res, core->mem[index % MEM_SIZE]);
      if(!process->op->l_size)
      {
        res = chatoi(&(core->mem[index % MEM_SIZE])); 
+    // ft_printf("{%d}{%02x}",res, core->mem[index % MEM_SIZE]);
      }
     else
     {

@@ -6,11 +6,23 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 06:40:45 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/29 11:51:10 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/03/30 17:48:03 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
+void insert_in_color(char *map, unsigned char color, int len)
+{
+  int i;
+
+  i = 0;
+  while (i < len)
+  {
+    map[i] = color;
+    i++;
+  }
+}
 
 void insert_in_reg(unsigned char *reg, unsigned int cpy)
 {
@@ -71,7 +83,7 @@ unsigned char *get_n_reg(t_core *core, t_process *process, int arg)
     dec += size_arg(core->mem[(process->pc + 1) % MEM_SIZE], 4 - 2 * process->op->l_size, i);
     i++;
   }
-  // ft_printf("{%d}{%d}",i,dec);
+   ft_printf("{%d}{%d}",i, dec);
   reg = process->reg[core->mem[(process->pc + 2 + dec) % MEM_SIZE] - 1];
   // ft_printf("%d\n", core->mem[(process->pc + 2 + dec) % MEM_SIZE] - 1);
   return (reg);
@@ -141,7 +153,7 @@ int exec_ld(void *core, void *pro)
   res = get_n_arg(cr,pr,1,1);
   // ft_printf("{7}{%u}{%02x}\n",res, cr->mem[pr->pc % MEM_SIZE]);
   // res = chatoi(&(cr->mem[get_n_arg(cr, pr, 1, 1) % MEM_SIZE]));
- 
+
   if (get_n_arg(cr, pr, 1, 1) == 0)
     pr->carry = 1;
   else
@@ -213,7 +225,7 @@ int exec_st(void *core, void *pro)
   if (res == 0)
     pr->carry = 1;
   else
-    pr->carry = 0;  
+    pr->carry = 0;
   if (cr->mem[(pr->pc + 1) % MEM_SIZE] == (unsigned char)80)
   {
     // ft_printf("d\n");
@@ -223,6 +235,7 @@ int exec_st(void *core, void *pro)
   else
   {
     insert_in_reg(&cr->mem[get_n_arg(cr, pr, 2, 1) % MEM_SIZE], res);
+    insert_in_color(&cr->mem_c[(get_n_arg(cr, pr, 2, 1) + 1) % MEM_SIZE] ,pr->player->nb * 10 + 1, 4);
   }
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 4));
 }
@@ -243,10 +256,12 @@ int exec_sti(void *core, void *pro)
     pr->carry = 1;
   else
     pr->carry = 0;
-  insert_in_reg(&cr->mem[(get_n_arg(cr, pr, 2, 1) + get_n_arg(cr, pr, 3, 1)) + pr->pc % MEM_SIZE], res);
-  // ft_printf("{7}2Arg(15) =  %02d\n",get_n_arg(cr, pr, 2, 1));
+  insert_in_reg(&cr->mem[(get_n_arg(cr, pr, 2, 1) + get_n_arg(cr, pr, 3, 1) + pr->pc) % MEM_SIZE], res);
+  insert_in_color(&cr->mem_c[(get_n_arg(cr, pr, 2, 1) + get_n_arg(cr, pr, 3, 1) + pr->pc) % MEM_SIZE] ,pr->player->nb * 10 + 1, 4);
+
+  // ft_printf("{7}2Arg(15) =  %d\n",get_n_arg(cr, pr, 2, 1));
   // ft_printf("{7}3Arg(1) =  %d\n",get_n_arg(cr, pr, 3, 1));
-  // ft_printf("{9}[%d]\n",(get_n_arg(cr, pr, 2, 1) + get_n_arg(cr, pr, 3, 1)));
+  // ft_printf("{9}%d\n",(get_n_arg(cr, pr, 2, 1) + get_n_arg(cr, pr, 3, 1)));
   // exit(0);
   // ft_printf("return : %d\n", size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));

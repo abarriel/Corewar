@@ -126,8 +126,7 @@ void exec_op(t_core *core, t_process *pro)
 
     ft_printf("{9}\n\nReturn Check  de %s=[%d]\n",pro->op->mnemonique, checker_arg(core, pro));
     // exit(0);
-     print_map(core);
-    
+
     if (pro->op->cde_oct == 0 || checker_arg(core, pro))
     {
      // print_map(core);
@@ -139,7 +138,17 @@ void exec_op(t_core *core, t_process *pro)
   else
     exec = 1;
   if (exec == -1)
+  {
+    core->mem_c[pro->pc] /= 10;
     pro->pc = (pro->pc + pro->op->cde_oct + 1) % MEM_SIZE;
+    core->mem_c[pro->pc] = 10 * pro->player->nb;
+  }
   else
+  {
+    core->mem_c[pro->pc] /= 10;
     pro->pc += exec;
+    core->mem_c[pro->pc] = 10 * pro->player->nb;
+  }
+  print_map(core);
+
 }

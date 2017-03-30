@@ -97,7 +97,7 @@ void  init_core(t_core *core)
 	{
 		ft_memcpy(&core->mem[tmp_r->pc], tmp_p->prog, tmp_p->weight);
 		ft_memset(&core->mem_c[tmp_r->pc], i, tmp_p->weight);
-		ft_bzero(&core->mem_c[tmp_r->pc + tmp_p->weight], 10);
+		//ft_bzero(&core->mem_c[tmp_r->pc + tmp_p->weight], 10);
 		core->mem_c[tmp_r->pc] = 10 * i;
 		tmp_p = tmp_p->next;
 		tmp_r = tmp_r->next;
