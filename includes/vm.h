@@ -154,7 +154,8 @@ t_core					*parcing(int argc, char **argv, t_core *c);
 t_core					*new_core();
 void					init_core(t_core *core);
 t_core					*parcing(int argc, char **argv, t_core *c);
-
+void  print_player(t_core *core);
+void  print_winner(t_player *p);
 //visu
 
 int         go_visu(t_core *core);
