@@ -12,26 +12,27 @@
 
 #include "vm.h"
 
-int check_all_arg(t_core *core, t_process *pro, int i, int index, int *ok)
+
+int check_all_arg(t_core *core, t_process *pro, int index, int *ok)
 {
-  int decal;
 
   // decal = 0;
-    // ft_printf("{8}[%d] - [%d]  - Index=[%b] - ",i,*ok,index);
-     // ft_printf("{4}[%02x]\n",core->mem[(pro->pc + 1 + i + *ok) % MEM_SIZE]);
-  if ((index & REG_CODE) == index)
+    // ft_printf("{8}[%d] - [%b]   ",*ok,index);
+     // ft_printf("{4}[%02x]\n",core->mem[(pro->pc + 1  + *ok) % MEM_SIZE]);
+  if ((index & REG_CODE) == REG_CODE)
   {
-  // ft_printf("{8}[%02x]",core->mem[(pro->pc + 1 + i) % MEM_SIZE]);
+    // ft_printf("{8}[%02x]",core->mem[(pro->pc + 1 + *ok) % MEM_SIZE]);
     // ft_printf("{8}[%08b]\n",index);
-    if (core->mem[(pro->pc + 1 + i + *ok) % MEM_SIZE] > REG_NUMBER)
+    if (core->mem[(pro->pc + 1 + *ok) % MEM_SIZE] > REG_NUMBER)
     {
       // ft_printf("REG NUMBER TROP GRAND");
       return(0);
     }
+    (*ok)++;
     // else
     //   (*ok)++;
   }
-  else if ((index & DIR_CODE) == index)
+  else if ((index & DIR_CODE) == DIR_CODE)
   {
     // ft_printf("{8}[%02x]",core->mem[(pro->pc + 1 + i) % MEM_SIZE]);
     // ft_printf("{8}[%08b]\n",index);
@@ -51,7 +52,7 @@ int check_all_arg(t_core *core, t_process *pro, int i, int index, int *ok)
     }
       // ft_printf("T_DIR");
   }
-  else if ((index & IND_CODE) == index)
+  else if ((index & IND_CODE) == IND_CODE)
   {
     // ft_printf("{8}[%02x]",core->mem[(pro->pc + 1 + i) % MEM_SIZE]);
     // ft_printf("{8}[%08b]\n",index);
@@ -72,7 +73,7 @@ int check_cde_oct(t_core *core, t_process *pro)
   int mask;
 
   arg = 0;
-  ok = 0;
+  ok = 1;
   index = core->mem[(pro->pc + 1) % MEM_SIZE];
   // ft_printf("{RED}\n[%02x]\n",index);
   while(arg != pro->op->nbr_args)
@@ -81,7 +82,7 @@ int check_cde_oct(t_core *core, t_process *pro)
     cde = apply_mask(index, arg + 1);
     if(cde & pro->op->type[arg])
     {
-      if(!(check_all_arg(core,pro,arg + 1, cde, &ok)))
+      if(!(check_all_arg(core,pro, cde, &ok)))
         return(0);
     }
     else

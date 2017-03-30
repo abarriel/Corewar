@@ -126,7 +126,7 @@ void exec_op(t_core *core, t_process *pro)
   {
       ft_printf("op : %s at cycle : %d from player : %d\n", pro->op->mnemonique, core->cycle, pro->player->nb);
 
-    ft_printf("{9}\n\nReturn Check  de %s=[%d]\n",pro->op->mnemonique, checker_arg(core, pro));
+    ft_printf("{9}\nReturn Check  de %s=[%d]\n",pro->op->mnemonique, checker_arg(core, pro));
     // exit(0);
 
     if (pro->op->cde_oct == 0 || checker_arg(core, pro))
