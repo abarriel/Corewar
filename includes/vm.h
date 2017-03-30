@@ -84,6 +84,7 @@ typedef struct			s_core
 
 typedef struct    s_env
 {
+  t_core    *core;
   int       speed;
   int       pause;
   int       cycle_count;
