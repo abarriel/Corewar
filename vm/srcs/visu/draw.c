@@ -12,24 +12,52 @@
 
 #include "vm.h"
 
+void		chose_color_case(t_env *p, int i3)
+{
+	ft_modif_color(35, 35, 35, p);
+	if (p->core->mem_c[i3] == 1 || p->core->mem_c[i3] == 11)
+		ft_modif_color(60, 76, 231 , p);
+	if (p->core->mem_c[i3] == 10)
+		ft_modif_color(100, 106, 241 , p);
+
+	if (p->core->mem_c[i3] == 2 || p->core->mem_c[i3] == 21)
+		ft_modif_color(113, 204, 46 , p);
+	if (p->core->mem_c[i3] == 20)
+		ft_modif_color(163, 244, 66 , p);
+
+	if (p->core->mem_c[i3] == 3 || p->core->mem_c[i3] == 31)
+		ft_modif_color(219, 152, 52 , p);
+	if (p->core->mem_c[i3] == 30)
+		ft_modif_color(249, 182, 122 , p);
+
+	if (p->core->mem_c[i3] == 4 ||p->core->mem_c[i3] == 41)
+		ft_modif_color(15, 193, 241 , p);
+	if (p->core->mem_c[i3] == 40)
+		ft_modif_color(105, 213, 241 , p);
+	
+}
+
 void		ft_draw_map(t_env *p)
 {
 	int i;
 	int i2;
+	int i3;
 	int e;
 	float size;
 
 	e = 1;
 	i = 0;
+	i3 = 0;
 	size = (((HEIGHT - 20)) / (MAP_SIZE_Y)) - e;
 	while (i < MAP_SIZE_Y)
 	{
 		i2 = 0;
 		while (i2 < MAP_SIZE_X)
 		{	
-			ft_modif_color(35, 35, 35 , p);
+			chose_color_case(p, i3);
 			ft_draw_square(((i2) * (size + e)) + 18, ((i) * (size + e)) + 18, size, p);
 			i2++;
+			i3++;
 		}
 		i++;
 	}
@@ -42,7 +70,7 @@ void		ft_draw_score(t_env *p)
 	p->h = 20;
 	ft_draw_rectangle((HEIGHT + 100), 270, p);
 	ft_modif_color(60, 76, 231, p);
-	p->l = (p->cycle_count) / 10;
+	p->l = (p->core->cycle) / 100;
 	p->h = 20;
 	ft_draw_rectangle((HEIGHT + 100), 270, p);
 
@@ -51,7 +79,7 @@ void		ft_draw_score(t_env *p)
 	p->h = 20;
 	ft_draw_rectangle((HEIGHT + 100), 320, p);
 	ft_modif_color(113, 204, 46, p);
-	p->l = (p->cycle_count) / 10;
+	p->l = (p->core->cycle) / 100;
 	p->h = 20;
 	ft_draw_rectangle((HEIGHT + 100), 320, p);
 
@@ -60,7 +88,7 @@ void		ft_draw_score(t_env *p)
 	p->h = 20;
 	ft_draw_rectangle((HEIGHT + 100), 370, p);
 	ft_modif_color(219, 152, 52, p);
-	p->l = (p->cycle_count) / 10;
+	p->l = (p->core->cycle) / 100;
 	p->h = 20;
 	ft_draw_rectangle((HEIGHT + 100), 370, p);
 
@@ -69,7 +97,7 @@ void		ft_draw_score(t_env *p)
 	p->h = 20;
 	ft_draw_rectangle((HEIGHT + 100), 420, p);
 	ft_modif_color(15, 196, 241, p);
-	p->l = (p->cycle_count) / 10;
+	p->l = (p->core->cycle) / 100;
 	p->h = 20;
 	ft_draw_rectangle((HEIGHT + 100), 420, p);
 }

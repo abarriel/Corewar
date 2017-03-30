@@ -31,23 +31,6 @@ void		init_but(t_env *p)
 	p->but->btn5_py = (HEIGHT) - 120;
 }
 
-static int	ft_loop_key_hook(t_env *p)
-{
-	char	*str;
-
-	p->ret = mlx_get_data_addr(p->img, &(p->bits_per_pixel), 
-		&(p->size_line), &(p->endian));
-	ft_draw(p);
-	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
-	mlx_put_image_to_window(p->mlx, p->win, p->img2, 0, 0);
-	print_text(p);
-	mlx_destroy_image(p->mlx, p->img);
-	p->img = mlx_new_image(p->mlx, WIDTH, HEIGHT);
-	if (p->pause == 0)
-		p->cycle_count += (1 * p->speed);
-	init_but(p);	
-	return (0);
-}
 
 int			ft_key_hook(int keycode, t_env *p)
 {
@@ -84,16 +67,14 @@ void		check_button_hit(int button, int x, int y, t_env *p)
 			p->but->btn3_s = 80;
 			p->but->btn3_px = (HEIGHT) + 330;
 			p->but->btn3_py = (HEIGHT) - 125;
-			if (p->speed >= 2)
-				p->speed -= 1;
+			p->core->cycle_sec--;
 		}
 		if ((x <= (HEIGHT) + 565) && (x >= (HEIGHT) + 485) && (y <= (HEIGHT) - 50) && (y >= (HEIGHT) - 120))
 		{
 			p->but->btn4_s = 80;
 			p->but->btn4_px = (HEIGHT) + 480;
 			p->but->btn4_py = (HEIGHT) - 125;
-			if (p->speed <= 11)
-				p->speed += 1;
+			p->core->cycle_sec++;
 		}
 		if ((x <= (HEIGHT) + 705) && (x >= (HEIGHT) + 635) && (y <= (HEIGHT) - 50) && (y >= (HEIGHT) - 120))
 		{
@@ -117,9 +98,9 @@ void		ft_start_struct(t_env *p, t_but *but)
 	p->r = 0;
 	p->v = 0;
 	p->b = 0;
-	p->pause = 0;
+	p->pause = 1;
 	p->speed = 1;
-	p->cycle_count = 0;
+	p->cycle_count = p->core->cycle;
 	p->map_size_x = 0;
 	p->map_size_y = 0;
 	p->but->btn1_s = 70;
@@ -139,21 +120,36 @@ void		ft_start_struct(t_env *p, t_but *but)
 	p->but->btn5_py = (HEIGHT) - 120;
 }
 
-int			visu(t_core *c)
+static int	ft_loop_key_hook(t_env *p)
 {
-	t_env	*p;
-	t_but	*but;
+	char	*str;
+	int     cycle_sec_tmp;
 
-	p = (t_env *)malloc(sizeof(t_env));
-	p->but = (t_but *)malloc(sizeof(t_but));
-	ft_start_struct(p, but);
-	p->mlx = mlx_init();
-	p->win = mlx_new_window(p->mlx, WIDTH, HEIGHT, "Corewar");
+	cycle_sec_tmp = p->core->cycle_sec;
+	mlx_destroy_image(p->mlx, p->img);
 	p->img = mlx_new_image(p->mlx, WIDTH, HEIGHT);
+	p->ret = mlx_get_data_addr(p->img, &(p->bits_per_pixel), 
+		&(p->size_line), &(p->endian));
+	ft_draw(p);
+	if (p->pause == 0)
+	{
+		while (cycle_sec_tmp != 0)
+		{
+			run_visu(p->core, p);
+			cycle_sec_tmp--;
+		}	
+	}
+	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
+	mlx_put_image_to_window(p->mlx, p->win, p->img2, 0, 0);
+	print_text(p);
+	init_but(p);	
+	return (0);
+}
+int			visu(t_env *p, t_but *but)
+{
+	ft_loop_key_hook(p);
 	mlx_hook(p->win, 2, 2, ft_key_hook, p);
 	mlx_mouse_hook(p->win, ft_mouse_hook, p);
-	ft_loop_key_hook(p);
 	mlx_loop_hook(p->mlx, ft_loop_key_hook, p);
-	mlx_loop(p->mlx);
 	return (0);
 }
