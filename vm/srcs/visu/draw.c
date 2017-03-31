@@ -21,19 +21,19 @@ void		chose_color_case(t_env *p, int i3)
 		ft_modif_color(50, 66, 195 , p);
 
 	else if (p->core->mem_c[i3] == 2 || p->core->mem_c[i3] == 20)
-		ft_modif_color(113, 204, 46 , p);
+		ft_modif_color(113, 204, 46, p);
 	else if (p->core->mem_c[i3] == 21)
-		ft_modif_color(163, 244, 66 , p);
+		ft_modif_color(83, 164, 36, p);
 
 	else if (p->core->mem_c[i3] == 3 || p->core->mem_c[i3] == 30)
-		ft_modif_color(219, 152, 52 , p);
+		ft_modif_color(219, 152, 52, p);
 	else if (p->core->mem_c[i3] == 31)
-		ft_modif_color(249, 182, 122 , p);
+		ft_modif_color(189, 122, 42, p);
 
 	else if (p->core->mem_c[i3] == 4 ||p->core->mem_c[i3] == 40)
-		ft_modif_color(15, 193, 241 , p);
+		ft_modif_color(15, 193, 241, p);
 	else if (p->core->mem_c[i3] == 41)
-		ft_modif_color(105, 213, 241 , p);
+		ft_modif_color(15, 193, 241, p);
 	
 }
 

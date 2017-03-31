@@ -32,7 +32,7 @@ void		print_nb_live(t_env *p)
 		if (i == 3)
 			mlx_string_put(p->mlx, p->win, 1700, 950, 0x0f1c40f, str);
 		if (p->core->player->next == NULL)
-			str = "N/A";
+			str = "";
 		else
 		{
 			p->core->player = p->core->player->next;
@@ -110,17 +110,23 @@ void		print_info(t_env *p)
 	str = "CYCLES       : ";
 	mlx_string_put(p->mlx, p->win, (HEIGHT + 50), 520, 0x0FFFFFF, str);
 	str = ft_itoa(p->core->cycle);
-	mlx_string_put(p->mlx, p->win, (HEIGHT + 200), 520, 0x0FFFFF, str);
-
+	mlx_string_put(p->mlx, p->win, (HEIGHT + 200), 520, 0x0e74c3c, str);
 	str = "LAST CHECK   : ";
 	mlx_string_put(p->mlx, p->win, (HEIGHT + 50), 570, 0x0FFFFFF, str);
 	str = ft_itoa(p->core->last_check);
-	mlx_string_put(p->mlx, p->win, (HEIGHT + 200), 570, 0x0FFFFF, str);
-
+	mlx_string_put(p->mlx, p->win, (HEIGHT + 200), 570, 0x0e74c3c, str);
 	str = "CYCLE / SEC  : ";
 	mlx_string_put(p->mlx, p->win, (HEIGHT + 50), 620, 0x0FFFFFF, str);
 	str = ft_itoa(p->core->cycle_sec);
-	mlx_string_put(p->mlx, p->win, (HEIGHT + 200), 620, 0x0FFFFF, str);
+	mlx_string_put(p->mlx, p->win, (HEIGHT + 200), 620, 0x0e74c3c, str);
+	str = "CYCLE DELTA  : ";
+	mlx_string_put(p->mlx, p->win, (HEIGHT + 380), 520, 0x0FFFFFF, str);
+	str = ft_itoa(CYCLE_DELTA);
+	mlx_string_put(p->mlx, p->win, (HEIGHT + 530), 520, 0x0e74c3c, str);
+	str = "CYCLE TO DIE : ";
+	mlx_string_put(p->mlx, p->win, (HEIGHT + 380), 570, 0x0FFFFFF, str);
+	str = ft_itoa(p->core->die_cycle);
+	mlx_string_put(p->mlx, p->win, (HEIGHT + 530), 570, 0x0e74c3c, str);
 }
 
 void		print_text(t_env *p)
