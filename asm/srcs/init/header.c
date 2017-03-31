@@ -12,9 +12,15 @@
 
 #include "asm.h"
 
+/*
+**  AJOUTER NOM QUAND IL DEPASSE LINE 
+*/
+
 void			header_name(char *line, t_header *h, t_asm *a)
 {
 	unsigned int i;
+	size_t feed;
+	char *name;
 
 	i = 0;
 	a->header_passage += 1;
@@ -22,20 +28,43 @@ void			header_name(char *line, t_header *h, t_asm *a)
 	if (*line != '"' && !ft_strchr(LABEL_CHARS, *line))
 		return (lexical_error(a->count_line, a->len_line - ft_strlen(line)));
 	line++;
+	name = line;
+	if(!ft_strchr(line,'"'))
+	{	
+		name[ft_strlen(name)] = '\n';
+		// ft_printf("{9}{%s}",line);
+		while (get_next_line(a->fd_champ, &line))
+		{
+			name = ft_strjoin(name,line);
+			feed = ft_strlen(name);
+			// name[feed] = '\n';
+			ft_printf("{9}Name = {%d}",feed);
+			ft_printf("{9}Line = {%d}",ft_strlen(line));
+			ft_printf("{%s}",name);
+			ft_printf("{%s}\n",line);
+			// line[ft_strlen(line)] = '\n'; 
+			// if()
+			// ft_printf("{9}{%s}",line);
+			if(ft_strchr(line,'"'))
+				break;
+			// if (!ft_strchr(line,'"'))
+				// break;
+		}
+		ft_printf("{%s}",name);
+	}
+	exit(0);
 	if ((ft_strlen(line) - 1) > PROG_NAME_LENGTH)
 		length_error(2);
 	ft_bzero(h->prog_name, PROG_NAME_LENGTH + 1);
 	i = ft_strlchr(line, '"');
 	ft_strncpy(h->prog_name, line, i);
-	// write(1, &(h->prog_name), sizeof(h->prog_name));
-	// exit(0);
 	header_verif_name_comment(line, a);
 }
 
 void			header_comment(char *line, t_header *h, t_asm *a)
 {
-	static int	tmp = 0;
-	unsigned int i;
+	static int		tmp = 0;
+	unsigned int	i;
 
 	a->header_passage += 1;
 	if (tmp == 1)
@@ -49,7 +78,6 @@ void			header_comment(char *line, t_header *h, t_asm *a)
 	ft_bzero(h->comment, COMMENT_LENGTH + 1);
 	i = ft_strlchr(line, '"');
 	ft_strncpy(h->comment, line, i);
-	// write(a->fd_cor, &(h->comment), sizeof(h->comment));
 	header_verif_name_comment(line, a);
 	tmp = 1;
 }
@@ -70,7 +98,7 @@ int				header_parser(char *line, t_header *h, t_asm *a)
 	return (0);
 }
 
-void			header_magic_code(t_asm *a, t_header *h)
+void			header_magic_code(t_header *h)
 {
 	char		str[4];
 	int			b0;
@@ -87,7 +115,6 @@ void			header_magic_code(t_asm *a, t_header *h)
 	str[1] = h->magic >> 8;
 	str[2] = h->magic >> 16;
 	str[3] = h->magic >> 24;
-	// write(a->fd_cor, &(str), sizeof(COREWAR_EXEC_MAGIC));
 }
 
 void			header_champ(t_asm *a, t_header *h)
@@ -95,7 +122,7 @@ void			header_champ(t_asm *a, t_header *h)
 	char		*line;
 
 	a->count_line = 1;
-	header_magic_code(a, h);
+	header_magic_code(h);
 	while (a->header_passage != 2)
 	{
 		get_next_line(a->fd_champ, &line);

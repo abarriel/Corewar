@@ -24,7 +24,6 @@ t_cmd	*init_cmd(char *op, char *args, int line, int colon)
 	cmd->barg = 0;
 	cmd->bytes = 0;
 	cmd->t_bytes = 0;
-	// cmd->tymake ps = 0;
 	cmd->colon = colon;
 	cmd->args = args;
 	cmd->nb_struct = -1;
@@ -49,7 +48,7 @@ void	add_cmd(t_cmd **t, char *op, char *args, t_lab *b)
 	tmp->next = init_cmd(op, args, b->line, b->colon);
 }
 
-void	get_cmd(t_lab *b, char *s, t_asm *a)
+void	get_cmd(t_lab *b, char *s)
 {
 	t_lab	*tmp;
 	char	*op;
@@ -102,7 +101,6 @@ char	**add_label(t_lab **l, t_asm *a)
 		index++;
 		*l = (*l)->next;
 	}
-	// label[index] = NULL;
 	*l = lab;
 	return (label);
 }

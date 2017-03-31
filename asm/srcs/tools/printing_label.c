@@ -18,8 +18,6 @@ void	print_cmd(t_cmd *cmd)
 	{
 		ft_printf("{9}\t%s - ", cmd->op);
 		ft_printf("{5}%s\n", cmd->args);
-		// ft_printf("{5}%d -",cmd->line);
-		// ft_printf("{5}%d -", cmd->colon);
 		cmd = cmd->next;
 	}
 }

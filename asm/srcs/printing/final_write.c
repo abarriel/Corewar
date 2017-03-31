@@ -11,46 +11,68 @@
 /* ************************************************************************** */
 
 #include "asm.h"
+
 /*
 ** LABEL SANS ARG , NE TROUVER PAS QUAND JE CHERCHE LE LABEL NORMAL
 ** JE DOIS FOUTRE CMD->BYTES DANS LE LABEL->BYTES
 ** ARGS SANS LABEL A GERER AUSSI JE DOI NEXT LE PARSER DE LABEL ET C TOUT
-**/
-void f_write_cmd(t_asm *a, t_cmd *c, t_op op_t)
+*/
+
+static void		create_file(t_asm *a, t_lab *l, t_header *h)
 {
-	short index;
+	if (!l)
+	{
+		ft_printf("No instructions found for %s\n",h->prog_name);
+		exit(0);
+	}
+	if ((a->fd_cor = open(a->cor, O_CREAT | O_WRONLY |
+		O_APPEND | O_TRUNC, 0644)) < 0)
+		ft_exit("Cannot create file");
+}
+
+static void		f_write_cmd(t_asm *a, t_cmd *c, t_op op_t)
+{
+	short	index;
 
 	index = 0;
-	while(index != op_t.nbr_args)
+	while (index != op_t.nbr_args)
 	{
 		if (c->typs[index] & T_REG)
-			write(a->fd_cor,&(c->r[index]),sizeof(c->r[index]));
+			write(a->fd_cor, &(c->r[index]), sizeof(c->r[index]));
 		if (c->typs[index] & T_DIR)
 		{
-			if ((!op_t.idk && op_t.idk1) || (op_t.idk & op_t.idk1))
-			write(a->fd_cor,&(c->d2[index]),sizeof(c->d2[index]));
+			if (!op_t.idk1)
+			{
+				write(a->fd_cor, &(c->d4[index]), sizeof(c->d4[index]));
+				ft_printf("4 OCTECT");
+			}
 			else
-			write(a->fd_cor,&(c->d4[index]),sizeof(c->d4[index]));
+			{
+				ft_printf("2 OCTECT");
+				write(a->fd_cor, &(c->d2[index]), sizeof(c->d2[index]));
+			}
 		}
 		if (c->typs[index] & T_IND)
-			write(a->fd_cor,&(c->ind[index]),sizeof(c->ind[index]));
+			write(a->fd_cor, &(c->ind[index]), sizeof(c->ind[index]));
 		index++;
 	}
 }
-void final_write(t_asm *a, t_header *h, t_lab *l, t_op *op_struct)
+
+void			final_write(t_asm *a, t_header *h, t_lab *l, t_op *op_struct)
 {
+	create_file(a, l, h);
 	write(a->fd_cor, h, sizeof(t_header));
-	while(l)
+	while (l)
 	{
-		while(l->cmd)
+		while (l->cmd)
 		{
-			write (a->fd_cor,&(l->cmd->code),sizeof(l->cmd->code));
+			write(a->fd_cor, &(l->cmd->code), sizeof(l->cmd->code));
 			if (op_struct[l->cmd->nb_struct].idk == 1)
 				write(a->fd_cor, &(l->cmd->barg), sizeof(l->cmd->barg));
-			f_write_cmd(a,l->cmd, op_struct[l->cmd->nb_struct]);
+			f_write_cmd(a, l->cmd, op_struct[l->cmd->nb_struct]);
 			l->cmd = l->cmd->next;
 		}
-			
 		l = l->next;
 	}
+	close(a->fd_cor);
 }

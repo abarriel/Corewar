@@ -83,11 +83,12 @@ typedef struct		s_lab
 	struct s_lab	*next;
 }					t_lab;
 t_op		*get_op(void);
+void bonus(t_asm *a, t_lab *l, t_header *h, t_op *op);
 void				 write_op(t_asm *a, t_lab *l);
 void				remove_first_label(t_asm *a, t_lab **begin);
 char				**add_label(t_lab **l, t_asm *a);
-void				get_cmd(t_lab *b, char *s, t_asm *a);
-int					handles_dir(t_asm *a, char *arg, t_cmd *c);
+void				get_cmd(t_lab *b, char *s);
+int					handles_dir(t_asm *a, char *arg);
 int					handles_ind(t_asm *a, char *arg, t_cmd *c);
 void				check_instructions(t_asm *a, t_cmd *c, t_op *op_struct);
 int					skip_space_len(char **s);
@@ -108,6 +109,6 @@ t_header			*init_header(void);
 int					skip_space(char **s);
 void				header_champ(t_asm *a, t_header *h);
 void				lexical_error(int line, int character);
-void				write_label(t_asm *a, t_lab *l, t_op *op);
+void				write_label(t_lab *l, t_op *op);
 void 				final_write(t_asm *a, t_header *h, t_lab *l, t_op *op_struct);
 #endif

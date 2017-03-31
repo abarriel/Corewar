@@ -11,14 +11,10 @@
 /* ************************************************************************** */
 
 #include "asm.h"
+
 /*
 ** PAS OUBLIER CHAMPIONS AVEC HEADER MAIS INSTRUCTION VIDE
-**/
-void	create_file(t_asm *a, t_lab *l)
-{
-	if ((a->fd_cor = open(a->cor, O_CREAT | O_WRONLY | O_APPEND | O_TRUNC, 0644)) < 0)
-		ft_exit("Cannot create file");
-}
+*/
 
 void	get_info_asm(char *s, t_asm *a)
 {
@@ -30,38 +26,31 @@ void	get_info_asm(char *s, t_asm *a)
 		ft_exit("Error strdup");
 	a->cor = ft_strnew(ft_strlen(a->champ_name) + 4);
 	ft_strcpy(a->cor, a->champ_name);
-	// a->cor = a->champ_name;
 	ft_strcat(a->cor, ".cor");
-	// ft_printf("{9}[%s]",a->cor);
-	// exit(1);
 }
 
 int		main(int av, char **ac)
 {
 	t_asm		*a;
 	t_header	*h;
-	t_op        *op;
+	t_op		*op;
 	t_lab		*l;
 
 	l = NULL;
 	a = init_asm();
 	h = init_header();
 	op = get_op();
-
 	if (av != 2)
 		ft_exit("Usage: ./asm <champion.s>");
 	get_info_asm(ac[1], a);
 	header_champ(a, h);
 	l = get_label(a);
 	check_operation(a, l);
-	//print_label(l);
-	// exit(0);
 	write_op(a, l);
-	write_label(a, l, op);
+	write_label(l, op);
 	h->prog_size = a->total_bytes;
-	create_file(a, l);
-	final_write(a, h, l, op);
 	close(a->fd_champ);
-	close(a->fd_cor);
+	final_write(a, h, l, op);
+	// bonus(a, h, l, op);
 	return (0);
 }

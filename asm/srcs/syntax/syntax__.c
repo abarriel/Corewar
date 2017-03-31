@@ -12,21 +12,21 @@
 
 #include "asm.h"
 
-void handles_space(char **s)
+void	handles_space(char **s)
 {
-	int i;
-	int len;
+	size_t	i;
+	int		len;
 
 	i = 0;
-	while((*s)[i] != '\0' && (*s)[i] != ' ' && (*s)[i] != '\t')
+	while ((*s)[i] != '\0' && (*s)[i] != ' ' && (*s)[i] != '\t')
 		i++;
 	if (i == ft_strlen(*s))
 		return ;
-	len  = ft_strlen((*s) + i );
+	len = ft_strlen((*s) + i);
 	ft_bzero((*s) + i, len);
-	// ft_printf("{9}%d - %d - [%s]\n",len, i, *s);
 }
-int		handles_dir(t_asm *a, char *arg, t_cmd *c)
+
+int		handles_dir(t_asm *a, char *arg)
 {
 	char	*str;
 	int		i;
@@ -34,12 +34,8 @@ int		handles_dir(t_asm *a, char *arg, t_cmd *c)
 
 	i = -1;
 	str = arg;
-	// ft_printf("{7}[%s]\n",arg);
 	if (*arg != '%')
-	{
 		return (0);
-		// syntax_error(arg,c->colon, c->line);
-	}
 	if (*arg == '%')
 		arg++;
 	if (*arg == LABEL_CHAR)
@@ -52,10 +48,7 @@ int		handles_dir(t_asm *a, char *arg, t_cmd *c)
 				break ;
 		}
 		if (i == a->nb_label)
-		{
 			return (0);
-			// no_label_error(arg,str,c->colon,c->line - (ft_strlen(str) - 1));
-		}
 		return (T_DIR);
 	}
 	else
@@ -103,10 +96,7 @@ int		handles_ind(t_asm *a, char *arg, t_cmd *c)
 		arg = arg + i;
 		len -= skip_space_len(&arg);
 		if (i != len)
-		{
 			return (0);
-			// syntax_error(arg,c->colon, c->line - i);
-		}
 		return (T_IND);
 	}
 }

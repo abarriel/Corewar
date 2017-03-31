@@ -10,6 +10,6 @@ make;
 ./asm $1.s;
 mv $1.cor $2.cor;
 ./zaz $1.s;
-diff $1.cor $2.cor > diff.diff
+diff  $1.cor $2.cor > diff.diff
 cat diff.diff
 fi

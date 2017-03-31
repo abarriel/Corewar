@@ -11,12 +11,14 @@
 /* ************************************************************************** */
 
 #include "asm.h"
+
 /*
 ** 	A LA PLACE DE T_REG PEUT ETRE REG_CODE
 */
-int		handles_reg(t_asm *a, char *arg, t_cmd *c)
+
+int		handles_reg(char *arg, t_cmd *c)
 {
-	char *str;
+	char	*str;
 
 	str = arg;
 	if (*arg != 'r')
@@ -39,9 +41,9 @@ void	check_type(t_asm *a, t_cmd *c, t_op *op_struct, short index)
 	red = 0;
 	binary = 0;
 	if ((op_struct[c->nb_struct].type[index]) & T_REG)
-		red = handles_reg(a, c->type[index], c);
+		red = handles_reg(c->type[index], c);
 	if ((op_struct[c->nb_struct].type[index]) & T_DIR)
-		red += handles_dir(a, c->type[index], c);
+		red += handles_dir(a, c->type[index]);
 	if ((op_struct[c->nb_struct].type[index]) & T_IND)
 		red += handles_ind(a, c->type[index], c);
 	if ((op_struct[c->nb_struct].type[index]) & T_LAB)
@@ -49,7 +51,6 @@ void	check_type(t_asm *a, t_cmd *c, t_op *op_struct, short index)
 	if (red == 0)
 		syntax_error(c->type[index], c->colon, c->line);
 	c->typs[index] = red;
-	// ft_printf("{c->args %s}[%d]\n",c->type[index],red);
 }
 
 void	check_instructions(t_asm *a, t_cmd *c, t_op *op_struct)
