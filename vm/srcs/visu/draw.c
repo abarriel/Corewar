@@ -84,23 +84,25 @@ void		ft_draw_score(t_env *p)
 {
 	t_player *player;
 	int i;
-	static int i2;
+	static int i2[4] = {0, 0, 0, 0};
 
 	player = p->core->player;
 	i = 0;
-	i2 = 0;
 	while (p->core->player)
 	{
 		if (p->core->player->nb_live > 0)
-			i2 = WIDTH - (HEIGHT) - 150;
-		else if (i2 > 0)
-			i2--;
+		{
+			if ((i2[i / 50]) + 1 <= (WIDTH - (HEIGHT) - 150))
+				(i2[i / 50]) += 5;
+		}
+		else if (p->core->player->nb_live == 0 && (i2[i / 50]) > 0)
+			(i2[i / 50])--;
 		ft_modif_color(20, 20, 20, p);
 		p->l = WIDTH - (HEIGHT) - 150;
 		p->h = 20;
 		ft_draw_rectangle((HEIGHT + 100), 270 + i, p);
 		modif_color_for_player(p, i);
-		p->l = i2;
+		p->l = (i2[i / 50]);
 		p->h = 20;
 		ft_draw_rectangle((HEIGHT + 100), 270 + i, p);
 		p->core->player = p->core->player->next;
