@@ -20,7 +20,7 @@ void		print_nb_live(t_env *p)
 	
 	i = -1;
 	tmp = p->core->player;
-	str = tmp->name;
+	str = ft_itoa(p->core->player->nb_live);
 	while (++i < 4)
 	{
 		if (i == 0)
@@ -36,7 +36,7 @@ void		print_nb_live(t_env *p)
 		else
 		{
 			p->core->player = p->core->player->next;
-			str = p->core->player->name;
+			str = ft_itoa(p->core->player->nb_live);
 		}
 	}
 	p->core->player = tmp;
