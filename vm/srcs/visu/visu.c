@@ -35,7 +35,8 @@ void		check_button_hit(int button, int x, int y, t_env *p)
 			p->but->btn3_s = 80;
 			p->but->btn3_px = (HEIGHT) + 330;
 			p->but->btn3_py = (HEIGHT) - 125;
-			p->core->cycle_sec -= 5;
+			if (p->core->cycle_sec - 5 > 0)
+				p->core->cycle_sec -= 5;
 		}
 		if ((x <= (HEIGHT) + 565) && (x >= (HEIGHT) + 485) && (y <= (HEIGHT) - 50) && (y >= (HEIGHT) - 120))
 		{
@@ -98,8 +99,10 @@ int			ft_key_hook(int keycode, t_env *p)
 	if (keycode == RIGHT)
 		p->core->cycle_sec++;
 	if (keycode == LEFT)
-		p->core->cycle_sec--;
-	ft_printf("keycode: [%d]\n", keycode);
+	{
+		if (p->core->cycle_sec - 1 > 0)
+			p->core->cycle_sec--;
+	}
 	ft_loop_key_hook(p);
 	return (0);
 }
