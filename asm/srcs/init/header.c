@@ -12,15 +12,11 @@
 
 #include "asm.h"
 
-/*
-**  AJOUTER NOM QUAND IL DEPASSE LINE 
-*/
-
 void			header_name(char *line, t_header *h, t_asm *a)
 {
 	unsigned int i;
-	size_t feed;
 	char *name;
+	char *tmp;
 
 	i = 0;
 	a->header_passage += 1;
@@ -30,35 +26,25 @@ void			header_name(char *line, t_header *h, t_asm *a)
 	line++;
 	name = line;
 	if(!ft_strchr(line,'"'))
-	{	
-		name[ft_strlen(name)] = '\n';
-		// ft_printf("{9}{%s}",line);
-		while (get_next_line(a->fd_champ, &line))
-		{
-			name = ft_strjoin(name,line);
-			feed = ft_strlen(name);
-			// name[feed] = '\n';
-			ft_printf("{9}Name = {%d}",feed);
-			ft_printf("{9}Line = {%d}",ft_strlen(line));
-			ft_printf("{%s}",name);
-			ft_printf("{%s}\n",line);
-			// line[ft_strlen(line)] = '\n'; 
-			// if()
-			// ft_printf("{9}{%s}",line);
-			if(ft_strchr(line,'"'))
-				break;
-			// if (!ft_strchr(line,'"'))
-				// break;
-		}
-		ft_printf("{%s}",name);
+		name = ft_strjoin(name, "\n");
+	while(!ft_strchr(line,'"'))
+	{
+		// ft_strjoin(name, line);
+		get_next_line(a->fd_champ,&line);
+		name = ft_strjoin(name, line);
+		a->count_line++;
+		if(ft_strchr(name,'"'))
+			break;
+		name = ft_strjoin(name, "\n");
+		free(line);
 	}
-	exit(0);
-	if ((ft_strlen(line) - 1) > PROG_NAME_LENGTH)
+	// ft_printf("{7}[%s]",name);
+	if ((ft_strlen(name) - 1) > PROG_NAME_LENGTH)
 		length_error(2);
 	ft_bzero(h->prog_name, PROG_NAME_LENGTH + 1);
-	i = ft_strlchr(line, '"');
-	ft_strncpy(h->prog_name, line, i);
-	header_verif_name_comment(line, a);
+	i = ft_strlchr(name, '"');
+	ft_strncpy(h->prog_name, name, i);
+	header_verif_name_comment(name, a);
 }
 
 void			header_comment(char *line, t_header *h, t_asm *a)

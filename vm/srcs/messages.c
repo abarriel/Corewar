@@ -6,12 +6,12 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 05:27:34 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/29 10:12:37 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/16 20:51:31 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
-
+#define D "'"
 void 	print_winner(t_player *p)
 {
 	ft_printf("Constestant %d, \"%s\", has won !\n", (unsigned int)p->nb, p->name);
