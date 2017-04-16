@@ -42,15 +42,9 @@ static void		f_write_cmd(t_asm *a, t_cmd *c, t_op op_t)
 		if (c->typs[index] & T_DIR)
 		{
 			if (!op_t.idk1)
-			{
 				write(a->fd_cor, &(c->d4[index]), sizeof(c->d4[index]));
-				ft_printf("4 OCTECT");
-			}
 			else
-			{
-				ft_printf("2 OCTECT");
 				write(a->fd_cor, &(c->d2[index]), sizeof(c->d2[index]));
-			}
 		}
 		if (c->typs[index] & T_IND)
 			write(a->fd_cor, &(c->ind[index]), sizeof(c->ind[index]));
@@ -58,20 +52,24 @@ static void		f_write_cmd(t_asm *a, t_cmd *c, t_op op_t)
 	}
 }
 
+static void final_write_(t_asm *a, t_header *h, t_cmd *cmd, t_op *op_struct)
+{
+	while (cmd)
+		{
+			write(a->fd_cor, &(cmd->code), sizeof(cmd->code));
+			if (op_struct[cmd->nb_struct].idk == 1)
+				write(a->fd_cor, &(cmd->barg), sizeof(cmd->barg));
+			f_write_cmd(a, cmd, op_struct[cmd->nb_struct]);
+			cmd = cmd->next;
+		}
+}
 void			final_write(t_asm *a, t_header *h, t_lab *l, t_op *op_struct)
 {
 	create_file(a, l, h);
 	write(a->fd_cor, h, sizeof(t_header));
 	while (l)
 	{
-		while (l->cmd)
-		{
-			write(a->fd_cor, &(l->cmd->code), sizeof(l->cmd->code));
-			if (op_struct[l->cmd->nb_struct].idk == 1)
-				write(a->fd_cor, &(l->cmd->barg), sizeof(l->cmd->barg));
-			f_write_cmd(a, l->cmd, op_struct[l->cmd->nb_struct]);
-			l->cmd = l->cmd->next;
-		}
+		final_write_(a,h,l->cmd,op_struct);
 		l = l->next;
 	}
 	close(a->fd_cor);

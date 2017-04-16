@@ -1,6 +1,4 @@
-.name "zork
-
-"
+.name "zork"
 # !
 .comment "I'M ALIIIIVE"
 

@@ -44,13 +44,14 @@ int		main(int av, char **ac)
 		ft_exit("Usage: ./asm <champion.s>");
 	get_info_asm(ac[1], a);
 	header_champ(a, h);
+	
 	l = get_label(a);
 	check_operation(a, l);
 	write_op(a, l);
 	write_label(l, op);
 	h->prog_size = a->total_bytes;
 	close(a->fd_champ);
-	final_write(a, h, l, op);
-	// bonus(a, h, l, op);
+ final_write(a, h, l, op);
+	bonus(a, l, h, op);
 	return (0);
 }

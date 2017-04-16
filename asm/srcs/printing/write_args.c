@@ -120,4 +120,5 @@ void			write_op(t_asm *a, t_lab *l)
 			l->bytes = a->total_bytes;
 	}
 	a->total_bytes = swap_uint(a->total_bytes);
+	ft_printf("%d",a->total_bytes);
 }

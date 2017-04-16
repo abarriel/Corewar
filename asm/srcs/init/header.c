@@ -16,7 +16,6 @@ void			header_name(char *line, t_header *h, t_asm *a)
 {
 	unsigned int i;
 	char *name;
-	char *tmp;
 
 	i = 0;
 	a->header_passage += 1;
@@ -29,7 +28,6 @@ void			header_name(char *line, t_header *h, t_asm *a)
 		name = ft_strjoin(name, "\n");
 	while(!ft_strchr(line,'"'))
 	{
-		// ft_strjoin(name, line);
 		get_next_line(a->fd_champ,&line);
 		name = ft_strjoin(name, line);
 		a->count_line++;
@@ -38,12 +36,12 @@ void			header_name(char *line, t_header *h, t_asm *a)
 		name = ft_strjoin(name, "\n");
 		free(line);
 	}
-	// ft_printf("{7}[%s]",name);
 	if ((ft_strlen(name) - 1) > PROG_NAME_LENGTH)
 		length_error(2);
 	ft_bzero(h->prog_name, PROG_NAME_LENGTH + 1);
 	i = ft_strlchr(name, '"');
 	ft_strncpy(h->prog_name, name, i);
+	// ft_printf("Name :\"%s\"",h->prog_name);
 	header_verif_name_comment(name, a);
 }
 
@@ -51,6 +49,7 @@ void			header_comment(char *line, t_header *h, t_asm *a)
 {
 	static int		tmp = 0;
 	unsigned int	i;
+	char *name;
 
 	a->header_passage += 1;
 	if (tmp == 1)
@@ -59,12 +58,25 @@ void			header_comment(char *line, t_header *h, t_asm *a)
 	if (*line != '"' && !ft_strchr(LABEL_CHARS, *line))
 		return (lexical_error(a->count_line, a->len_line - ft_strlen(line)));
 	line++;
-	if ((ft_strlen(line) - 1) > COMMENT_LENGTH)
+	name = line;
+	if(!ft_strchr(line,'"'))
+		name = ft_strjoin(name, "\n");
+	while(!ft_strchr(line,'"'))
+	{
+		get_next_line(a->fd_champ,&line);
+		name = ft_strjoin(name, line);
+		a->count_line++;
+		if(ft_strchr(name,'"'))
+			break;
+		name = ft_strjoin(name, "\n");
+		free(line);
+	}
+	if ((ft_strlen(name) - 1) > COMMENT_LENGTH)
 		length_error(1);
 	ft_bzero(h->comment, COMMENT_LENGTH + 1);
-	i = ft_strlchr(line, '"');
-	ft_strncpy(h->comment, line, i);
-	header_verif_name_comment(line, a);
+	i = ft_strlchr(name, '"');
+	ft_strncpy(h->comment, name, i);
+	header_verif_name_comment(name, a);
 	tmp = 1;
 }
 
