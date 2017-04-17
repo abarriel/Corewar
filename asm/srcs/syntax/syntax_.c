@@ -37,18 +37,18 @@ int		handles_reg(char *arg, t_cmd *c)
 	return (T_REG);
 }
 
-void	check_type(t_asm *a, t_cmd *c, t_op *op_struct, short index)
+void	check_type(t_asm *a, t_cmd *c, short index)
 {
 	int		binary;
 	int		red;
 
 	red = 0;
 	binary = 0;
-	if ((op_struct[c->nb_struct].type[index]) & T_REG)
+	if ((g_op[c->nb_struct].type[index]) & T_REG)
 		red = handles_reg(c->type[index], c);
-	if ((op_struct[c->nb_struct].type[index]) & T_DIR)
+	if ((g_op[c->nb_struct].type[index]) & T_DIR)
 		red += handles_dir(a, c->type[index], c);
-	if ((op_struct[c->nb_struct].type[index]) & T_IND)
+	if ((g_op[c->nb_struct].type[index]) & T_IND)
 		red += handles_ind(a, c->type[index], c);
 	// if ((op_struct[c->nb_struct].type[index]) & T_LAB)
 	// 	ft_printf("-LAB-");
@@ -57,14 +57,14 @@ void	check_type(t_asm *a, t_cmd *c, t_op *op_struct, short index)
 	c->typs[index] = red;
 }
 
-void	check_instructions(t_asm *a, t_cmd *c, t_op *op_struct)
+void	check_instructions(t_asm *a, t_cmd *c)
 {
 	short	index;
 
 	index = 0;
-	while (index != op_struct[c->nb_struct].nbr_args)
+	while (index != g_op[c->nb_struct].nbr_args)
 	{
-		check_type(a, c, op_struct, index);
+		check_type(a, c, index);
 		index++;
 	}
 }

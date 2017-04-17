@@ -57,8 +57,6 @@ void write_arg_fun(t_cmd *c, t_op op_t)
 	}
 }
 
-// Codage [0000000000r4] [0000000000%0] [000000000r3	]
-	   // 0x06   0x64 [        0x04] [      0x0000] [        0x03]
 void write_arg_size(t_cmd *c, t_op op_t)
 {
 	char	*tmp;
@@ -121,7 +119,7 @@ void write_cmd_fun(t_cmd *c)
 			c = c->next;
 	}
 }
-void bonus(t_asm *a, t_lab *l, t_header *h, t_op *op)
+void bonus(t_asm *a, t_lab *l, t_header *h)
 {
 	unsigned int size;
 

@@ -16,21 +16,21 @@
 ** SKIP LE CMP AVEC LE PREMIER MAILLION CAR IL NEXISTE PAS
 */
 
-int		cmp_struct_op(char *op, t_op *op_struct)
+int		cmp_struct_op(char *op)
 {
 	int	index;
 
 	index = 0;
 	while (index < 16)
 	{
-		if (!ft_strcmp(op, op_struct[index].mnemonique))
+		if (!ft_strcmp(op, g_op[index].mnemonique))
 			return (index);
 		index++;
 	}
 	return (-1);
 }
 
-void	handles_instructions(t_cmd *c, t_op *op_struct)
+void	handles_instructions(t_cmd *c)
 {
 	char	**args;
 	size_t	index;
@@ -39,10 +39,10 @@ void	handles_instructions(t_cmd *c, t_op *op_struct)
 	args = ft_strsplit(c->args, SEPARATOR_CHAR);
 	while (args[index])
 		index++;
-	if ((char)index != op_struct[c->nb_struct].nbr_args)
+	if ((char)index != g_op[c->nb_struct].nbr_args)
 		invalid_error(c->op, index);
 	index = 0;
-	while ((char)index != op_struct[c->nb_struct].nbr_args)
+	while ((char)index != g_op[c->nb_struct].nbr_args)
 	{
 		skip_space(&args[index]);
 	// ft_printf("============%d===============\\\\",sizeof(c->type[index]));
@@ -53,7 +53,7 @@ void	handles_instructions(t_cmd *c, t_op *op_struct)
 	}
 }
 
-void	handles_cmd_name(t_asm *a, t_cmd *c, t_op *op_struct, int count_line)
+void	handles_cmd_name(t_asm *a, t_cmd *c, int count_line)
 {
 	int	i;
 
@@ -61,13 +61,13 @@ void	handles_cmd_name(t_asm *a, t_cmd *c, t_op *op_struct, int count_line)
 	// ft_printf("OK");
 	while (c)
 	{
-		if ((c->nb_struct = cmp_struct_op(c->op, op_struct)) <= -1)
+		if ((c->nb_struct = cmp_struct_op(c->op)) <= -1)
 			return (token_error(c->op, count_line + i, ft_strlen(c->op) + 1));
 		else
 		{
 			c->line += i;
-			handles_instructions(c, op_struct);
-			check_instructions(a, c, op_struct);
+			handles_instructions(c);
+			check_instructions(a, c);
 		}
 		i++;
 		c = c->next;
@@ -75,20 +75,17 @@ void	handles_cmd_name(t_asm *a, t_cmd *c, t_op *op_struct, int count_line)
 	// ft_printf("SORTI");
 }
 
-void	handles_op(t_asm *a, t_lab *l, t_op *op_struct)
+void	handles_op(t_asm *a, t_lab *l)
 {
 	while (l)
 	{
-		handles_cmd_name(a, l->cmd, op_struct, l->count_line);
+		handles_cmd_name(a, l->cmd, l->count_line);
 		l = l->next;
 	}
 }
 
 void	check_operation(t_asm *a, t_lab *l)
 {
-	t_op	*op_struct;
-
-	op_struct = get_op();
-	handles_op(a, l, op_struct);
+	handles_op(a, l);
 		// exit(1);
 }

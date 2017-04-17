@@ -80,7 +80,7 @@ static void		write_arg(t_cmd *c, t_op op_t)
 	}
 }
 
-static void		handles_code(t_asm *a, t_cmd *c, t_op *op_struct)
+static void		handles_code(t_asm *a, t_cmd *c)
 {
 	int			i;
 	static int	tmp;
@@ -88,16 +88,16 @@ static void		handles_code(t_asm *a, t_cmd *c, t_op *op_struct)
 	i = 0;
 	while (c)
 	{
-		c->code = op_struct[c->nb_struct].code;
+		c->code = g_op[c->nb_struct].code;
 		// ft_dprintf(2, "{9}5[%p]", c->code);
 		c->bytes += sizeof(c->code);
-		if (op_struct[c->nb_struct].idk == 1)
+		if (g_op[c->nb_struct].idk == 1)
 		{
-			write_c(c, op_struct[c->nb_struct]);
+			write_c(c, g_op[c->nb_struct]);
 			// ft_dprintf(2, "{5}p[%p]", (int)c->barg);
 			c->bytes += sizeof(c->barg);
 		}
-		write_arg(c, op_struct[c->nb_struct]);
+		write_arg(c, g_op[c->nb_struct]);
 		tmp += c->bytes;
 		c->t_bytes = tmp;
 		// ft_dprintf(2, "{2}%hd- [%hd]", c->bytes, c->t_bytes);
@@ -109,18 +109,14 @@ static void		handles_code(t_asm *a, t_cmd *c, t_op *op_struct)
 
 void			write_op(t_asm *a, t_lab *l)
 {
-	t_op	*op_struct;
 
-	op_struct = get_op();
 	l->bytes = 0;
-	// a->total_bytes = 0;
 	while (l)
 	{
-		handles_code(a, l->cmd, op_struct);
+		handles_code(a, l->cmd);
 		l = l->next;
 		if (l)
 			l->bytes = a->total_bytes;
 	}
 	a->total_bytes = swap_uint(a->total_bytes);
-	// ft_printf("%d",a->total_bytes);
 }

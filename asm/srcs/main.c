@@ -33,25 +33,22 @@ int		main(int av, char **ac)
 {
 	t_asm		*a;
 	t_header	*h;
-	t_op		*op;
 	t_lab		*l;
 
 	l = NULL;
 	a = init_asm();
 	h = init_header();
-	op = get_op();
 	if (av != 2)
 		ft_exit("Usage: ./asm <champion.s>");
 	get_info_asm(ac[1], a);
 	header_champ(a, h);
-	
 	l = get_label(a);
 	check_operation(a, l);
 	write_op(a, l);
-	write_label(l, op);
+	write_label(l);
 	h->prog_size = a->total_bytes;
 	close(a->fd_champ);
- final_write(a, h, l, op);
-	bonus(a, l, h, op);
+ final_write(a, h, l);
+	bonus(a, l, h);
 	return (0);
 }

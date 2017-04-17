@@ -39,7 +39,7 @@ __uint16_t get_pos_label(short bytes, char *s, t_lab *l)
 			else
 			{
 
-				ft_printf("{8}{%d}{%d}", l->bytes, bytes);
+				// ft_printf("{8}{%d}{%d}", l->bytes, bytes);
 				return (l->bytes - bytes);
 			}
 		}
@@ -70,7 +70,7 @@ void				recup_label(t_cmd *c, t_op op_t, t_lab *tmp)
 				else
 					c->d2[index] = get_pos_label(c->t_bytes - c->bytes, new, tmp);	
 					c->d2[index] = swap_usint(c->d2[index]);
-					ft_printf("{1}[%x]",c->d2[index]);
+					// ft_printf("{1}[%x]",c->d2[index]);
 			}
 		}
 		else if (c->typs[index] & T_IND)
@@ -90,26 +90,26 @@ void				recup_label(t_cmd *c, t_op op_t, t_lab *tmp)
 	}
 }
 
-void				handles_label(t_cmd *c, t_op *op_struct, t_lab *tmp)
+void				handles_label(t_cmd *c, t_lab *tmp)
 {
 	int	i;
 
 	i = 0;
 	while (c)
 	{
-		recup_label(c, op_struct[c->nb_struct], tmp);
+		recup_label(c, g_op[c->nb_struct], tmp);
 		c = c->next;
 	}
 }
 
-void				write_label(t_lab *l, t_op *op)
+void				write_label(t_lab *l)
 {
 	t_lab *tmp;
 
 	tmp = l;
 	while (l)
 	{
-		handles_label(l->cmd, op, tmp);
+		handles_label(l->cmd, tmp);
 		l = l->next;
 	}
 }

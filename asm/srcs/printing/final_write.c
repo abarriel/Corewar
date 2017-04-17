@@ -12,11 +12,6 @@
 
 #include "asm.h"
 
-/*
-** LABEL SANS ARG , NE TROUVER PAS QUAND JE CHERCHE LE LABEL NORMAL
-** JE DOIS FOUTRE CMD->BYTES DANS LE LABEL->BYTES
-** ARGS SANS LABEL A GERER AUSSI JE DOI NEXT LE PARSER DE LABEL ET C TOUT
-*/
 
 static void		create_file(t_asm *a, t_lab *l, t_header *h)
 {
@@ -42,17 +37,9 @@ static void		f_write_cmd(t_asm *a, t_cmd *c, t_op op_t)
 		if (c->typs[index] & T_DIR)
 		{
 			if (!op_t.idk1)
-			{
-				// ft_dprintf(2, "{8}{[[[%p}-", c->d4[index]);
-
 				write(a->fd_cor, &(c->d4[index]), sizeof(c->d4[index]));
-			}
 			else
-			{
-				// ft_dprintf(2, "{8}{[[[%p}-", c->d2[index]);
-
 				write(a->fd_cor, &(c->d2[index]), sizeof(c->d2[index]));
-			}
 		}
 		if (c->typs[index] & T_IND)
 			write(a->fd_cor, &(c->ind[index]), sizeof(c->ind[index]));
@@ -60,24 +47,25 @@ static void		f_write_cmd(t_asm *a, t_cmd *c, t_op op_t)
 	}
 }
 
-static void final_write_(t_asm *a, t_header *h, t_cmd *cmd, t_op *op_struct)
+static void final_write_(t_asm *a, t_header *h, t_cmd *cmd)
 {
 	while (cmd)
 		{
 			write(a->fd_cor, &(cmd->code), sizeof(cmd->code));
-			if (op_struct[cmd->nb_struct].idk == 1)
+			if (g_op[cmd->nb_struct].idk == 1)
 				write(a->fd_cor, &(cmd->barg), sizeof(cmd->barg));
-			f_write_cmd(a, cmd, op_struct[cmd->nb_struct]);
+			f_write_cmd(a, cmd, g_op[cmd->nb_struct]);
 			cmd = cmd->next;
 		}
 }
-void			final_write(t_asm *a, t_header *h, t_lab *l, t_op *op_struct)
+
+void			final_write(t_asm *a, t_header *h, t_lab *l)
 {
 	create_file(a, l, h);
 	write(a->fd_cor, h, sizeof(t_header));
 	while (l)
 	{
-		final_write_(a,h,l->cmd,op_struct);
+		final_write_(a,h,l->cmd);
 		l = l->next;
 	}
 	close(a->fd_cor);
