@@ -24,14 +24,14 @@ __uint16_t get_pos_label(short bytes, char *s, t_lab *l)
 		{
 			if (l->cmd)
 			{
-				ft_printf("{8}{%d}{%d}",
-				l->cmd->t_bytes - l->cmd->bytes, bytes);
+				// ft_printf("{8}{%d}{%d}",
+				// l->cmd->t_bytes - l->cmd->bytes, bytes);
 				// ft_printf("{4}Final = [%d]\n",(l->cmd->t_bytes - l->cmd->bytes) - bytes);
 				return ((l->cmd->t_bytes - l->cmd->bytes) - bytes);
 			}
 			else
 			{
-				ft_printf("{8}{%d}{%d}", l->bytes, bytes);
+				// ft_printf("{8}{%d}{%d}", l->bytes, bytes);
 				return (l->bytes - bytes);
 			}
 		}
@@ -61,16 +61,20 @@ void				recup_label(t_cmd *c, t_op op_t, t_lab *tmp)
 				}
 				else
 					c->d2[index] = get_pos_label(c->t_bytes - c->bytes, new, tmp);	
+				// ft_printf("{1}[ddå%x]",c->d2[index]);
 					c->d2[index] = swap_usint(c->d2[index]);
 			}
 		}
 		else if (c->typs[index] & T_IND)
 		{
 			new = (c->type[index]);
+			// ft_printf("{4}[ll%sll]",new);
 			if (*new == LABEL_CHAR)
 			{
 				new = new + 1;
 				c->ind[index] = get_pos_label(c->t_bytes - c->bytes, new, tmp);	
+				// ft_printf("{4}]]]]]%d[[[[[ %d ",c->ind[index],index);
+				c->d2[index] = c->ind[index];
 				c->ind[index] = swap_usint(c->ind[index]);
 			}
 		}

@@ -42,9 +42,17 @@ static void		f_write_cmd(t_asm *a, t_cmd *c, t_op op_t)
 		if (c->typs[index] & T_DIR)
 		{
 			if (!op_t.idk1)
+			{
+				// ft_dprintf(2, "{8}{[[[%p}-", c->d4[index]);
+
 				write(a->fd_cor, &(c->d4[index]), sizeof(c->d4[index]));
+			}
 			else
+			{
+				// ft_dprintf(2, "{8}{[[[%p}-", c->d2[index]);
+
 				write(a->fd_cor, &(c->d2[index]), sizeof(c->d2[index]));
+			}
 		}
 		if (c->typs[index] & T_IND)
 			write(a->fd_cor, &(c->ind[index]), sizeof(c->ind[index]));

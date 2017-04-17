@@ -45,6 +45,9 @@ void	handles_instructions(t_cmd *c, t_op *op_struct)
 	while ((char)index != op_struct[c->nb_struct].nbr_args)
 	{
 		skip_space(&args[index]);
+	// ft_printf("============%d===============\\\\",sizeof(c->type[index]));
+		// ft_printf("[%s]",args[index]);
+		
 		c->type[index] = args[index];
 		index++;
 	}

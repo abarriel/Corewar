@@ -46,8 +46,8 @@ void	check_type(t_asm *a, t_cmd *c, t_op *op_struct, short index)
 		red += handles_dir(a, c->type[index]);
 	if ((op_struct[c->nb_struct].type[index]) & T_IND)
 		red += handles_ind(a, c->type[index], c);
-	if ((op_struct[c->nb_struct].type[index]) & T_LAB)
-		ft_printf("-LAB-");
+	// if ((op_struct[c->nb_struct].type[index]) & T_LAB)
+	// 	ft_printf("-LAB-");
 	if (red == 0)
 		syntax_error(c->type[index], c->colon, c->line);
 	c->typs[index] = red;

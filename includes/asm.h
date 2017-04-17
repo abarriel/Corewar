@@ -22,6 +22,7 @@
 # define RID T_REG | T_IND | T_DIR
 # define RDI T_REG | T_DIR | T_IND
 
+
 typedef struct		s_op
 {
 	char			*mnemonique;
@@ -33,7 +34,7 @@ typedef struct		s_op
 	int				idk;
 	int				idk1;
 }					t_op;
-
+extern t_op g_op[17];
 typedef struct		s_asm
 {
 	int				header_passage;
