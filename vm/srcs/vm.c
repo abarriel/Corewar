@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:29:02 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/30 22:52:19 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/17 21:09:35 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,66 @@ void print_res(t_core *core)
 	print_winner(winner);
 }
 
+void print_reg(t_core *core)
+{
+	int i;
+	t_process *tmp;
+
+	tmp = core->process;
+	while (tmp)
+	{
+		i = 0;
+		ft_printf("\nName: [%s]\n", tmp->player->name);
+		ft_printf("ID: [%02x%02x%02x%02x]\n", tmp->player->id[0], tmp->player->id[1], tmp->player->id[2], tmp->player->id[3]);
+		ft_printf("pc: %d\n", tmp->pc);
+		ft_printf("registre: \n");
+		while (i < REG_NUMBER)
+		{
+			ft_printf("%2d : %.2x%.2x%.2x%.2x\n", i + 1, tmp->reg[i][0], tmp->reg[i][1], tmp->reg[i][2], tmp->reg[i][3]);
+			i++;
+		}
+		ft_printf("\n");
+		tmp = tmp->next;
+	}
+}
+
+void print_data(t_core *core)
+{
+	ft_printf("cycle        : %7d\nlast check   : %7d\ncycle to die : %7d\n", core->cycle, core->last_check, core->die_cycle);
+}
+
+void debug_run(t_core *core)
+{
+	char *line;
+
+	ft_printf("%s\n", "Usage :\n	map  : print map\n	run -> value : run value cycle\n	reg  : print registers\n	core : print information about core programme\n	exit : exit");
+	while (1)
+	{
+		get_next_line(0, &line);
+		if (ft_strcmp(line, "exit") == 0)
+			exit (0);
+		else if (ft_strcmp(line, "run") == 0)
+		{
+			free(line);
+			get_next_line(0, &line);
+			core->dump = ft_atoi(line);
+			if (core->dump != 0)
+				run(core);
+			else
+				ft_printf("%s\n", "Incorect value");
+		}
+		else if (ft_strcmp(line, "map") == 0)
+			print_map(core);
+		else if (ft_strcmp(line, "core") == 0)
+			print_data(core);
+		else if (ft_strcmp(line, "reg") == 0)
+			print_reg(core);
+		else
+			ft_printf("%s\n", "Usage :\n	map : print map\n	run -> value : run value cycle\n	reg : print registers\n	core : print information about core programme\n	exit : exit");
+		free(line);
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	t_core	*core;
@@ -172,10 +232,14 @@ int		main(int argc, char **argv)
 	init_core(core);
 	// print_map(core);
 	if (core->visu == 0)
+	{
+		if (core->debug == 0)
   		run(core);
+		else
+			debug_run(core);
+	}
 	else
 		go_visu(core);
-	ft_printf("vache\n");
 	print_res(core);
 	return (0);
 }

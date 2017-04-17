@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:19:44 by abarriel          #+#    #+#             */
-/*   Updated: 2017/03/30 22:58:01 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/17 18:36:58 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ unsigned int get_n_arg(t_core *core, t_process *process, int arg, int mod)
   {
     i = return_good_value((((core->mem[(process->pc + 1) % MEM_SIZE]) & 192)>> 6), process);
     index = (process->pc + 2) + i;
-    printf("%02x %02x\n", core->mem[index % MEM_SIZE], core->mem[index % MEM_SIZE + 1]);
+    //printf("%02x %02x\n", core->mem[index % MEM_SIZE], core->mem[index % MEM_SIZE + 1]);
     return(return_arg(core, process, mod, index, cde));
   }
   if (arg == 3)

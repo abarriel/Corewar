@@ -6,11 +6,26 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 06:40:45 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/01 22:55:01 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/17 23:45:15 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
+int real_int(unsigned int nb)
+{
+  if (nb < 2048)
+    return (nb);
+  return (nb - 4096);
+}
+
+int uns_int(int nb)
+{
+  ft_printf("------- %d\n", nb);
+  if (nb < 0)
+    return (nb + 4096);
+  return (nb);
+}
 
 void insert_in_color(char *map, int index, unsigned char color, int len)
 {
@@ -27,7 +42,7 @@ void insert_in_color(char *map, int index, unsigned char color, int len)
 void insert_in_reg(unsigned char *reg, int index, unsigned int cpy)
 {
   // ft_printf("trois\n");
-  // ft_printf("%02x\n", reg[0]);
+  ft_printf("%d\n", index);
   reg[index] = (cpy & 0xFF000000) >> 24;
   reg[(index + 1) % MEM_SIZE] = (cpy & 0x00FF0000) >> 16;
   reg[(index + 2) % MEM_SIZE] = (cpy & 0x0000FF00) >> 8;
@@ -148,6 +163,7 @@ int exec_ld(void *core, void *pro)
   t_core *cr;
   unsigned int res;
 
+  ft_printf("%s\n", "vache");
   cr = (t_core*)core;
   pr = (t_process*)pro;
   res = get_n_arg(cr, pr, 1, 0);
@@ -185,11 +201,14 @@ int exec_ldi(void *core, void *pro)
   t_process *pr;
   t_core *cr;
   unsigned int res;
+  int add;
 
   cr = (t_core*)core;
   pr = (t_process*)pro;
-  res = chatoi(&(cr->mem[((pr->pc + (get_n_arg(cr, pr, 1, 1) % IDX_MOD) + get_n_arg(cr, pr, 2, 1)) % IDX_MOD)]));
-  ft_printf("LDI at : %08X\n", (chatoi(&(cr->mem[((pr->pc + (get_n_arg(cr, pr, 1, 1) % IDX_MOD) + get_n_arg(cr, pr, 2, 1)) % IDX_MOD)]))));
+  add = real_int(get_n_arg(cr, pr, 1, 0) % MEM_SIZE) + real_int((get_n_arg(cr, pr, 2, 0) % MEM_SIZE));
+  res = chatoi(&(cr->mem[uns_int((add % IDX_MOD) + pr->pc) % MEM_SIZE]));
+  ft_printf("stock at %d + %d", (real_int(get_n_arg(cr, pr, 1, 0) % MEM_SIZE)), get_n_arg(cr, pr, 2, 0));
+  ft_printf("LDI at : %08X\n", res);
   if (res == 0)
     pr->carry = 1;
   else
@@ -248,6 +267,7 @@ int exec_sti(void *core, void *pro)
   t_process *pr;
   t_core *cr;
   unsigned int res;
+  int add;
 
   cr = (t_core*)core;
   pr = (t_process*)pro;
@@ -259,14 +279,18 @@ int exec_sti(void *core, void *pro)
     pr->carry = 1;
   else
     pr->carry = 0;
-  insert_in_reg(cr->mem, (get_n_arg(cr, pr, 2, 1) + get_n_arg(cr, pr, 3, 1) + pr->pc) % IDX_MOD, res);
-  insert_in_color(cr->mem_c, (get_n_arg(cr, pr, 2, 1) + get_n_arg(cr, pr, 3, 1) + pr->pc) % IDX_MOD, pr->player->nb * 10 + 1, 4);
+  add = real_int(get_n_arg(cr, pr, 2, 0) % MEM_SIZE) + real_int((get_n_arg(cr, pr, 3, 0) % MEM_SIZE));
+  insert_in_reg(cr->mem, uns_int((add % IDX_MOD) + pr->pc) % MEM_SIZE, res);
+  insert_in_color(cr->mem_c, uns_int((add % IDX_MOD) + pr->pc) % MEM_SIZE, pr->player->nb * 10 + 1, 4);
 
-   ft_printf("{7}2Arg(15) =  %d\n",get_n_arg(cr, pr, 2, 1));
-   ft_printf("{7}3Arg(1) =  %d\n",get_n_arg(cr, pr, 3, 1));
-   ft_printf("{9}%d\n",(get_n_arg(cr, pr, 2, 1) + get_n_arg(cr, pr, 3, 1) + pr->pc) % IDX_MOD);
+  ft_printf("here%d\n", uns_int((add % IDX_MOD) + pr->pc) % MEM_SIZE);
+  ft_printf("{9}%d\n",(get_n_arg(cr, pr, 2, 0) % MEM_SIZE));
+  ft_printf("{9}%d\n",(get_n_arg(cr, pr, 3, 0) % MEM_SIZE));
+  ft_printf("{8}%d\n",pr->pc);
+  ft_printf("{9}%d\n",(((get_n_arg(cr, pr, 2, 0) % MEM_SIZE) + (get_n_arg(cr, pr, 3, 0) % MEM_SIZE)) + pr->pc) % MEM_SIZE);
   // exit(0);
   // ft_printf("return : %d\n", size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));
+  ft_printf("size arg: %d", size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));
 }
 

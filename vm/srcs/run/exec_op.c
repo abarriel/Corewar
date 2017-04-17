@@ -28,7 +28,7 @@ int  exec_live(void *core, void *pro)
   return (5);
 }
 
-void cp_reg(unsigned char *dest, unsigned char *src)
+unsigned char *cp_reg(unsigned char *dest, unsigned char *src)
 {
   int i;
 
@@ -38,6 +38,7 @@ void cp_reg(unsigned char *dest, unsigned char *src)
     dest[i] = src[i];
     i++;
   }
+  return (dest);
 }
 
 t_process *dup_process(t_process *pro)
@@ -57,7 +58,7 @@ t_process *dup_process(t_process *pro)
   while (i < REG_NUMBER)
   {
     new->reg[i] = (unsigned char*)malloc(REG_SIZE * sizeof(unsigned char));
-    cp_reg(new->reg[i], pro->reg[i]);
+    new->reg[i] = cp_reg(new->reg[i], pro->reg[i]);
     i++;
   }
   return (new);

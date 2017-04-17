@@ -116,6 +116,7 @@ t_core *new_core()
 	res->player = NULL;
 	res->process = NULL;
 	res->dump = -1;
+	res->debug = 0;
 	res->last_check = 0;
 	res->die_cycle = CYCLE_TO_DIE;
 	res->op = get_op();

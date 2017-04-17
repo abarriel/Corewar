@@ -199,5 +199,5 @@ void run(t_core *core)
       core->dump--;
 	}
   //if (core->dump == 0)
-    print_map(core);
+  //  print_map(core);
 }

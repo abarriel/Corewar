@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 05:41:30 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/29 10:22:01 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/17 18:54:21 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ int	ft_get_flag(t_core *c, int argc, char **argv, int i)
 		c->dump = ft_atoi(argv[i + 1]);
 		return (i + 1);
 	}
+	else if (ft_strequ(argv[i], "-debug"))
+		c->debug = 1;
 	else
 		ft_exit("Cannot find the flag");
 	return (i);
