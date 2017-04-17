@@ -108,8 +108,8 @@ int  exec_zjmp(void *core, void *pro)
   unsigned short int jmp;
 
   pr = (t_process*)pro;
-  //if (pr->carry == 0)
-  //  return (3);
+  if (pr->carry == 0)
+    return (3);
   jmp = 0;
   cor = (t_core*)core;
   jmp += (unsigned int)(cor->mem[(pr->pc + 1) % MEM_SIZE]) * 256;
