@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/30 20:11:29 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/17 18:42:17 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct			s_core
   int					cycle_sec;
   int					dump;
   char        run;
+	int					debug;
 	t_op				*op;
 }						t_core;
 
