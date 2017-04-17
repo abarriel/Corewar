@@ -112,6 +112,8 @@ void			write_op(t_asm *a, t_lab *l)
 	t_op	*op_struct;
 
 	op_struct = get_op();
+	l->bytes = 0;
+	// a->total_bytes = 0;
 	while (l)
 	{
 		handles_code(a, l->cmd, op_struct);

@@ -143,14 +143,14 @@ next_wall:
 	st		r2, 511
 	st		r2, 511
 	st		r2, 511
-	zjm	%:next_wall
+	zjmp	%:next_wall
 
 
 
-#	ld		%251883523, r2
-#	ld      %386101251, r3
-#	st		r2, 15
-#	st		r3, -1
+	ld		%251883523, r2
+	ld      %386101251, r3
+	st		r2, 15
+	st		r3, -1
 
-#	st		r2, 15
-#	st		r3, -1
+	st		r2, 15
+	st		r3, -1

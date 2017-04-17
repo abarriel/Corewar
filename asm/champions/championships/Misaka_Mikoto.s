@@ -4,32 +4,33 @@
 	She is the third ranked Level 5 esper in Academy City, and is nicknamed the Railgun due to her signature move. Kamijou Touma coined the nickname Biri-Biri (ビリビリ?) (a Japanese onomatopoeia imitating the sound of electricity) for her and whenever the two meet he usually calls her that, even after his amnesia"
 
 entry:
-	sti		r1, %:run, %1			; live :run
-	sti		r1, %:f1_a, %1			; live :f2_a
-	sti     r1, %:f1_b, %1			; live :f2_b
-	sti     r1, %:f2_a, %1			; live :f2_c
-	sti     r1, %:f2_d, %1			; live :f2_d
-
-	st      r2, :entry			; clear entry + 0
-
+	zjmp	%:f2_b 			
+	sti		r1 , %:run, %1		
+	sti		r1			, %:f1_a, %1					
+	sti     r1, %:f1_b			, %1			
+	sti     r1, %:f2_a, %1		
+	sti     r1, %:f2_d		, %1		
+	st      r2, :entry 									
+	st      r2, :entry 			
+	st      r2, :entry 				
 nothing:
 	fork	%:clear
 	add		r3, r3, r3
 	zjmp	%:loader
 
 filler:
-	zjmp	%:run
+	zjmp	%:run 		 
+	zjmp    %:run 				
+	zjmp    %:run				
 	zjmp    %:run
-	zjmp    %:run
-	zjmp    %:run
-	zjmp    %:run
+	zjmp    %:run				
 	zjmp    %:run
 
 clear:
-	live	%404
+	live	%40
 	
 	add		r3, r3, r3
-	fork	%:f0_z
+	fork	%:f0_z  
 	zjmp	%:f1_a
 
 f0_z:
@@ -43,7 +44,7 @@ f1_a:
 f1_b:
 	live	%404
 	fork	%:f1_y
-	zjmp	%:f2_b
+
 
 f1_z:
 	zjmp	%:f2_c
@@ -80,49 +81,49 @@ f2_w:
 
 
 
-f3_b:							;snipe run + 12
+f3_b:							
 	ld		%-498, r9
 	ldi     %0, %:bomb_b, r8
 	add     r3, r3, r3
 	zjmp	%:run
 
-f3_f:							;snipe before + 4
+f3_f:						
 	ld		%-504, r9
 	ldi     %0, %:bomb_b, r8
 	add     r3, r3, r3
 	zjmp	%:run
 
-f3_d:							;snipe after - 8
+f3_d:							
 	ld		%508, r9
 	ldi     %0, %:bomb_a, r8
 	add     r3, r3, r3
 	zjmp	%:run
 
-f3_c:							;snipe after
+f3_c:							
 	ld		%516, r9
 	ldi     %0, %:bomb_a, r8
 	add     r3, r3, r3
 	zjmp	%:run
 
-f3_g:							;snipe after - 4
+f3_g:							
 	ld		%512, r9
 	ldi     %0, %:bomb_a, r8
 	add     r3, r3, r3
 	zjmp	%:run
 
-f3_a:							;run + 8
+f3_a:						
 	ld		%19, r9
 	ldi     %8, %:run, r8
 	add     r3, r3, r3
 	zjmp	%:run
 
-f3_e:							;run + 0
+f3_e:						
 	ld		%11, r9
 	ldi     %0, %:run, r8
 	add     r3, r3, r3
 	zjmp	%:run
 
-f3_h:							;run + 4
+f3_h:							
 	ld		%15, r9
 	ldi     %4, %:run, r8
 	add     r3, r3, r3
@@ -135,7 +136,7 @@ run:
 	sti     r8, %:run, r9
 	sti     r8, %:run, r9
 	sti     r8, %:run, r9
-	sti     r8, %:run, r9
+	sti     r8, %:run            , r9
 	sti     r8, %:run, r9
 	sti     r8, %:run, r9
 
