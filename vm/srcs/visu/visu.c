@@ -89,7 +89,7 @@ int			ft_key_hook(int keycode, t_env *p)
 	i = 1;
 	if (keycode == ECHAP)
 		exit(1);
-	/*if (keycode == SPACE)
+	if (keycode == SPACE)
 	{
 		if (p->pause == 1)
 			p->pause = 0;
@@ -102,7 +102,7 @@ int			ft_key_hook(int keycode, t_env *p)
 	{
 		if (p->core->cycle_sec - 1 > 0)
 			p->core->cycle_sec--;
-	}*/
+	}
 	ft_loop_key_hook(p);
 	return (0);
 }
