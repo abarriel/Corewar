@@ -37,12 +37,13 @@ tools/messages_error.c \
 tools/messages_error_.c \
 \
 fun/bonus.c \
+fun/bonus_.c \
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
 INCLUDES = ../includes/asm.h ../includes/op.h
 
-ALL_FLAGS = -Wall -Wextra
+ALL_FLAGS = -Wall -Wextra -Werror
 CFLAGS	=  $(ALL_FLAGS) -I../includes/ -I../libft/includes/
 
 all:  makefile libft  $(INCLUDES) $(NAME)

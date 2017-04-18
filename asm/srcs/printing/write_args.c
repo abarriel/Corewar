@@ -35,7 +35,7 @@ static void		write_c(t_cmd *c, t_op op_t)
 
 static void		write_arg_(t_cmd *c, t_op op_t, int index)
 {
-	char *tmp; 
+	char *tmp;
 
 	if (c->typs[index] & T_DIR)
 	{

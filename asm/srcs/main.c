@@ -36,21 +36,22 @@ int		main(int av, char **ac)
 	t_lab		*l;
 
 	l = NULL;
-	while(1)
-		;
 	a = init_asm();
 	h = init_header();
 	if (av != 2)
 		ft_exit("Usage: ./asm <champion.s>");
 	get_info_asm(ac[1], a);
+
 	header_champ(a, h);
+		while(1)
+		;
 	l = get_label(a);
 	check_operation(a, l);
 	write_op(a, l);
 	write_label(l);
 	h->prog_size = a->total_bytes;
 	close(a->fd_champ);
- final_write(a, h, l);
+	final_write(a, h, l);
 	bonus(a, l, h);
 	return (0);
 }

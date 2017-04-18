@@ -46,7 +46,7 @@ static void		f_write_cmd(t_asm *a, t_cmd *c, t_op op_t)
 	}
 }
 
-static void		final_write_(t_asm *a, t_header *h, t_cmd *cmd)
+static void		final_write_(t_asm *a, t_cmd *cmd)
 {
 	while (cmd)
 	{
@@ -64,7 +64,7 @@ void			final_write(t_asm *a, t_header *h, t_lab *l)
 	write(a->fd_cor, h, sizeof(t_header));
 	while (l)
 	{
-		final_write_(a, h, l->cmd);
+		final_write_(a, l->cmd);
 		l = l->next;
 	}
 	close(a->fd_cor);

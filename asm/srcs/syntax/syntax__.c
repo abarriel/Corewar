@@ -39,7 +39,7 @@ void	handles_space(char **s, t_cmd *c)
 int		handles_ind_dir(char *arg, short type)
 {
 	int		i;
-	size_t	len;
+	int		len;
 
 	i = -1;
 	if (*arg == '-' && *(arg) + 1 != '\0')
@@ -55,6 +55,7 @@ int		handles_ind_dir(char *arg, short type)
 		return (T_DIR);
 	if (type == 2)
 		return (T_IND);
+	return (0);
 }
 
 int		handles_dir(t_asm *a, char *arg, t_cmd *c)
