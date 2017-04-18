@@ -36,6 +36,8 @@ int		main(int av, char **ac)
 	t_lab		*l;
 
 	l = NULL;
+	while(1)
+		;
 	a = init_asm();
 	h = init_header();
 	if (av != 2)

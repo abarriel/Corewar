@@ -13,7 +13,7 @@
 #include "asm.h"
 
 /*
-** ERREYR DOIVE ETRE CHANGER CAR ISNTRUCTION PEUT ETRE ALBEL
+** ERREUR DOIVE ETRE CHANGER CAR ISNTRUCTION PEUT ETRE ALBEL
 */
 
 void	no_label_error(char *arg, char *str, int line, int character)

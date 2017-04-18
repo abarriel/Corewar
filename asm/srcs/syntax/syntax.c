@@ -45,9 +45,6 @@ void	handles_instructions(t_cmd *c)
 	while ((char)index != g_op[c->nb_struct].nbr_args)
 	{
 		skip_space(&args[index]);
-	// ft_printf("============%d===============\\\\",sizeof(c->type[index]));
-		// ft_printf("{9}[%s]\n",args[index]);
-		
 		c->type[index] = args[index];
 		index++;
 	}
@@ -58,7 +55,6 @@ void	handles_cmd_name(t_asm *a, t_cmd *c, int count_line)
 	int	i;
 
 	i = 0;
-	// ft_printf("OK");
 	while (c)
 	{
 		if ((c->nb_struct = cmp_struct_op(c->op)) <= -1)
@@ -72,7 +68,6 @@ void	handles_cmd_name(t_asm *a, t_cmd *c, int count_line)
 		i++;
 		c = c->next;
 	}
-	// ft_printf("SORTI");
 }
 
 void	handles_op(t_asm *a, t_lab *l)
@@ -87,5 +82,4 @@ void	handles_op(t_asm *a, t_lab *l)
 void	check_operation(t_asm *a, t_lab *l)
 {
 	handles_op(a, l);
-		// exit(1);
 }
