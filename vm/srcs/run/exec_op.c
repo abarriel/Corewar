@@ -152,7 +152,7 @@ void exec_op(t_core *core, t_process *pro)
   else
   {
     core->mem_c[pro->pc] = pro->player->nb;
-    pro->pc += exec;
+    pro->pc = (pro->pc + exec) % MEM_SIZE;
   }
 //  print_map(core);
 
