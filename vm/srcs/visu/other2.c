@@ -12,7 +12,36 @@
 
 #include "vm.h"
 
-void		check_button_hit2(int button, int x, int y, t_env *p)
+void			print_nb_live(t_env *p)
+{
+	char		*str;
+	t_player	*tmp;
+	int			i;
+
+	i = -1;
+	tmp = p->core->player;
+	str = ft_itoa(p->core->player->nb_live);
+	while (++i < 4)
+	{
+		if (i == 0 || i == 1)
+			mlx_string_put(p->mlx, p->win, 1350, 750 + (200 * i), 0x0e74c3c,
+				str);
+		if (i == 2)
+			mlx_string_put(p->mlx, p->win, 1700, 750, 0x03498db, str);
+		if (i == 3)
+			mlx_string_put(p->mlx, p->win, 1700, 950, 0x0f1c40f, str);
+		if (p->core->player->next == NULL)
+			str = "";
+		else
+		{
+			p->core->player = p->core->player->next;
+			str = ft_itoa(p->core->player->nb_live);
+		}
+	}
+	p->core->player = tmp;
+}
+
+void			check_button_hit2(int button, int x, int y, t_env *p)
 {
 	if (button == 1)
 	{
