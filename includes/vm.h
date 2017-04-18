@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/17 18:42:17 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/19 00:12:08 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ typedef struct		s_op
 	int				l_size;
 	int				(*f)(void*, void*);
 }					t_op;
+extern t_op g_op[17];
 
 typedef struct			s_player
 {
+	int								color;
   unsigned int      magic;
   char				      *name;
   size_t		      	weight;

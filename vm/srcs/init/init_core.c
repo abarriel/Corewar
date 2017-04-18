@@ -1,8 +1,6 @@
 #include "vm.h"
 
-void		init_op(void **res)
-{
-	static const t_op op[] = {{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0, &exec_live},
+t_op g_op[17] = {{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0, &exec_live},
 		{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0, &exec_ld},
 		{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0, &exec_st},
 		{"add", 3, {T_REG, T_REG, T_REG}, 4, 10, "addition", 1, 0, &exec_add},
@@ -19,20 +17,6 @@ void		init_op(void **res)
 		{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1, &exec_lfork},
 		{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0, &exec_aff},
 		{0, 0, {0}, 0, 0, 0, 0, 0, NULL}};
-
-	*res = (void*)op;
-}
-
-t_op		*get_op(void)
-{
-	void **get_op;
-	t_op *res;
-
-	*get_op = NULL;
-	init_op(get_op);
-	res = (t_op*)*get_op;
-	return (res);
-}
 
 t_process *init_process(t_player *players, int nb_player, int i)
 {
@@ -96,9 +80,10 @@ void  init_core(t_core *core)
 	while (tmp_p)
 	{
 		ft_memcpy(&core->mem[tmp_r->pc], tmp_p->prog, tmp_p->weight);
-		ft_memset(&core->mem_c[tmp_r->pc], i, tmp_p->weight);
+		ft_memset(&core->mem_c[tmp_r->pc], i * 16, tmp_p->weight);
 		//ft_bzero(&core->mem_c[tmp_r->pc + tmp_p->weight], 10);
-		core->mem_c[tmp_r->pc] = 10 * i;
+		core->mem_c[tmp_r->pc] = 16 * i + 1;
+		tmp_p->color = i;
 		tmp_p = tmp_p->next;
 		tmp_r = tmp_r->next;
 		i++;
@@ -119,7 +104,7 @@ t_core *new_core()
 	res->debug = 0;
 	res->last_check = 0;
 	res->die_cycle = CYCLE_TO_DIE;
-	res->op = get_op();
+	res->op = g_op;
 	res->visu = 0;
 	res->cycle = 0;
 	res->run = 1;

@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:29:02 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/17 21:09:35 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/18 23:47:11 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,55 @@ void print_reg(t_core *core)
 	}
 }
 
+void print_color(t_core *core)
+{
+	char *map = core->mem_c;
+	char *color = core->mem_c;
+	int i = 0;
+	int j = 0;
+	int magic = 0;
+
+	ft_printf("Map: \n");
+	ft_printf("       00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63\n");
+	ft_printf("       -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --\n");
+
+	while (i < MEM_SIZE)
+	{
+		ft_printf("%4d | ", i);
+		while (j < 64)
+		{
+			if (color[i] == 0x10)
+				ft_printf("{1}%.2x", map[i]);
+			else if (color[i] == 0x20)
+				ft_printf("{2}%.2x", map[i]);
+			else if (color[i] == 0x21)
+				ft_printf("\033[4;1;32m%.2x", map[i]);
+			else if (color[i] == 0x30)
+				ft_printf("{3}%.2x", map[i]);
+			else if (color[i] == 0x31)
+				ft_printf("\033[4;1;33m%.2x", map[i]);
+			else if (color[i] == 0x40)
+				ft_printf("{4}%.2x", map[i]);
+			else if (color[i] == 0x41)
+				ft_printf("\033[4;1;34m%.2x", map[i]);
+			else if (color[i] == 0x11)
+				ft_printf("\033[4;1;31m%.2x", map[i]);
+			else if (color[i] == 0x12)
+				ft_printf("{8}%.2x", map[i]);
+			else if (color[i] == 0x22)
+				ft_printf("{9}%.2x", map[i]);
+			else
+				ft_printf("%.2x", map[i]);
+			ft_printf("\033[0m ");
+			j++;
+			i++;
+		}
+		j = 0;
+		ft_printf("\n");
+	}
+	ft_printf("\n");
+}
+
 void print_data(t_core *core)
 {
 	ft_printf("cycle        : %7d\nlast check   : %7d\ncycle to die : %7d\n", core->cycle, core->last_check, core->die_cycle);
@@ -212,6 +261,8 @@ void debug_run(t_core *core)
 		}
 		else if (ft_strcmp(line, "map") == 0)
 			print_map(core);
+		else if (ft_strcmp(line, "color") == 0)
+			print_color(core);
 		else if (ft_strcmp(line, "core") == 0)
 			print_data(core);
 		else if (ft_strcmp(line, "reg") == 0)
