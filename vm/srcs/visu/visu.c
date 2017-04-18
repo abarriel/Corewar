@@ -36,10 +36,18 @@ void		check_button_hit(int button, int x, int y, t_env *p)
 	check_button_hit2(button, x, y, p);
 }
 
+void my_delay(int i)  
+{
+    clock_t start,end;
+    start=clock();
+    while(((end=clock())-start)<=((i*CLOCKS_PER_SEC)/1000));
+}
+
 static int	ft_loop_key_hook(t_env *p)
 {
 	char	*str;
 	int		cycle_sec_tmp;
+	struct timeval tv;
 
 	cycle_sec_tmp = p->core->cycle_sec;
 	mlx_destroy_image(p->mlx, p->img);

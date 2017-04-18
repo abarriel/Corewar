@@ -14,6 +14,8 @@
 # define VM_H
 # include "libft.h"
 # include "op.h"
+#include <sys/time.h>
+#include <time.h>
 # include "mlx/mlx.h"
 # define WIDTH 2000
 # define HEIGHT 1250

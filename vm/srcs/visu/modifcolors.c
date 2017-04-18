@@ -15,11 +15,11 @@
 void			chose_color_case(t_env *p, int i3)
 {
 	ft_modif_color(35, 35, 35, p);
-	if (p->core->mem_c[i3] == 1 || p->core->mem_c[i3] == 10)
+	if (p->core->mem_c[i3] == 2 || p->core->mem_c[i3] == 20)
 		ft_modif_color(60, 76, 231, p);
 	else if (p->core->mem_c[i3] == 11)
 		ft_modif_color(50, 66, 195, p);
-	else if (p->core->mem_c[i3] == 2 || p->core->mem_c[i3] == 20)
+	else if (p->core->mem_c[i3] == 1 || p->core->mem_c[i3] == 10)
 		ft_modif_color(113, 204, 46, p);
 	else if (p->core->mem_c[i3] == 21)
 		ft_modif_color(83, 164, 36, p);
@@ -30,7 +30,7 @@ void			chose_color_case(t_env *p, int i3)
 	else if (p->core->mem_c[i3] == 4 || p->core->mem_c[i3] == 40)
 		ft_modif_color(15, 193, 241, p);
 	else if (p->core->mem_c[i3] == 41)
-		ft_modif_color(15, 193, 241, p);
+		ft_modif_color(15, 173, 201, p);
 }
 
 void			modif_color_for_player(t_env *p, int i)
