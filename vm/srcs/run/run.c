@@ -80,13 +80,14 @@ void exec(t_core *core)
       exec_op(core, pro);
       // print_map(core);
       // ft_printf("\n");
-      core->mem_c[pro->pc] = pro->player->nb * 10;
+
+      core->mem_c[pro->pc] = pro->player->color * 16 + 1;
       pro->op = NULL;
       //pro = moove_last(core, pro);
     }
     else
     {
-      core->mem_c[pro->pc] = pro->player->nb * 10;
+      core->mem_c[pro->pc] = pro->player->color * 16 + 1;
       pro = pro->next;
     }
   }
@@ -154,6 +155,25 @@ void check_proces(t_process **pro)
   }
 }
 
+void upd_color_die(t_core *core)
+{
+    char *map;
+    int i;
+
+    map = core->mem_c;
+    i = 0;
+    while (i < MEM_SIZE)
+    {
+      ft_printf("before : %d ->", map[i]);
+      if (map[i] % 16 == 2)
+        map[i] -= 2;
+      if (map[i] % 16 == 4)
+        map[i] -= 4;
+      ft_printf("after : %d", map[i]);
+      i++;
+    }
+}
+
 void die_check(t_core *core)
 {
   static int nb_check = 0;
@@ -169,6 +189,7 @@ void die_check(t_core *core)
     }
     check_proces(&core->process);
     core->last_check = core->cycle;
+    upd_color_die(core);
   }
 }
 

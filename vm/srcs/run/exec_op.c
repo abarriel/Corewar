@@ -24,6 +24,12 @@ int  exec_live(void *core, void *pro)
   {
     pla->nb_live ++;
     pla->last_live = cor->cycle;
+    i = 0;
+    while (i < 4)
+    {
+      cor->mem_c[(pr->pc + i + 1) % MEM_SIZE] = pla->color * 16 + 4;
+      i++;
+    }
   }
   return (5);
 }
@@ -77,7 +83,7 @@ int  exec_lfork(void *core, void *pro)
   jmp += (unsigned int)(cor->mem[(pr->pc + 1) % MEM_SIZE]) * 256;
   jmp += (unsigned int)(cor->mem[(pr->pc + 2) % MEM_SIZE]);
   new->pc = (new->pc + (jmp % MEM_SIZE)) % MEM_SIZE;
-  cor->mem_c[new->pc] = 16 * new->player->nb + 1;
+  cor->mem_c[new->pc] = 16 * new->player->color + 1;
   new->next = cor->process;
   cor->process = new;
   return (3);
@@ -96,7 +102,7 @@ int  exec_fork(void *core, void *pro)
   jmp += (unsigned int)(cor->mem[(pr->pc + 1) % MEM_SIZE]) * 256;
   jmp += (unsigned int)(cor->mem[(pr->pc + 2) % MEM_SIZE]);
   new->pc = (new->pc + (((short int)jmp % MEM_SIZE) % IDX_MOD)) % MEM_SIZE;
-  cor->mem_c[new->pc] = 16 * new->player->nb + 1;
+  cor->mem_c[new->pc] = 16 * new->player->color + 1;
   new->next = cor->process;
   cor->process = new;
   return (3);
@@ -115,7 +121,7 @@ int  exec_zjmp(void *core, void *pro)
   cor = (t_core*)core;
   jmp += (unsigned int)(cor->mem[(pr->pc + 1) % MEM_SIZE]) * 256;
   jmp += (unsigned int)(cor->mem[(pr->pc + 2) % MEM_SIZE]);
-  cor->mem_c[pr->pc] = pr->player->nb * 16;
+  cor->mem_c[pr->pc] = pr->player->color * 16;
   pr->pc = (pr->pc + (jmp % MEM_SIZE)) % MEM_SIZE;
   return (0);
 }
@@ -141,7 +147,7 @@ void exec_op(t_core *core, t_process *pro)
     exec = 1;
   if (exec == -1)
   {
-    core->mem_c[pro->pc] -= 1;
+    core->mem_c[pro->pc] = pro->player->color * 16;
     if (pro->op->cde_oct == 1)
       pro->pc = (pro->pc + size_args(core->mem[(pro->pc + 1) % MEM_SIZE], 4 - 2 * pro->op->l_size)) % MEM_SIZE;
     else
@@ -149,7 +155,7 @@ void exec_op(t_core *core, t_process *pro)
   }
   else
   {
-    core->mem_c[pro->pc] = pro->player->nb * 16 + 1;
+    core->mem_c[pro->pc] = pro->player->color * 16;
     pro->pc = (pro->pc + exec) % MEM_SIZE;
   }
 //  print_map(core);

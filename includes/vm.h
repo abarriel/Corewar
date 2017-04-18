@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/19 00:12:08 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/19 01:35:54 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ t_core					*new_core();
 void					init_core(t_core *core);
 t_core					*parcing(int argc, char **argv, t_core *c);
 void        print_player(t_core *core);
+void        print_color(t_core *core);
 void        print_winner(t_player *p);
 //visu
 void        print_nb_live(t_env *p);
