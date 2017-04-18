@@ -161,10 +161,12 @@ t_core					*parcing(int argc, char **argv, t_core *c);
 t_core					*new_core();
 void					init_core(t_core *core);
 t_core					*parcing(int argc, char **argv, t_core *c);
-void  print_player(t_core *core);
-void  print_winner(t_player *p);
+void        print_player(t_core *core);
+void        print_winner(t_player *p);
 //visu
 
+void        modif_color_for_player(t_env *p, int i);
+void        chose_color_case(t_env *p, int i3);
 int         go_visu(t_core *core);
 void        print_nb_live(t_env *p);
 void        print_player_name(t_env *p);

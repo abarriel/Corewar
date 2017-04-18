@@ -13,7 +13,7 @@
 NAME	= vm
 
 SRC		= vm.c messages.c parcing_entry.c tools.c \
-			init/init_core.c run/run.c run/exec_op.c visu/aff.c visu/draw.c \
+			init/init_core.c run/run.c run/exec_op.c visu/aff.c visu/modifcolors.c visu/draw.c \
 		 visu/visu.c visu/other.c visu/other2.c visu/print.c \
 		 run/checker.c run/exec_op_.c run/get_n_arg.c
 

@@ -77,27 +77,23 @@ void		ft_draw_title(t_env *p)
 void		ft_draw_button(t_env *p)
 {
 	ft_modif_color(25, 25, 25, p);
-	ft_draw_square((HEIGHT) + 20,(HEIGHT) - 135 , 100, p);
+	ft_draw_square((HEIGHT) + 20, (HEIGHT) - 135, 100, p);
 	ft_modif_color(35, 35, 35, p);
-	ft_draw_square(p->but->btn1_px, p->but->btn1_py , p->but->btn1_s, p);
-
+	ft_draw_square(p->but->btn1_px, p->but->btn1_py, p->but->btn1_s, p);
 	ft_modif_color(25, 25, 25, p);
-	ft_draw_square((HEIGHT) + 170,(HEIGHT) - 135 , 100, p);
+	ft_draw_square((HEIGHT) + 170, (HEIGHT) - 135, 100, p);
 	ft_modif_color(35, 35, 35, p);
 	ft_draw_square(p->but->btn2_px, p->but->btn2_py, p->but->btn2_s, p);
-
 	ft_modif_color(25, 25, 25, p);
-	ft_draw_square((HEIGHT) + 320,(HEIGHT) - 135 , 100, p);
+	ft_draw_square((HEIGHT) + 320, (HEIGHT) - 135, 100, p);
 	ft_modif_color(35, 35, 35, p);
 	ft_draw_square(p->but->btn3_px, p->but->btn3_py, p->but->btn3_s, p);
-
 	ft_modif_color(25, 25, 25, p);
-	ft_draw_square((HEIGHT) + 470,(HEIGHT) - 135 , 100, p);
+	ft_draw_square((HEIGHT) + 470, (HEIGHT) - 135, 100, p);
 	ft_modif_color(35, 35, 35, p);
 	ft_draw_square(p->but->btn4_px, p->but->btn4_py, p->but->btn4_s, p);
-
 	ft_modif_color(25, 25, 25, p);
-	ft_draw_square((HEIGHT) + 620,(HEIGHT) - 135 , 100, p);
+	ft_draw_square((HEIGHT) + 620, (HEIGHT) - 135, 100, p);
 	ft_modif_color(35, 35, 35, p);
 	ft_draw_square(p->but->btn5_px, p->but->btn5_py, p->but->btn5_s, p);
 }
@@ -133,6 +129,7 @@ void		ft_draw(t_env *p)
 	ft_draw_background(p);
 	ft_draw_arena(p);
 	ft_draw_menu(p);
+	ft_modif_color(20, 20, 20, p);
 	ft_draw_score(p);
 	ft_draw_title(p);
 	ft_draw_player_info(p);

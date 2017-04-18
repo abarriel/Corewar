@@ -12,24 +12,10 @@
 
 #include "vm.h"
 
-void		check_button_hit(int button, int x, int y, t_env *p)
+void		check_button_hit2(int button, int x, int y, t_env *p)
 {
 	if (button == 1)
 	{
-		if ((x <= (HEIGHT) + 105) && (x >= (HEIGHT) + 35) && (y <= (HEIGHT) - 50) && (y >= (HEIGHT) - 120))
-		{
-			p->but->btn1_s = 80;
-			p->but->btn1_px = (HEIGHT) + 30;
-			p->but->btn1_py = (HEIGHT) - 125;
-			p->pause = 0;
-		}
-		if ((x <= (HEIGHT) + 265) && (x >= (HEIGHT) + 185) && (y <= (HEIGHT) - 50) && (y >= (HEIGHT) - 120))
-		{
-			p->but->btn2_s = 80;
-			p->but->btn2_px = (HEIGHT) + 180;
-			p->but->btn2_py = (HEIGHT) - 125;
-			p->pause = 1;
-		}
 		if ((x <= (HEIGHT) + 405) && (x >= (HEIGHT) + 335) && (y <= (HEIGHT) - 50) && (y >= (HEIGHT) - 120))
 		{
 			p->but->btn3_s = 80;
@@ -53,6 +39,29 @@ void		check_button_hit(int button, int x, int y, t_env *p)
 			p->cycle_count = 1;
 		}
 	}
+}
+
+void		check_button_hit(int button, int x, int y, t_env *p)
+{
+	if (button == 1)
+	{
+		if ((x <= (HEIGHT) + 105) && (x >= (HEIGHT) + 35) && (y <= (HEIGHT) - 50) && (y >= (HEIGHT) - 120))
+		{
+			p->but->btn1_s = 80;
+			p->but->btn1_px = (HEIGHT) + 30;
+			p->but->btn1_py = (HEIGHT) - 125;
+			p->pause = 0;
+		}
+		if ((x <= (HEIGHT) + 265) && (x >= (HEIGHT) + 185) && (y <= (HEIGHT) - 50) && (y >= (HEIGHT) - 120))
+		{
+			p->but->btn2_s = 80;
+			p->but->btn2_px = (HEIGHT) + 180;
+			p->but->btn2_py = (HEIGHT) - 125;
+			p->pause = 1;
+		}
+		
+	}
+	check_button_hit2(button,x,y,p);
 }
 
 static int	ft_loop_key_hook(t_env *p)
