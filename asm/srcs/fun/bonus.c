@@ -118,7 +118,7 @@ void	bonus(t_asm *a, t_lab *l, t_header *h)
 		exit(0);
 	}
 	size = swap_uint(a->total_bytes);
-	ft_printf("Dumping annotated program on standar output\n");
+	ft_putstr("Dumping annotated program on standar output\n");
 	ft_printf("{6}Programme size : %d bytes\n", size);
 	ft_printf("{1}Name :\"%s\"\n", h->prog_name);
 	ft_printf("{1}Comment :\"%s\"\n\n", h->comment);

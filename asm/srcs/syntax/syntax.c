@@ -37,6 +37,8 @@ void	handles_instructions(t_cmd *c)
 
 	index = 0;
 	args = ft_strsplit(c->args, SEPARATOR_CHAR);
+	free(c->args);
+	free(args);
 	while (args[index])
 		index++;
 	if ((char)index != g_op[c->nb_struct].nbr_args)
@@ -75,8 +77,11 @@ void	handles_op(t_asm *a, t_lab *l)
 	while (l)
 	{
 		handles_cmd_name(a, l->cmd, l->count_line);
+
 		l = l->next;
 	}
+	// while(1)
+	// 		;
 }
 
 void	check_operation(t_asm *a, t_lab *l)

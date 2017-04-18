@@ -43,7 +43,7 @@ OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
 INCLUDES = ../includes/asm.h ../includes/op.h
 
-ALL_FLAGS = -Wall -Wextra -Werror
+ALL_FLAGS = -Wall -Wextra  -g
 CFLAGS	=  $(ALL_FLAGS) -I../includes/ -I../libft/includes/
 
 all:  makefile libft  $(INCLUDES) $(NAME)
