@@ -14,10 +14,15 @@
 # define VM_H
 # include "libft.h"
 # include "op.h"
+#include <sys/time.h>
+#include <time.h>
 # include "mlx/mlx.h"
 # define WIDTH 2000
 # define HEIGHT 1250
 # define ECHAP  53
+# define SPACE 49
+# define LEFT 123
+# define RIGHT 124
 # define MAP_SIZE_X 64
 # define MAP_SIZE_Y 64
 # define CYC_SEC_ST 50
@@ -158,10 +163,17 @@ t_core					*parcing(int argc, char **argv, t_core *c);
 t_core					*new_core();
 void					init_core(t_core *core);
 t_core					*parcing(int argc, char **argv, t_core *c);
-void  print_player(t_core *core);
-void  print_winner(t_player *p);
+void        print_player(t_core *core);
+void        print_winner(t_player *p);
 //visu
-
+void        print_nb_live(t_env *p);
+void        check_button_hit2(int button, int x, int y, t_env *p);
+void        ft_draw_rectangle(int start_x, int start_y, t_env *p);
+void        ft_draw_square(int start_x, int start_y, int size, t_env *p);
+void        ft_draw_score(t_env *p);
+void        ft_draw_map(t_env *p);
+void        modif_color_for_player(t_env *p, int i);
+void        chose_color_case(t_env *p, int i3);
 int         go_visu(t_core *core);
 void        print_nb_live(t_env *p);
 void        print_player_name(t_env *p);

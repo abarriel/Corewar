@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 06:22:52 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/17 23:59:21 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/18 03:22:52 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int checker_arg(t_core *core, t_process *pro)
 	int pc;
 
 	pc = pro->pc;
-  ft_printf("-------------------------->     {8}%02x- ",core->mem[(pro->pc) % MEM_SIZE]);
+  //ft_printf("-------------------------->     {8}%02x- ",core->mem[(pro->pc) % MEM_SIZE]);
   if (pro->op->cde_oct == 1)
   {
     if(!(check_cde_oct(core, pro)))
