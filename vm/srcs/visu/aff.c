@@ -77,6 +77,7 @@ void		ft_draw(t_env *p)
 	ft_draw_background(p);
 	ft_draw_arena(p);
 	ft_draw_menu(p);
+	p->h = 20;
 	ft_draw_score(p);
 	ft_draw_title(p);
 	ft_draw_player_info(p);

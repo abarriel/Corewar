@@ -12,11 +12,11 @@
 
 #include "vm.h"
 
-void		ft_draw_rectangle(int start_x, int start_y, t_env *p)
+void			ft_draw_rectangle(int start_x, int start_y, t_env *p)
 {
-	int		i;
-	int		i2;
-	int		t;
+	int			i;
+	int			i2;
+	int			t;
 
 	i2 = 0;
 	t = 0;
@@ -36,11 +36,11 @@ void		ft_draw_rectangle(int start_x, int start_y, t_env *p)
 	}
 }
 
-void		ft_draw_square(int start_x, int start_y, int size, t_env *p)
+void			ft_draw_square(int start_x, int start_y, int size, t_env *p)
 {
-	int		i;
-	int		i2;
-	int		tmp;
+	int			i;
+	int			i2;
+	int			tmp;
 
 	i2 = 0;
 	tmp = 0;
@@ -111,7 +111,6 @@ void			ft_draw_score(t_env *p)
 		else if (p->core->player->nb_live == 0 && (i2[i / 50]) > 0)
 			(i2[i / 50])--;
 		p->l = WIDTH - (HEIGHT) - 150;
-		p->h = 20;
 		ft_modif_color(20, 20, 20, p);
 		ft_draw_rectangle((HEIGHT + 100), 270 + i, p);
 		modif_color_for_player(p, i);

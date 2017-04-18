@@ -164,7 +164,7 @@ t_core					*parcing(int argc, char **argv, t_core *c);
 void        print_player(t_core *core);
 void        print_winner(t_player *p);
 //visu
-
+void        check_button_hit2(int button, int x, int y, t_env *p);
 void        ft_draw_rectangle(int start_x, int start_y, t_env *p);
 void        ft_draw_square(int start_x, int start_y, int size, t_env *p);
 void        ft_draw_score(t_env *p);
