@@ -165,6 +165,8 @@ void        print_player(t_core *core);
 void        print_winner(t_player *p);
 //visu
 
+void        ft_draw_score(t_env *p);
+void        ft_draw_map(t_env *p);
 void        modif_color_for_player(t_env *p, int i);
 void        chose_color_case(t_env *p, int i3);
 int         go_visu(t_core *core);
