@@ -36,7 +36,7 @@ void	put_color(int fd, char color_nfun)
 
 void	color_fun__(t_stock *s)
 {
-	char *tmp;
+	// char *tmp;
 
 	if (ft_strncmp(s->str, "{6}", 3) == 0)
 		s->color_nfun = 6;
@@ -48,14 +48,16 @@ void	color_fun__(t_stock *s)
 		s->color_nfun = 9;
 	if (s->color_nfun > 0)
 	{
-		tmp = s->str;
-		s->str = ft_strsub(tmp, 3, ft_strlen(s->str) - 3);
+		// 	tmp = ft_strdup(s->str);
+		// free(s->str);
+		// s->str = ft_strsub(tmp, 3, ft_strlen(tmp) -3);
+		// free(tmp);
 	}
 }
 
 void	color_fun_(t_stock *s)
 {
-	char *tmp;
+	// char *tmp;
 
 	if (ft_strncmp(s->str, "{1}", 3) == 0)
 		s->color_nfun = 1;
@@ -74,14 +76,16 @@ void	color_fun_(t_stock *s)
 	}
 	if (s->color_nfun > 0)
 	{
-		tmp = s->str;
-		s->str = ft_strsub(tmp, 3, ft_strlen(s->str) - 3);
+		// 	tmp = ft_strdup(s->str);
+		// free(s->str);
+		// s->str = ft_strsub(tmp, 3, ft_strlen(tmp) -3);
+		// free(tmp);
 	}
 }
 
 void	color_fun(t_stock *s)
 {
-	char *tmp;
+	// char *tmp;
 
 	if (ft_strncmp(s->str, "{RED}", 5) == 0)
 		s->color_nfun = 1;
@@ -100,7 +104,9 @@ void	color_fun(t_stock *s)
 	}
 	if (s->color_nfun > 0)
 	{
-		tmp = s->str;
-		s->str = ft_strsub(tmp, 5, ft_strlen(s->str) - 5);
+		// tmp = ft_strdup(s->str);
+		// free(s->str);
+		// s->str = ft_strsub(tmp, 5, ft_strlen(tmp) - 5);
+		// free(tmp);
 	}
 }

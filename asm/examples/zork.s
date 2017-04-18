@@ -1,18 +1,6 @@
-.name "zo
-
-
-
-rk"
+.name   "zork"
 # !
-.comment "I'M ALI
-
-
-
-
-
-
-
-IIIVE"
+.comment "I'M ALIIIIVE"
 
 
 

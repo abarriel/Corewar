@@ -40,13 +40,6 @@ int		check_label_name(char *s)
 	return (0);
 }
 
-int		check_first(char c)
-{
-	if (!ft_strchr(LABEL_CHARS, c))
-		return (1);
-	return (0);
-}
-
 void	handles_comment(char **s)
 {
 	char	*tmp;
@@ -63,6 +56,29 @@ void	handles_comment(char **s)
 	ft_bzero((*s) + i, len);
 }
 
+int		check_label_(char *s, t_lab *lab, t_asm *a, int len)
+{
+	int	i;
+
+	i = 0;
+	if ((i = check_label_name(s)) || *s == ':')
+		lexical_error(a->count_line, i + a->len_line);
+	if (len == 0 && *s != ':')
+	{
+		if (*s == '\0')
+			return (0);
+		get_cmd(lab, s);
+		return (0);
+	}
+	if ((s[len - 1] == DIRECT_CHAR || ft_strchr(SP, s[len - 1]))
+		&& ft_strchr(LABEL_CHARS, s[len + 1]))
+	{
+		get_cmd(lab, s);
+		return (0);
+	}
+	return (1);
+}
+
 void	check_label(char *s, t_lab *lab, t_asm *a)
 {
 	int		i;
@@ -71,8 +87,6 @@ void	check_label(char *s, t_lab *lab, t_asm *a)
 
 	i = 0;
 	name = NULL;
-	lab->colon = a->count_line;
-	lab->line = ft_strlen(s);
 	a->len_line = skip_space(&s);
 	if (*s == COMMENT_CHAR)
 		return ;
@@ -80,17 +94,8 @@ void	check_label(char *s, t_lab *lab, t_asm *a)
 	if (check_first(*s))
 		return (lexical_error(a->count_line, 1));
 	handles_comment(&s);
-	if ((i = check_label_name(s)) || *s == ':')
-		return (lexical_error(a->count_line, i + a->len_line));
-	if (len == 0 && *s != ':')
-	{
-		if (*s == '\0')
-			return ;
-		return (get_cmd(lab, s));
-	}
-	if ((s[len - 1] == DIRECT_CHAR || ft_strchr(SP, s[len - 1]))
-		&& ft_strchr(LABEL_CHARS, s[len + 1]))
-		return (get_cmd(lab, s));
+	if (check_label_(s, lab, a, len) == 0)
+		return ;
 	name = ft_strndup(s, len);
 	add_back_lab(&lab, name, a);
 	a->nb_label++;
@@ -106,11 +111,15 @@ t_lab	*get_label(t_asm *a)
 	t_lab	*lab;
 
 	lab = NULL;
-	add_back_lab(&lab, "@@", a);
+	add_back_lab(&lab, "No@Label", a);
 	while (get_next_line(a->fd_champ, &line) > 0)
 	{
 		if (*line != COMMENT_CHAR && *line != '\0')
+		{
+			lab->colon = a->count_line;
+			lab->line = ft_strlen(line);
 			check_label(line, lab, a);
+		}
 		a->count_line++;
 		free(line);
 	}

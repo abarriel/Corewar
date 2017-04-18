@@ -33,6 +33,34 @@ static void		write_c(t_cmd *c, t_op op_t)
 	}
 }
 
+static void		write_arg_(t_cmd *c, t_op op_t, int index)
+{
+	char *tmp;
+
+	if (c->typs[index] & T_DIR)
+	{
+		tmp = (c->type[index] + 1);
+		if ((!op_t.idk && op_t.idk1) || (op_t.idk & op_t.idk1))
+		{
+			c->d2[index] = ft_atoi(tmp);
+			c->d2[index] = swap_usint(c->d2[index]);
+			c->bytes += sizeof(c->d2[index]);
+		}
+		else
+		{
+			c->d4[index] = ft_atoi(tmp);
+			c->d4[index] = swap_uint(c->d4[index]);
+			c->bytes += sizeof(c->d4[index]);
+		}
+	}
+	if (c->typs[index] & T_IND)
+	{
+		c->ind[index] = ft_atoi(c->type[index]);
+		c->ind[index] = swap_usint(c->ind[index]);
+		c->bytes += sizeof(c->ind[index]);
+	}
+}
+
 static void		write_arg(t_cmd *c, t_op op_t)
 {
 	char	*tmp;
@@ -47,35 +75,9 @@ static void		write_arg(t_cmd *c, t_op op_t)
 			tmp = (c->type[index] + 1);
 			get_reg = ft_atoi(tmp);
 			c->r[index] = get_reg;
-			// ft_dprintf(2, "{RED}[%s;]{%p}-", c->type[index], c->r[index]);
 			c->bytes += sizeof(c->r[index]);
 		}
-		if (c->typs[index] & T_DIR)
-		{
-			tmp = (c->type[index] + 1);
-			// ft_dprintf(2, "{8}[%s]", c->type[index]);
-			if ((!op_t.idk && op_t.idk1) || (op_t.idk & op_t.idk1))
-			{
-				c->d2[index] = ft_atoi(tmp);
-				// ft_dprintf(2, "{8}{[[[%p}-", c->d2[index]);
-				c->d2[index] = swap_usint(c->d2[index]);
-				c->bytes += sizeof(c->d2[index]);
-			}
-			else
-			{
-				c->d4[index] = ft_atoi(tmp);
-				// ft_dprintf(2, "{3}{%p}-", c->d4[index]);
-				c->d4[index] = swap_uint(c->d4[index]);
-				c->bytes += sizeof(c->d4[index]);
-			}
-		}
-		if (c->typs[index] & T_IND)
-		{
-			c->ind[index] = ft_atoi(c->type[index]);
-			// ft_dprintf(2, "{6}[%s]l{%p} -", c->type[index], c->ind[index]);
-			c->ind[index] = swap_usint(c->ind[index]);
-			c->bytes += sizeof(c->ind[index]);
-		}
+		write_arg_(c, op_t, index);
 		index++;
 	}
 }
@@ -89,19 +91,15 @@ static void		handles_code(t_asm *a, t_cmd *c)
 	while (c)
 	{
 		c->code = g_op[c->nb_struct].code;
-		// ft_dprintf(2, "{9}5[%p]", c->code);
 		c->bytes += sizeof(c->code);
 		if (g_op[c->nb_struct].idk == 1)
 		{
 			write_c(c, g_op[c->nb_struct]);
-			// ft_dprintf(2, "{5}p[%p]", (int)c->barg);
 			c->bytes += sizeof(c->barg);
 		}
 		write_arg(c, g_op[c->nb_struct]);
 		tmp += c->bytes;
 		c->t_bytes = tmp;
-		// ft_dprintf(2, "{2}%hd- [%hd]", c->bytes, c->t_bytes);
-		// ft_dprintf(2, "%hd\n", tmp);
 		c = c->next;
 	}
 	a->total_bytes = tmp;
@@ -109,7 +107,6 @@ static void		handles_code(t_asm *a, t_cmd *c)
 
 void			write_op(t_asm *a, t_lab *l)
 {
-
 	l->bytes = 0;
 	while (l)
 	{

@@ -16,7 +16,7 @@
 int check_all_arg(t_core *core, t_process *pro, int index, int *ok)
 {
 
-  //  ft_printf("{8}[%d] - [%b]   ",*ok,index);
+   ft_printf("{8}[%d] - [%b]   ",*ok,index);
   //   ft_printf("{4}[%02x]\n",core->mem[(pro->pc + 1  + *ok) % MEM_SIZE]);
   if (index == REG_CODE)
   {
@@ -56,22 +56,42 @@ int check_cde_oct(t_core *core, t_process *pro)
   arg = 0;
   ok = 1;
   index = core->mem[(pro->pc + 1) % MEM_SIZE];
-//  ft_printf("here [%08b]\n", index);
-  if (index == 255)
-    return (0);
+  ft_printf("here [%08b]\n", index);
+  // if (index == 255)
+  //   return (0);
   while(arg != pro->op->nbr_args)
   {
     cde = apply_mask(index, arg + 1);
+    // ft_printf("{9}%x",  pro->op->nbr_args);
+    ft_printf("{9}[%d - %d][%d][%d][%s]",  cde, pro->op->type[0],cde & pro->op->type[arg],arg,pro->op->mnemonique );
+
     if(cde & pro->op->type[arg])
     {
+      // ft_printf("ddd");
       if(!(check_all_arg(core,pro, cde, &ok)))
-        return(0);
+      {
+      return(0);
+      }
     }
     else
      return(0);
    arg++;
-
- }
+ } 
+ if(pro->op->nbr_args == 2)
+    {
+      if(15 & index)
+        return 0;
+    }
+  if(pro->op->nbr_args == 1)
+    {
+      if(63 & index)
+        return 0;
+    }
+     if(pro->op->nbr_args == 3)
+    {
+      if(3 & index)
+        return 0;
+    }
  return(1);
 }
 
@@ -85,6 +105,7 @@ int checker_arg(t_core *core, t_process *pro)
   {
     if(!(check_cde_oct(core, pro)))
      return(0);
+   ft_printf("{1}%s","sorti");
    pc += 1;
  }
  return (1);

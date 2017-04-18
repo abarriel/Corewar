@@ -12,6 +12,10 @@
 
 NAME	= asm
 
+#
+#	 truc a faire attention prendre le gnl de corentin pas celui de allan pck il pue du cul quand le buff size est infrerieu au feed
+#
+#
 SRC		=  main.c \
 init/header.c \
 init/header_.c \
@@ -31,15 +35,15 @@ syntax/syntax__.c \
 \
 tools/messages_error.c \
 tools/messages_error_.c \
-tools/printing_label.c \
 \
 fun/bonus.c \
+fun/bonus_.c \
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
 INCLUDES = ../includes/asm.h ../includes/op.h
 
-ALL_FLAGS = -Wall -Wextra
+ALL_FLAGS = -Wall -Wextra  -g
 CFLAGS	=  $(ALL_FLAGS) -I../includes/ -I../libft/includes/
 
 all:  makefile libft  $(INCLUDES) $(NAME)

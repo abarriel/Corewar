@@ -48,7 +48,9 @@ int		main(int av, char **ac)
 	write_label(l);
 	h->prog_size = a->total_bytes;
 	close(a->fd_champ);
- final_write(a, h, l);
+	final_write(a, h, l);	
+	while(1)
+		;
 	bonus(a, l, h);
 	return (0);
 }

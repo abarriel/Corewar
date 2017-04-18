@@ -13,13 +13,13 @@
 #include "asm.h"
 
 /*
-** ERREYR DOIVE ETRE CHANGER CAR ISNTRUCTION PEUT ETRE ALBEL
+** ERREUR DOIVE ETRE CHANGER CAR ISNTRUCTION PEUT ETRE ALBEL
 */
 
-void	no_label_error(char *arg, char *str, int line, int character)
+void	no_label_error(char *arg, char *str, int line, int cha)
 {
 	ft_printf("No such label %3s while attempting to dereference", arg);
-	ft_printf(" token[TOKEN][%03d:%03d] ", line, character);
+	ft_printf(" token[TOKEN][%03d:%03d] ", line, cha);
 	ft_printf("DIRECT_LABEL \"%s\"\n", str);
 	exit(0);
 }
