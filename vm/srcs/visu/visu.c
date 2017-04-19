@@ -38,7 +38,6 @@ void		check_button_hit(int button, int x, int y, t_env *p)
 
 static int	ft_loop_key_hook(t_env *p)
 {
-	char	*str;
 	int		cycle_sec_tmp;
 
 	cycle_sec_tmp = p->core->cycle_sec;
@@ -50,7 +49,7 @@ static int	ft_loop_key_hook(t_env *p)
 	{
 		while (cycle_sec_tmp != 0)
 		{
-			run_visu(p->core, p);
+			run_visu(p->core);
 			cycle_sec_tmp--;
 		}
 	}
@@ -65,7 +64,6 @@ static int	ft_loop_key_hook(t_env *p)
 int			ft_key_hook(int keycode, t_env *p)
 {
 	int		i;
-	int		j;
 
 	i = 1;
 	if (keycode == ECHAP)
@@ -95,7 +93,7 @@ int			ft_mouse_hook(int button, int x, int y, t_env *p)
 	return (0);
 }
 
-int			visu(t_env *p, t_but *but, t_core *c)
+int			visu(t_env *p, t_core *c)
 {
 	p->core = c;
 	ft_loop_key_hook(p);

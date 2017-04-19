@@ -72,7 +72,7 @@ int			count_live(t_player *players)
 	return (res);
 }
 
-void		run_visu(t_core *core, t_env *p)
+void		run_visu(t_core *core)
 {
 	core->cycle += 1;
 	lunch_op(core);

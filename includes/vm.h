@@ -197,9 +197,9 @@ int         go_visu(t_core *core);
 void        print_nb_live(t_env *p);
 void        print_player_name(t_env *p);
 void        run(t_core *core);
-void        run_visu(t_core *core, t_env *p);
-int         visu(t_env *p, t_but *but, t_core *c);
-void        ft_start_struct(t_env *p, t_but *but);
+void        run_visu(t_core *core);
+int          visu(t_env *p, t_core *c);
+void    ft_start_struct(t_env *p);
 void        init_but(t_env *p);
 void        ft_draw_rectangle(int start_x, int start_y, t_env *p);
 void        ft_draw_score(t_env *p);
@@ -209,8 +209,7 @@ void        print_text(t_env *p);
 void        ft_modif_color(int r, int v, int b, t_env *p);
 void        ft_draw(t_env *p);
 void        ft_modif_color(int r, int v, int b, t_env *p);
-void        ft_draw_square(int start_x, int start_y,
-  int size, t_env *p);
+void        ft_draw_square(int start_x, int start_y, int size, t_env *p);
 void        ft_draw_background(t_env *p);
 void        ft_draw_map(t_env *p);
 
