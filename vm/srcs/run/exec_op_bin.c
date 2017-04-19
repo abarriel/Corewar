@@ -56,7 +56,7 @@ int	exec_and(void *core, void *pro)
 
 	cr = (t_core*)core;
 	pr = (t_process*)pro;
-	res = get_n_arg(cr, pr, 1, 1) & get_n_arg(cr, pr, 2, 1);
+	res = get_n_arg(cr, pr, 1) & get_n_arg(cr, pr, 2);
 	if (res == 0)
 		pr->carry = 1;
 	else
@@ -73,7 +73,7 @@ int	exec_or(void *core, void *pro)
 
 	cr = (t_core*)core;
 	pr = (t_process*)pro;
-	res = get_n_arg(cr, pr, 1, 1) | get_n_arg(cr, pr, 2, 1);
+	res = get_n_arg(cr, pr, 1) | get_n_arg(cr, pr, 2);
 	if (res == 0)
 		pr->carry = 1;
 	else
@@ -90,7 +90,7 @@ int	exec_xor(void *core, void *pro)
 
 	cr = (t_core*)core;
 	pr = (t_process*)pro;
-	res = get_n_arg(cr, pr, 1, 1) ^ get_n_arg(cr, pr, 2, 1);
+	res = get_n_arg(cr, pr, 1) ^ get_n_arg(cr, pr, 2);
 	if (res == 0)
 		pr->carry = 1;
 	else
