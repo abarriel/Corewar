@@ -82,7 +82,7 @@ typedef struct		s_lab
 	struct s_lab	*next;
 }					t_lab;
 t_op				*get_op(void);
-char 				*skip_space_ok(char *s);
+char				*skip_space_ok(char *s);
 int					check_first(char c);
 void				header_comment(char *line, t_header *h, t_asm *a);
 void				header_name(char *line, t_header *h, t_asm *a);

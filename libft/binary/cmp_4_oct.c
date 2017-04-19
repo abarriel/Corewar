@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmp_4_oct.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/20 01:05:24 by abarriel          #+#    #+#             */
+/*   Updated: 2017/04/20 01:06:03 by abarriel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int cmp_4_oct(unsigned char *one, unsigned char *two)
+int	cmp_4_oct(unsigned char *one, unsigned char *two)
 {
-  if (one[0] == two[0] && one[1] == two[1] &&
-    one[2] == two[2] && one[3] == two[3])
-    return (1);
-  return(0);
+	if (one[0] == two[0] && one[1] == two[1] &&
+		one[2] == two[2] && one[3] == two[3])
+		return (1);
+	return (0);
 }

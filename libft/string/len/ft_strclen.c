@@ -31,7 +31,7 @@ size_t		ft_strslen(const char *s, char *c)
 	i = 0;
 	while (s[len] != '\0')
 	{
-		while(c[i] != '\0')
+		while (c[i] != '\0')
 		{
 			if (s[len] == c[i])
 				return (len);

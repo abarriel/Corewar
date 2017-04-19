@@ -48,7 +48,7 @@ int		putstr_per_first(char *str, int fd, int color)
 		i = 3;
 	while (str[i] && str[i] != '%')
 	{
-		ft_putchar_fd(str[i],fd);
+		ft_putchar_fd(str[i], fd);
 		i++;
 	}
 	if (color > 0)

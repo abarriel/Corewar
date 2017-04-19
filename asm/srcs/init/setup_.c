@@ -17,7 +17,6 @@ int			skip_space(char **s)
 	int		len;
 
 	len = 1;
-
 	while ((**s) == ' ' || (**s) == '\t')
 	{
 		len++;

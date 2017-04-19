@@ -6,13 +6,13 @@
 /*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 20:48:58 by abarriel          #+#    #+#             */
-/*   Updated: 2017/01/08 23:13:50 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/04/20 01:06:07 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		count_bits(unsigned int nbr)
+int	count_bits(unsigned int nbr)
 {
 	size_t	i;
 

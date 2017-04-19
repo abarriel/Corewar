@@ -12,10 +12,6 @@
 
 #include "asm.h"
 
-/*
-** ERREUR DOIVE ETRE CHANGER CAR ISNTRUCTION PEUT ETRE ALBEL
-*/
-
 void	no_label_error(char *arg, char *str, int line, int cha)
 {
 	ft_dprintf(2, "No such label %3s while attempting to dereference", arg);
@@ -43,6 +39,7 @@ void	length_error(int i)
 	if (i == 1)
 		ft_dprintf(2, "Comment too long (Max length %d)\n", COMMENT_LENGTH);
 	if (i == 2)
-		ft_dprintf(2, "Champion name too long (Max length %d)\n", PROG_NAME_LENGTH);
+		ft_dprintf(2, "Champion name too long (Max length %d)\n",
+		PROG_NAME_LENGTH);
 	exit(0);
 }

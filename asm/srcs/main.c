@@ -41,7 +41,7 @@ int		main(int av, char **ac)
 	h = init_header();
 	if (av < 2 || av > 3)
 		ft_exit("Usage: ./asm <champion.s>");
-	if (!ft_strcmp(ac[b],"-o"))
+	if (!ft_strcmp(ac[b], "-o"))
 		b += 1;
 	get_info_asm(ac[b], a);
 	header_champ(a, h);
@@ -52,10 +52,8 @@ int		main(int av, char **ac)
 	h->prog_size = a->total_bytes;
 	close(a->fd_champ);
 	if (b != 2)
-		final_write(a, h, l, ac[1]);	
+		final_write(a, h, l, ac[1]);
 	else
 		bonus(a, l, h);
-	while(1)
-		;
 	return (0);
 }

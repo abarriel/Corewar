@@ -73,7 +73,7 @@ void			final_write(t_asm *a, t_header *h, t_lab *l, char *name)
 	close(a->fd_cor);
 	ft_putstr("Writing output program to ");
 	ft_putstr(RED);
-	while(++i < (short)(ft_strlen(name) - 2))
+	while (++i < (short)(ft_strlen(name) - 2))
 		ft_putchar(name[i]);
 	ft_putstr(".cor\n");
 	ft_putstr(RESET);

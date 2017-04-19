@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   char_to_ui.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/20 01:05:20 by abarriel          #+#    #+#             */
+/*   Updated: 2017/04/20 01:05:58 by abarriel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-unsigned int chatohi(unsigned char *str)
+unsigned int	chatohi(unsigned char *str)
 {
-  unsigned int final;
+	unsigned int	final;
 
 	final = 0;
-  //ft_printf("------------------------------------<<<<<><><><%02x %02x\n", str[0], str[1]);
-  final |= ((unsigned int)(str)[0] << 8);
+	final |= ((unsigned int)(str)[0] << 8);
 	final |= ((unsigned int)(str)[1]);
-  return (final);
+	return (final);
 }

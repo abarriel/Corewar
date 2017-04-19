@@ -77,11 +77,8 @@ void	handles_op(t_asm *a, t_lab *l)
 	while (l)
 	{
 		handles_cmd_name(a, l->cmd, l->count_line);
-
 		l = l->next;
 	}
-	// while(1)
-	// 		;
 }
 
 void	check_operation(t_asm *a, t_lab *l)
