@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   aff.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcharvol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/05 20:31:16 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/02/05 20:31:20 by lcharvol         ###   ########.fr       */
+/*   Updated: 2017/04/20 01:01:06 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void		ft_draw_title(t_env *p)
 		ft_putstr("Image xpm introuvable\n");
 		exit(0);
 	}
-	p->img2 = mlx_xpm_file_to_image(p->mlx, "../includes/mlx/title2.xpm", &n, &r);
+	p->img2 = mlx_xpm_file_to_image(p->mlx,
+		"../includes/mlx/title2.xpm", &n, &r);
 	p->ret2 = mlx_get_data_addr(p->img, &(p->bits_per_pixel),
 		&(p->size_line), &(p->endian));
 }

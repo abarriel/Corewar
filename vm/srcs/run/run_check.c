@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run__.c                                            :+:      :+:    :+:   */
+/*   run_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 20:25:28 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/19 20:58:14 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/04/20 01:34:20 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	free_process(t_process **pro)
+void	free_process(t_process **pro, t_core *core)
 {
 	t_process	*tmp;
 	int			i;
 
 	i = 0;
 	tmp = *pro;
+	core->mem_c[tmp->pc] -= 1;
 	while (i < REG_NUMBER)
 	{
 		free(tmp->reg[i]);
@@ -29,7 +30,7 @@ void	free_process(t_process **pro)
 	tmp = NULL;
 }
 
-void	check_proces(t_process **pro)
+void	check_proces(t_process **pro, t_core *core)
 {
 	t_process	*tmp;
 	t_process	*last;
@@ -44,7 +45,7 @@ void	check_proces(t_process **pro)
 				last->next = tmp->next;
 			else
 				*pro = tmp->next;
-			free_process(&tmp);
+			free_process(&tmp, core);
 		}
 		else
 		{
@@ -89,7 +90,7 @@ void	die_check(t_core *core)
 			nb_check = 0;
 			core->die_cycle -= CYCLE_DELTA;
 		}
-		check_proces(&core->process);
+		check_proces(&core->process, core);
 		core->last_check = core->cycle;
 		upd_color_die(core);
 	}
