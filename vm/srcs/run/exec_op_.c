@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 06:40:45 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/19 20:46:25 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/04/19 23:50:44 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int		exec_sti(void *core, void *pro)
 	insert_in_color(cr->mem_c, uns_int((add % IDX_MOD) + pr->pc) % MEM_SIZE,
 	pr->player->color * 16 + 2, 4);
 	insert_in_reg(cr->mem, uns_int((add % IDX_MOD) + pr->pc) % MEM_SIZE, res);
-	get_n_arg(cr, pr, 3);
 	return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));
 }
 
