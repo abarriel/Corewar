@@ -23,7 +23,7 @@ unsigned char	apply_mask(unsigned char cde, int arg)
 	return (cde);
 }
 
-unsigned int	return_arg(t_core *core, t_process *process, int mod, int index, int cde)
+unsigned int	return_arg(t_core *core, t_process *process, int index, int cde)
 {
 	unsigned int	res;
 
@@ -62,26 +62,21 @@ unsigned char	return_good_value(unsigned char cde, t_process *process)
 	return (0);
 }
 
-unsigned int	get_n_arg(t_core *core, t_process *process, int arg, int mod)
+unsigned int	get_n_arg(t_core *core, t_process *process, int arg)
 {
-	unsigned int	res;
 	unsigned char	cde;
 	unsigned char	i;
 	int				index;
 
-	cde = core->mem[(process->pc + 1) % MEM_SIZE];
-	cde = apply_mask(cde, arg);
+	cde = apply_mask(core->mem[(process->pc + 1) % MEM_SIZE], arg);
 	if (arg == 1)
-	{
-		index = (process->pc + 2) % MEM_SIZE;
-		return (return_arg(core, process, mod, index, cde));
-	}
+		return (return_arg(core, process, (process->pc + 2) % MEM_SIZE, cde));
 	if (arg == 2)
 	{
 		i = return_good_value((((core->mem[(process->pc + 1) % MEM_SIZE])
 		& 192) >> 6), process);
 		index = ((process->pc + 2) + i) % MEM_SIZE;
-		return (return_arg(core, process, mod, index, cde));
+		return (return_arg(core, process, index, cde));
 	}
 	if (arg == 3)
 	{
@@ -90,7 +85,7 @@ unsigned int	get_n_arg(t_core *core, t_process *process, int arg, int mod)
 		i += return_good_value((((core->mem[(process->pc + 1) % MEM_SIZE])
 		& 48) >> 4), process);
 		index = ((process->pc + 2) + i) % MEM_SIZE;
-		return (return_arg(core, process, mod, index, cde));
+		return (return_arg(core, process, index, cde));
 	}
 	return (0);
 }

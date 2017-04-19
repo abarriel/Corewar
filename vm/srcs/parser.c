@@ -12,55 +12,20 @@
 
 #include "vm.h"
 
-int		is_a_champ(char *str, t_core *c)
-{
-	if ((ft_strrncmp(str, "roc.", 4)) || ft_strlen(str) == 4)
-		return (1);
-	return (0);
-}
-
-unsigned long int		chatoli(char **str)
-{
-	unsigned long int final;
-
-	final = 0;
-	final |= ((unsigned long)(*str)[0] << 56);
-	final |= ((unsigned long)(*str)[1] << 48);
-	final |= ((unsigned long)(*str)[2] <<  40);
-	final |= ((unsigned long)(*str)[3] << 32);
-	final |= ((unsigned long)(*str)[4] << 24 );
-	final |= ((unsigned long)(*str)[5] << 16 );
-	final |= ((unsigned long)(*str)[6] <<  8 );
-	final |= ((unsigned long)(*str)[7]);
-	return (final);
-}
-
-size_t	ft_endian(size_t n)
-{
-	size_t	r;
-
-	r = 0;
-	r += ((n & 0xff000000) / 0x1000000);
-	r += ((n & 0xff0000) / 0x100);
-	r += ((n & 0xff00) * 0x100);
-	r += ((n & 0xff) * 0x10000);
-	return (r);
-}
-
-t_player	*get_the_prog(int fd, char *str, t_core *c, t_player *new)
+t_player	*get_the_prog(int fd, t_player *new)
 {
 	unsigned char buff[new->weight];
 
-	if ((read(fd, &buff, new->weight) < new->weight))
+	if (((size_t)read(fd, &buff, new->weight) < new->weight))
 		ft_exit("Can't read source file");
 	new->prog = (unsigned char *)malloc(sizeof(unsigned char) * new->weight);
 	ft_memcpy(new->prog, buff, new->weight + 1);
 	return (new);
 }
 
-void	get_the_champ(char *str, t_core *c)
+void		get_the_champ(char *str, t_core *c)
 {
-	int fd;
+	int			fd;
 	t_header	header;
 	t_player	*new;
 
@@ -77,7 +42,7 @@ void	get_the_champ(char *str, t_core *c)
 	if (new->weight > CHAMP_MAX_SIZE)
 		ft_exit("Wrong prog size");
 	ft_memcpy(new->comment, header.comment, COMMENT_LENGTH + 1);
-	new = get_the_prog(fd, str, c, new);
+	new = get_the_prog(fd, new);
 	if (c->player == NULL)
 	{
 		c->player = new;
@@ -89,7 +54,7 @@ void	get_the_champ(char *str, t_core *c)
 	close(fd);
 }
 
-int	ft_get_flag(t_core *c, int argc, char **argv, int i)
+int			ft_get_flag(t_core *c, int argc, char **argv, int i)
 {
 	if (ft_strequ(argv[i], "-f"))
 		c->visu = 1;
@@ -118,7 +83,7 @@ int	ft_get_flag(t_core *c, int argc, char **argv, int i)
 	return (i);
 }
 
-t_core	*parcing(int argc, char **argv, t_core *c)
+t_core		*parcing(int argc, char **argv, t_core *c)
 {
 	int i;
 
@@ -129,7 +94,7 @@ t_core	*parcing(int argc, char **argv, t_core *c)
 	{
 		if (argv[i][0] == '-')
 			i = ft_get_flag(c, argc, argv, i);
-		else if (is_a_champ(argv[i], c) == 0)
+		else if (is_a_champ(argv[i]) == 0)
 		{
 			get_the_champ(argv[i], c);
 			c->nb_player += 1;

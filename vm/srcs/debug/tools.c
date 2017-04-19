@@ -6,7 +6,7 @@
 /*   By: lcharvol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 05:45:22 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/28 05:45:29 by lcharvol         ###   ########.fr       */
+/*   Updated: 2017/04/19 23:06:56 by abarriel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,53 @@ void	print_usage(void)
 	ft_printf("    -n numer         : Fixe le numéro du prochain joueur.\n");
 	ft_printf("    -v               : interface graphique mlx\n");
 	exit(0);
+}
+
+void	print_line_norm(void)
+{
+	ft_putstr("Usage :\n	map  : print map\n ");
+	ft_putstr("run -> value : run value cycle\n");
+	ft_putstr("	reg  : print registers\n	core : ");
+	ft_putstr("print information about core programme\n	exit : exit\n");
+}
+
+void	debug_run_(t_core *core, char *line)
+{
+	get_next_line(0, &line);
+	if (ft_strcmp(line, "exit") == 0)
+		exit(0);
+	else if (ft_strcmp(line, "run") == 0)
+	{
+		free(line);
+		get_next_line(0, &line);
+		core->dump = ft_atoi(line);
+		if (core->dump != 0)
+			run(core);
+		else
+			ft_printf("%s\n", "Incorect value");
+	}
+	else if (ft_strcmp(line, "map") == 0)
+		print_map(core);
+	else if (ft_strcmp(line, "color") == 0)
+		print_color(core);
+	else if (ft_strcmp(line, "core") == 0)
+		print_data(core);
+	else if (ft_strcmp(line, "reg") == 0)
+		print_reg(core);
+	else
+		print_line_norm();
+	free(line);
+}
+
+void	debug_run(t_core *core)
+{
+	char	*line;
+
+	line = NULL;
+	ft_putstr("Usage :\n	map  : print map\n ");
+	ft_putstr("run -> value : run value cycle\n");
+	ft_putstr("	reg  : print registers\n	core : ");
+	ft_putstr("print information about core programme\n	exit : exit\n");
+	while (1)
+		debug_run_(core, line);
 }

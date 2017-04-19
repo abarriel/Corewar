@@ -13,9 +13,13 @@
 NAME	= vm
 
 SRC		= vm.c  \
-	messages.c \
-	parcing_entry.c \
-	tools.c \
+	parser.c \
+	parser_.c \
+	\
+	debug/messages.c \
+	debug/vm_map_.c \
+	debug/vm_map.c \
+	debug/tools.c \
 	\
 	init/init_core.c \
 	\
@@ -46,8 +50,8 @@ OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 INCLUDES = ../includes/vm.h ../includes/op.h
 
 INIB_FLAGS = -Wno-error=unused-parameter -Wno-error=unused-variable
-ALL_FLAGS = -Wall -Wextra -Werror
-CFLAGS	=  -I../includes/ -I../libft/includes/
+ALL_FLAGS = -Wall -Wextra 
+CFLAGS	=  $(ALL_FLAGS) -I../includes/ -I../libft/includes/
 
 all: $(INCLUDES) makefile libft $(NAME)
 
