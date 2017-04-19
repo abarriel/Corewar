@@ -127,6 +127,7 @@ void				print_c(t_flag *f, t_conv *c);
 void				print_d(t_flag *f, t_conv *c);
 void				print_base(t_flag *f, t_conv *c);
 int					putstr_per(char *str, int fd);
+int					putstr_per_first(char *str, int fd, int color);
 void				ft_putnwstr(t_conv *c, t_flag *f);
 int					ft_putnwchar(t_conv *c, t_flag *f);
 /*

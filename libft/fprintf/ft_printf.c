@@ -62,7 +62,7 @@ int		ft_vdprintf(t_stock *s)
 	size_t	flen;
 
 	color_fun(s);
-	flen = putstr_per(s->str, s->fd);
+	flen = putstr_per_first(s->str, s->fd, s->color_nfun);
 	ft_init(s);
 	flen += s->f_len;
 	va_end(s->aps);

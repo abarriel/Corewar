@@ -39,6 +39,23 @@ int		putstr_per(char *str, int fd)
 	return (i);
 }
 
+int		putstr_per_first(char *str, int fd, int color)
+{
+	size_t i;
+
+	i = 0;
+	if (color > 0)
+		i = 3;
+	while (str[i] && str[i] != '%')
+	{
+		ft_putchar_fd(str[i],fd);
+		i++;
+	}
+	if (color > 0)
+		i -= 3;
+	return (i);
+}
+
 char	*ft_strjoin_three(char *s1, char *s2, char *s3)
 {
 	char	*d;
