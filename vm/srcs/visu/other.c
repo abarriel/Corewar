@@ -31,7 +31,7 @@ void		init_but(t_env *p)
 	p->but->btn5_py = (HEIGHT) - 120;
 }
 
-void		ft_start_struct(t_env *p, t_but *but)
+void		ft_start_struct(t_env *p)
 {
 	p->r = 0;
 	p->v = 0;
@@ -61,16 +61,15 @@ void		ft_start_struct(t_env *p, t_but *but)
 int			go_visu(t_core *core)
 {
 	t_env	*p;
-	t_but	*but;
 
 	p = (t_env *)malloc(sizeof(t_env));
 	p->but = (t_but *)malloc(sizeof(t_but));
 	p->core = core;
-	ft_start_struct(p, but);
+	ft_start_struct(p);
 	p->mlx = mlx_init();
 	p->win = mlx_new_window(p->mlx, WIDTH, HEIGHT, "Corewar");
 	p->img = mlx_new_image(p->mlx, WIDTH, HEIGHT);
-	visu(p, but, core);
+	visu(p, core);
 	print_player(core);
 	mlx_loop(p->mlx);
 	return (0);

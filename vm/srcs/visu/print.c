@@ -65,6 +65,7 @@ void			print_players(t_env *p)
 
 	i = -1;
 	tmp = p->core->player;
+	str = NULL;
 	str = ft_strncpy(str, tmp->name, 4);
 	while (++i < 4)
 	{
