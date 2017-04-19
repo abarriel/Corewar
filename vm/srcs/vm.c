@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:29:02 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/19 02:14:36 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/19 03:25:03 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ void print_reg(t_core *core)
 		ft_printf("\nName: [%s]\n", tmp->player->name);
 		ft_printf("ID: [%02x%02x%02x%02x]\n", tmp->player->id[0], tmp->player->id[1], tmp->player->id[2], tmp->player->id[3]);
 		ft_printf("pc: %d\n", tmp->pc);
+		ft_printf("carry: %d\n", tmp->carry);
 		ft_printf("registre: \n");
 		while (i < REG_NUMBER)
 		{

@@ -59,7 +59,7 @@ void	init_player(t_player *p, t_core *c)
 	p->comment = NULL;
 	p->prog = NULL;
 	p->last_live = 0;
-	p->nb_live = 0;
+	p->nb_live = 1;
 	petit = swap_st(petit);
 	ft_memcpy(p->id, &petit, 4);
 	p->next = NULL;

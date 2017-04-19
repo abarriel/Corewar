@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 06:22:52 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/18 03:22:52 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/19 03:51:50 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 int check_all_arg(t_core *core, t_process *pro, int index, int *ok)
 {
 
-   ft_printf("{8}[%d] - [%b]   ",*ok,index);
+   //ft_printf("{8}[%d] - [%b]   ",*ok,index);
   //   ft_printf("{4}[%02x]\n",core->mem[(pro->pc + 1  + *ok) % MEM_SIZE]);
   if (index == REG_CODE)
   {
     if (core->mem[(pro->pc + 1 + *ok) % MEM_SIZE] > REG_NUMBER)
     {
-      ft_printf("REG NUMBER TROP GRAND\n");
+      //ft_printf("REG NUMBER TROP GRAND\n");
       return(0);
     }
     if (core->mem[(pro->pc + 1 + *ok) % MEM_SIZE] < 1)
     {
-      ft_printf("REG NUMBER TROP PETIT\n");
+      //ft_printf("REG NUMBER TROP PETIT\n");
       return (0);
     }
     (*ok)++;
@@ -56,14 +56,14 @@ int check_cde_oct(t_core *core, t_process *pro)
   arg = 0;
   ok = 1;
   index = core->mem[(pro->pc + 1) % MEM_SIZE];
-  ft_printf("here [%08b]\n", index);
+  //ft_printf("here [%08b]\n", index);
   // if (index == 255)
   //   return (0);
   while(arg != pro->op->nbr_args)
   {
     cde = apply_mask(index, arg + 1);
     // ft_printf("{9}%x",  pro->op->nbr_args);
-    ft_printf("{9}[%d - %d][%d][%d][%s]",  cde, pro->op->type[0],cde & pro->op->type[arg],arg,pro->op->mnemonique );
+    //ft_printf("{9}[%d - %d][%d][%d][%s]",  cde, pro->op->type[0],cde & pro->op->type[arg],arg,pro->op->mnemonique );
 
     if(cde & pro->op->type[arg])
     {
@@ -76,7 +76,7 @@ int check_cde_oct(t_core *core, t_process *pro)
     else
      return(0);
    arg++;
- } 
+ }
  if(pro->op->nbr_args == 2)
     {
       if(15 & index)
@@ -105,7 +105,7 @@ int checker_arg(t_core *core, t_process *pro)
   {
     if(!(check_cde_oct(core, pro)))
      return(0);
-   ft_printf("{1}%s","sorti");
+  // ft_printf("{1}%s","sorti");
    pc += 1;
  }
  return (1);

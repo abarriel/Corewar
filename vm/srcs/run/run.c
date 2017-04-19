@@ -164,12 +164,10 @@ void upd_color_die(t_core *core)
     i = 0;
     while (i < MEM_SIZE)
     {
-      ft_printf("before : %d ->", map[i]);
       if (map[i] % 16 == 2)
         map[i] -= 2;
       if (map[i] % 16 == 4)
         map[i] -= 4;
-      ft_printf("after : %d", map[i]);
       i++;
     }
 }
