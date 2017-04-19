@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_map_.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 22:54:20 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/19 22:54:25 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/04/20 00:04:53 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	print_reg(t_core *core)
 			tmp->reg[i][1], tmp->reg[i][2], tmp->reg[i][3]);
 			i++;
 		}
-		ft_printf("\nnb_process : %d\n", j);
 		tmp = tmp->next;
 	}
+	ft_printf("\nnb_process : %d\n", j);
 }
 
 void	print_color(t_core *core)
@@ -73,5 +73,8 @@ void	print_data(t_core *core)
 	ft_putstr("cycle        : ");
 	ft_printf("%7d\n", core->cycle);
 	ft_printf("last check   : %7d\n", core->last_check);
-	ft_printf("cycle to die : %7d\n", core->die_cycle);
+	if (core->die_cycle > 0)
+		ft_printf("cycle to die : %7d\n", core->die_cycle);
+	else
+		ft_putstr("cycle to die :       0\n");
 }
