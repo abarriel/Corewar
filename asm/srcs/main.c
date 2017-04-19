@@ -55,5 +55,7 @@ int		main(int av, char **ac)
 		final_write(a, h, l, ac[1]);	
 	else
 		bonus(a, l, h);
+	while(1)
+		;
 	return (0);
 }

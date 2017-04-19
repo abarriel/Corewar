@@ -50,7 +50,7 @@ OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 INCLUDES = ../includes/vm.h ../includes/op.h
 
 INIB_FLAGS = -Wno-error=unused-parameter -Wno-error=unused-variable
-ALL_FLAGS = -Wall -Wextra 
+ALL_FLAGS = -Wall -Wextra -Werror
 CFLAGS	=  $(ALL_FLAGS) -I../includes/ -I../libft/includes/
 
 all: $(INCLUDES) makefile libft $(NAME)
