@@ -17,6 +17,11 @@ void		ft_draw_title(t_env *p)
 	int		n;
 	int		r;
 
+	if (open("title2.xpm", O_RDWR) < 0)
+	{
+		ft_putstr("Image xpm introuvable\n");
+		exit(0);
+	}
 	p->img2 = mlx_xpm_file_to_image(p->mlx, "title2.xpm", &n, &r);
 	p->ret2 = mlx_get_data_addr(p->img, &(p->bits_per_pixel),
 		&(p->size_line), &(p->endian));
