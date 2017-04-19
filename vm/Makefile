@@ -12,10 +12,34 @@
 
 NAME	= vm
 
-SRC		= vm.c messages.c parcing_entry.c tools.c \
-			init/init_core.c run/run.c run/exec_op.c visu/aff.c visu/modifcolors.c visu/draw.c \
-		 visu/visu.c visu/draw2.c visu/other.c visu/other2.c visu/print.c \
-		 run/checker.c run/exec_op_.c run/get_n_arg.c
+SRC		= vm.c  \
+	messages.c \
+	parcing_entry.c \
+	tools.c \
+	\
+	init/init_core.c \
+	\
+	run/checker.c \
+	run/exec_op.c \
+	run/exec_op_.c \
+	run/exec_op_bin.c \
+	run/exec_op_l.c \
+	run/get_n_arg.c\
+	run/get_tools.c \
+	run/get_tools_.c \
+	run/run.c \
+	run/run_.c \
+	run/run_check.c \
+	\
+	visu/aff.c \
+	visu/modifcolors.c\
+	visu/draw.c \
+	visu/visu.c \
+	visu/draw2.c \
+	visu/other.c \
+	visu/other2.c \
+	visu/print.c \
+	
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
