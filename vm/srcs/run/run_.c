@@ -46,33 +46,3 @@ void		decrease(t_core *core)
 		pro = pro->next;
 	}
 }
-
-t_process	*moove_last(t_core *core, t_process *pro)
-{
-	t_process	*tmp;
-	t_process	*last;
-	t_process	*res;
-
-	if (!core->process->next)
-		return (core->process);
-	last = NULL;
-	tmp = core->process;
-	while (tmp != pro)
-	{
-		last = tmp;
-		tmp = tmp->next;
-	}
-	res = tmp->next;
-	if (!res)
-		return (res);
-	if (last)
-		last->next = tmp->next;
-	else
-		core->process = tmp->next;
-	last = tmp;
-	while (tmp && tmp->next)
-		tmp = tmp->next;
-	tmp->next = last;
-	last->next = NULL;
-	return (res);
-}
