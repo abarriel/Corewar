@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:19:44 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/19 03:52:27 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/19 05:56:22 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ unsigned int return_arg(t_core *core, t_process *process, int mod, int index, in
   }
 if (cde == IND_CODE)
   {
-    res = chatohi(&(core->mem[index % MEM_SIZE]));
-    //ft_printf("res :%d\n", res);
+    res = chatohi(&(core->mem[process->pc + ((index - process->pc) % IDX_MOD) % MEM_SIZE]));
+
     //ft_printf("%02x %02x\n", core->mem[index % MEM_SIZE], core->mem[(index+1) % MEM_SIZE]);
   }
   if (cde == DIR_CODE)

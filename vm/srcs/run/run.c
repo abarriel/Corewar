@@ -180,6 +180,7 @@ void die_check(t_core *core)
   {
     nb_check++;
     core->nb_player = count_live(core->player);
+  //  ft_printf("%d\n", core->nb_player);
     if (core->nb_player >= NBR_LIVE || nb_check == MAX_CHECKS)
     {
       nb_check = 0;

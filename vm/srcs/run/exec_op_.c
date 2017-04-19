@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 06:40:45 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/19 03:30:46 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/19 06:12:55 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ unsigned char *get_n_reg(t_core *core, t_process *process, int arg)
     i++;
   }
 
+   //ft_printf("{%d}{%d}",i, core->mem[(process->pc + 2 + dec) % MEM_SIZE] -1);
   reg = process->reg[core->mem[(process->pc + 2 + dec) % MEM_SIZE] - 1];
   // ft_printf("%d\n", core->mem[(process->pc + 2 + dec) % MEM_SIZE] - 1);
   return (reg);
@@ -113,10 +114,7 @@ int exec_and(void *core, void *pro)
   res = get_n_arg(cr, pr, 1, 1) & get_n_arg(cr, pr, 2, 1);
   // ft_printf("res : %08x | %08x\n", get_n_arg(cr, pr, 1, 1), get_n_arg(cr, pr, 2, 1));
   // exit(0);
-  if (res == 0)
     pr->carry = 1;
-  else
-    pr->carry = 0;
   insert_in_reg(get_n_reg(cr, pr, 3), 0, res);
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 4));
 }
@@ -130,10 +128,7 @@ int exec_or(void *core, void *pro)
   cr = (t_core*)core;
   pr = (t_process*)pro;
   res = get_n_arg(cr, pr, 1, 1) | get_n_arg(cr, pr, 2, 1);
-  if (res == 0)
     pr->carry = 1;
-  else
-    pr->carry = 0;
   insert_in_reg(get_n_reg(cr, pr, 3), 0, res);
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 4));
 }
@@ -147,10 +142,7 @@ int exec_xor(void *core, void *pro)
   cr = (t_core*)core;
   pr = (t_process*)pro;
   res = get_n_arg(cr, pr, 1, 1) ^ get_n_arg(cr, pr, 2, 1);
-  if (res == 0)
     pr->carry = 1;
-  else
-    pr->carry = 0;
   insert_in_reg(get_n_reg(cr, pr, 3), 0, res);
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 4));
 }
@@ -167,10 +159,7 @@ int exec_ld(void *core, void *pro)
   // ft_printf("{7}{%u}{%02x}\n",res, cr->mem[pr->pc % MEM_SIZE]);
   // res = chatoi(&(cr->mem[get_n_arg(cr, pr, 1, 1) % MEM_SIZE]));
 
-  if (res == 0)
     pr->carry = 1;
-  else
-    pr->carry = 0;
   insert_in_reg(get_n_reg(cr, pr, 2), 0, res);
   //ft_printf("\n--------------- load : %08X in : r%d ----------------------\n", res, cr->mem[pr->pc + 6]);
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 4));
@@ -185,10 +174,7 @@ int exec_lld(void *core, void *pro)
   cr = (t_core*)core;
   pr = (t_process*)pro;
   res = chatoi(&(cr->mem[(pr->pc + get_n_arg(cr, pr, 1, 0)) % MEM_SIZE]));
-  if (res == 0)
     pr->carry = 1;
-  else
-    pr->carry = 0;
   insert_in_reg(get_n_reg(cr, pr, 2), 0, res);
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 4));
 }
@@ -215,14 +201,14 @@ int exec_lldi(void *core, void *pro)
   t_process *pr;
   t_core *cr;
   unsigned int res;
+  int add;
 
   cr = (t_core*)core;
   pr = (t_process*)pro;
-  res = chatoi(&(cr->mem[((pr->pc + (get_n_arg(cr, pr, 1, 1)) + get_n_arg(cr, pr, 2, 1)))]));
-  if (res == 0)
+  add = real_int(get_n_arg(cr, pr, 1, 0) % MEM_SIZE) + real_int((get_n_arg(cr, pr, 2, 0) % MEM_SIZE));
+  res = chatoi(&(cr->mem[uns_int((add % MEM_SIZE) + pr->pc) % MEM_SIZE]));
+  //res = chatoi(&(cr->mem[((pr->pc + (get_n_arg(cr, pr, 1, 1)) + get_n_arg(cr, pr, 2, 1)))]));
     pr->carry = 1;
-  else
-    pr->carry = 0;
   insert_in_reg(get_n_reg(cr, pr, 3), 0, res);
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));
 }
@@ -246,7 +232,7 @@ int exec_st(void *core, void *pro)
     //ft_printf("\nHERE\n");
   //  ft_printf("--------------------------------->%d\n", ((unsigned short int)(pr->pc + (short int)get_n_arg(cr, pr, 2, 1)) % MEM_SIZE) % MEM_SIZE);
     insert_in_color(cr->mem_c, (pr->pc + get_n_arg(cr, pr, 2, 1)) % MEM_SIZE, pr->player->color * 16 + 2, 4);
-    insert_in_reg(cr->mem, ((unsigned short int)(pr->pc + (short int)get_n_arg(cr, pr, 2, 1)) % MEM_SIZE) % MEM_SIZE, res);
+    insert_in_reg(cr->mem, ((unsigned short int)(pr->pc + ((short int)get_n_arg(cr, pr, 2, 1) % IDX_MOD)) % MEM_SIZE) % MEM_SIZE, res);
   }
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 4));
 }

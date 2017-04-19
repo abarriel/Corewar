@@ -124,7 +124,8 @@ int  exec_zjmp(void *core, void *pro)
   jmp += (unsigned int)(cor->mem[(pr->pc + 1) % MEM_SIZE]) * 256;
   jmp += (unsigned int)(cor->mem[(pr->pc + 2) % MEM_SIZE]);
   cor->mem_c[pr->pc] = pr->player->color * 16;
-  pr->pc = (pr->pc + (jmp % MEM_SIZE)) % MEM_SIZE;
+  pr->pc = (pr->pc + (uns_int(real_int(jmp % MEM_SIZE) % IDX_MOD))) % MEM_SIZE;
+  //if ((real_int(jmp % MEM_SIZE) < -IDX_MOD) || (real_int(jmp % MEM_SIZE) > IDX_MOD))
   return (0);
 }
 
@@ -134,7 +135,7 @@ void exec_op(t_core *core, t_process *pro)
 
   if (pro->op->mnemonique)
   {
-      //ft_printf("op : %s at cycle : %d from player : %d\n\n", pro->op->mnemonique, core->cycle, pro->player->nb);
+    //  ft_printf("op : %s at cycle : %d from player : %d\n\n", pro->op->mnemonique, core->cycle, pro->player->nb);
 
     //ft_printf("{9}\nReturn Check  de %s=[%d]\n",pro->op->mnemonique, checker_arg(core, pro));
     // exit(0);
