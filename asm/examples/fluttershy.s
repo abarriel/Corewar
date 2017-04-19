@@ -2,7 +2,7 @@
 #2013
 
 .name		"fluttershy"
-.comment	"oh, my, what a scary project"
+.comment	"oh, my, what a scary project
 
 entry:
 	fork	%:coregeni

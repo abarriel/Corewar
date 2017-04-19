@@ -26,7 +26,6 @@
 # define MAP_SIZE_X 64
 # define MAP_SIZE_Y 64
 # define CYC_SEC_ST 50
-
 # define RID T_REG | T_IND | T_DIR
 # define RDI T_REG | T_DIR | T_IND
 
@@ -41,7 +40,7 @@ typedef struct		s_op
 	int				cde_oct;
 	int				l_size;
 	int				(*f)(void*, void*);
-}					t_op;
+}					      t_op;
 extern t_op g_op[17];
 
 typedef struct			s_player
@@ -57,7 +56,7 @@ typedef struct			s_player
   int					      nb_live;
 	int								nb;
   struct s_player		*next;
-}						t_player;
+}						       t_player;
 
 typedef struct			s_process
 {
@@ -69,7 +68,7 @@ typedef struct			s_process
 	char				       carry;
 	t_player					 *player;
 	struct s_process   *next;
-}						t_process;
+}				       		t_process;
 
 typedef struct			s_core
 {
@@ -133,7 +132,15 @@ typedef struct    s_but
   int       btn4_py;
   int       btn5_py;
 }         t_but;
-
+unsigned char *cp_reg(unsigned char *dest, unsigned char *src);
+void insert_in_color(char *map, int index, unsigned char color, int len);
+void die_check(t_core *core);
+void lunch_op(t_core *core);
+void decrease(t_core *core);
+unsigned char *get_n_reg(t_core *core, t_process *process, int arg);
+int count_live(t_player *players);
+t_process *dup_process(t_process *pro);
+void insert_in_reg(unsigned char *reg, int index, unsigned int cpy);
 int size_args(unsigned char oc_cde, int d_size);
 unsigned char apply_mask(unsigned char cde, int arg);
 unsigned int get_n_arg(t_core *core, t_process *process, int arg, int mod);
