@@ -44,7 +44,7 @@ void	write_arg_size_(t_cmd *c, t_op op_t, short index)
 	if (c->typs[index] & T_REG)
 	{
 		c->r[index] = ft_atoi(c->type[index] + 1);
-		ft_dprintf(2, "{3}%#10.02x ", c->r[index]);
+		ft_printf("{3}%#10.02x ", c->r[index]);
 	}
 	if (c->typs[index] & T_DIR)
 	{
@@ -52,12 +52,12 @@ void	write_arg_size_(t_cmd *c, t_op op_t, short index)
 		if (op_t.idk1)
 		{
 			c->d2[index] = swap_usint(c->d2[index]);
-			ft_dprintf(2, "{8}%#10.02x ", c->d2[index]);
+			ft_printf("{8}%#10.02x ", c->d2[index]);
 		}
 		else
 		{
 			c->d4[index] = swap_uint(c->d4[index]);
-			ft_dprintf(2, "{8}%#10.04x ", c->d4[index]);
+			ft_printf("{8}%#10.04x ", c->d4[index]);
 		}
 	}
 }
@@ -75,9 +75,9 @@ void	write_arg_size(t_cmd *c, t_op op_t)
 		{
 			tmp = (c->type[index]);
 			if (*tmp == LABEL_CHAR)
-				ft_dprintf(2, "{6}%#10.04x ", c->d2[index]);
+				ft_printf("{6}%#10.04x ", c->d2[index]);
 			else
-				ft_dprintf(2, "{6}%#10.04x ", c->ind[index]);
+				ft_printf("{6}%#10.04x ", c->ind[index]);
 		}
 		index++;
 	}
@@ -95,14 +95,14 @@ void	write_cmd_fun(t_cmd *c)
 		while (ft_strcmp(g_op[index].mnemonique, c->op))
 			index++;
 		write_arg_fun(c, g_op[index]);
-		ft_printf("\n");
+		ft_putchar('\n');
 		ft_printf("{7}\t%#5.02x", g_op[index].code);
 		if (g_op[index].nbr_args != 1)
 			ft_printf("{9}   %#02.2x ", c->barg);
 		else
 			ft_printf("{9}   %s ", "----");
 		write_arg_size(c, g_op[index]);
-		ft_printf("\n\n");
+		ft_putstr("\n\n");
 		index = 0;
 		c = c->next;
 	}
@@ -114,7 +114,7 @@ void	bonus(t_asm *a, t_lab *l, t_header *h)
 
 	if (!l)
 	{
-		ft_printf("No instructions found for %s\n", h->prog_name);
+		ft_dprintf(2, "No instructions found for %s\n", h->prog_name);
 		exit(0);
 	}
 	size = swap_uint(a->total_bytes);

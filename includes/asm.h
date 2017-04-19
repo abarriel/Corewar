@@ -116,5 +116,5 @@ int					skip_space(char **s);
 void				header_champ(t_asm *a, t_header *h);
 void				lexical_error(int line, int character);
 void				write_label(t_lab *l);
-void				final_write(t_asm *a, t_header *h, t_lab *l);
+void				final_write(t_asm *a, t_header *h, t_lab *l, char *name);
 #endif

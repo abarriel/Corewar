@@ -58,8 +58,11 @@ static void		final_write_(t_asm *a, t_cmd *cmd)
 	}
 }
 
-void			final_write(t_asm *a, t_header *h, t_lab *l)
+void			final_write(t_asm *a, t_header *h, t_lab *l, char *name)
 {
+	short i;
+
+	i = -1;
 	create_file(a, l, h);
 	write(a->fd_cor, h, sizeof(t_header));
 	while (l)
@@ -68,4 +71,10 @@ void			final_write(t_asm *a, t_header *h, t_lab *l)
 		l = l->next;
 	}
 	close(a->fd_cor);
+	ft_putstr("Writing output program to ");
+	ft_putstr(RED);
+	while(++i < (short)(ft_strlen(name) - 2))
+		ft_putchar(name[i]);
+	ft_putstr(".cor\n");
+	ft_putstr(RESET);
 }

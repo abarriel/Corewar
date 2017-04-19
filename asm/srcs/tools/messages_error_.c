@@ -20,7 +20,7 @@ void	lexical_error(int line, int character)
 
 void	token_error(char *str, int line, int character)
 {
-	ft_printf("Invalid instruction at token [TOKEN]");
-	ft_printf("[%03d:%03d] INSTRUCTION \"%s\"\n", line, character, str);
+	ft_dprintf(2, "Invalid instruction at token [TOKEN]");
+	ft_dprintf(2, "[%03d:%03d] INSTRUCTION \"%s\"\n", line, character, str);
 	exit(0);
 }

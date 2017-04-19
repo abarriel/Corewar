@@ -31,16 +31,19 @@ void	get_info_asm(char *s, t_asm *a)
 
 int		main(int av, char **ac)
 {
-	t_asm		*a;
-	t_header	*h;
-	t_lab		*l;
+	t_asm				*a;
+	t_header			*h;
+	t_lab				*l;
+	static short		b = 1;
 
 	l = NULL;
 	a = init_asm();
 	h = init_header();
-	if (av != 2)
+	if (av < 2 || av > 3)
 		ft_exit("Usage: ./asm <champion.s>");
-	get_info_asm(ac[1], a);
+	if (!ft_strcmp(ac[b],"-o"))
+		b += 1;
+	get_info_asm(ac[b], a);
 	header_champ(a, h);
 	l = get_label(a);
 	check_operation(a, l);
@@ -48,9 +51,9 @@ int		main(int av, char **ac)
 	write_label(l);
 	h->prog_size = a->total_bytes;
 	close(a->fd_champ);
-	final_write(a, h, l);	
-	while(1)
-		;
-	bonus(a, l, h);
+	if (b != 2)
+		final_write(a, h, l, ac[1]);	
+	else
+		bonus(a, l, h);
 	return (0);
 }
