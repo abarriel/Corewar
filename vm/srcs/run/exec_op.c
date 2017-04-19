@@ -80,6 +80,7 @@ int  exec_lfork(void *core, void *pro)
   pr = (t_process*)pro;
   cor = (t_core*)core;
   new = dup_process(pr);
+  jmp = 0;
   jmp += (unsigned int)(cor->mem[(pr->pc + 1) % MEM_SIZE]) * 256;
   jmp += (unsigned int)(cor->mem[(pr->pc + 2) % MEM_SIZE]);
   new->pc = (new->pc + (jmp % MEM_SIZE)) % MEM_SIZE;
@@ -99,8 +100,9 @@ int  exec_fork(void *core, void *pro)
   pr = (t_process*)pro;
   cor = (t_core*)core;
   new = dup_process(pr);
-  jmp += (unsigned int)(cor->mem[(pr->pc + 1) % MEM_SIZE]) * 256;
-  jmp += (unsigned int)(cor->mem[(pr->pc + 2) % MEM_SIZE]);
+  jmp = 0;
+  jmp += ((unsigned int)(cor->mem[(pr->pc + 1)]) * 256);
+  jmp += (unsigned int)(cor->mem[(pr->pc + 2)]);
   new->pc = (new->pc + (((short int)jmp % MEM_SIZE) % IDX_MOD)) % MEM_SIZE;
   cor->mem_c[new->pc] = 16 * new->player->color + 1;
   new->next = cor->process;

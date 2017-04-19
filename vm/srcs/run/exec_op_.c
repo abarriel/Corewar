@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 06:40:45 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/19 01:50:59 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/19 02:03:58 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,12 +219,10 @@ int exec_lldi(void *core, void *pro)
   t_process *pr;
   t_core *cr;
   unsigned int res;
-  int add;
 
   cr = (t_core*)core;
   pr = (t_process*)pro;
-  add = real_int(get_n_arg(cr, pr, 1, 0) % MEM_SIZE) + real_int((get_n_arg(cr, pr, 2, 0) % MEM_SIZE));
-  res = chatoi(&(cr->mem[uns_int((add % MEM_SIZE) + pr->pc) % MEM_SIZE]));
+  res = chatoi(&(cr->mem[((pr->pc + (get_n_arg(cr, pr, 1, 1)) + get_n_arg(cr, pr, 2, 1)))]));
   if (res == 0)
     pr->carry = 1;
   else

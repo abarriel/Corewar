@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:29:02 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/18 23:47:11 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/19 02:14:36 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,24 +89,26 @@ void print_map(t_core *core)
 		ft_printf("%4d | ", i);
 		while (j < 64)
 		{
-			if (color[i] == 1)
+			if (color[i] == 0x10)
 				ft_printf("{1}%.2x", map[i]);
-			else if (color[i] == 2)
+			else if (color[i] == 0x20)
 				ft_printf("{2}%.2x", map[i]);
-			else if (color[i] == 20)
-				ft_printf("\033[4;32m%.2x", map[i]);
-			else if (color[i] == 3)
+			else if (color[i] == 0x21)
+				ft_printf("\033[4;1;32m%.2x", map[i]);
+			else if (color[i] == 0x30)
 				ft_printf("{3}%.2x", map[i]);
-			else if (color[i] == 30)
-				ft_printf("\033[4;33m%.2x", map[i]);
-			else if (color[i] == 4)
+			else if (color[i] == 0x31)
+				ft_printf("\033[4;1;33m%.2x", map[i]);
+			else if (color[i] == 0x40)
 				ft_printf("{4}%.2x", map[i]);
-			else if (color[i] == 40)
-				ft_printf("\033[4;34m%.2x", map[i]);
-			else if (color[i] == 10)
+			else if (color[i] == 0x41)
+				ft_printf("\033[4;1;34m%.2x", map[i]);
+			else if (color[i] == 0x11)
 				ft_printf("\033[4;1;31m%.2x", map[i]);
-			else if (color[i] == 11)
+			else if (color[i] == 0x12)
 				ft_printf("{8}%.2x", map[i]);
+			else if (color[i] == 0x22)
+				ft_printf("{9}%.2x", map[i]);
 			else
 				ft_printf("%.2x", map[i]);
 			ft_printf("\033[0m ");
@@ -166,10 +168,13 @@ void print_reg(t_core *core)
 {
 	int i;
 	t_process *tmp;
+	int j;
 
+	j = 0;
 	tmp = core->process;
 	while (tmp)
 	{
+		j++;
 		i = 0;
 		ft_printf("\nName: [%s]\n", tmp->player->name);
 		ft_printf("ID: [%02x%02x%02x%02x]\n", tmp->player->id[0], tmp->player->id[1], tmp->player->id[2], tmp->player->id[3]);
@@ -180,7 +185,7 @@ void print_reg(t_core *core)
 			ft_printf("%2d : %.2x%.2x%.2x%.2x\n", i + 1, tmp->reg[i][0], tmp->reg[i][1], tmp->reg[i][2], tmp->reg[i][3]);
 			i++;
 		}
-		ft_printf("\n");
+		ft_printf("\nnb_process : %d\n", j);
 		tmp = tmp->next;
 	}
 }
