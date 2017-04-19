@@ -54,7 +54,7 @@ t_process *dup_process(t_process *pro)
 
   new = (t_process*)malloc(sizeof(t_process));
   new->pc = pro->pc;
-  new->life_flag = 0;
+  new->life_flag = pro->life_flag;
   new->cycle_left = 0;
   new->op = NULL;
   new->carry = pro->carry;
@@ -134,9 +134,9 @@ void exec_op(t_core *core, t_process *pro)
 
   if (pro->op->mnemonique)
   {
-      ft_printf("op : %s at cycle : %d from player : %d\n\n", pro->op->mnemonique, core->cycle, pro->player->nb);
+      //ft_printf("op : %s at cycle : %d from player : %d\n\n", pro->op->mnemonique, core->cycle, pro->player->nb);
 
-    ft_printf("{9}\nReturn Check  de %s=[%d]\n",pro->op->mnemonique, checker_arg(core, pro));
+    //ft_printf("{9}\nReturn Check  de %s=[%d]\n",pro->op->mnemonique, checker_arg(core, pro));
     // exit(0);
     if (pro->op->cde_oct == 0 || checker_arg(core, pro) == 1)
     {

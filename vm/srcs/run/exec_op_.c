@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 06:40:45 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/19 02:03:58 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/19 03:30:46 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,10 +206,6 @@ int exec_ldi(void *core, void *pro)
   res = chatoi(&(cr->mem[uns_int((add % IDX_MOD) + pr->pc) % MEM_SIZE]));
   //ft_printf("stock at %d + %d", (real_int(get_n_arg(cr, pr, 1, 0) % MEM_SIZE)), get_n_arg(cr, pr, 2, 0));
   //ft_printf("LDI at : %08X\n", res);
-  if (res == 0)
-    pr->carry = 1;
-  else
-    pr->carry = 0;
   insert_in_reg(get_n_reg(cr, pr, 3), 0, res);
   return (size_args(cr->mem[(pr->pc + 1) % MEM_SIZE], 2));
 }
@@ -240,10 +236,6 @@ int exec_st(void *core, void *pro)
   cr = (t_core*)core;
   pr = (t_process*)pro;
   res = get_n_arg(cr, pr, 1, 1);
-  if (res == 0)
-    pr->carry = 1;
-  else
-    pr->carry = 0;
   if (cr->mem[(pr->pc + 1) % MEM_SIZE] == (unsigned char)80)
   {
     insert_in_reg(get_n_reg(cr, pr, 2), 0, res);
@@ -272,10 +264,6 @@ int exec_sti(void *core, void *pro)
 //   ft_printf("res : %08x\n", res);
 //   ft_printf("to have : %02x %02x %02x %02x\n", pr->reg[0][0], pr->reg[0][1], pr->reg[0][2], pr->reg[0][3]);
   // exit(0);
-  if (res == 0)
-    pr->carry = 1;
-  else
-    pr->carry = 0;
   add = real_int(get_n_arg(cr, pr, 2, 0) % MEM_SIZE) + real_int((get_n_arg(cr, pr, 3, 0) % MEM_SIZE));
   insert_in_color(cr->mem_c, uns_int((add % IDX_MOD) + pr->pc) % MEM_SIZE, pr->player->color * 16 + 2, 4);
   insert_in_reg(cr->mem, uns_int((add % IDX_MOD) + pr->pc) % MEM_SIZE, res);
