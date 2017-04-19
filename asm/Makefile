@@ -11,10 +11,7 @@
 # **************************************************************************** #
 
 NAME	= asm
-#
-#	 truc a faire attention prendre le gnl de corentin pas celui de allan pck il pue du cul quand le buff size est infrerieu au feed
-#
-#
+
 SRC		=  main.c \
 init/header.c \
 init/header_.c \
