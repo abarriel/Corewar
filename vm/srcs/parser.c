@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parcing_entry.c                                    :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 05:41:30 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/17 18:54:21 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/20 00:42:16 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,11 @@ void		get_the_champ(char *str, t_core *c)
 		ft_exit("Wrong prog size");
 	ft_memcpy(new->comment, header.comment, COMMENT_LENGTH + 1);
 	new = get_the_prog(fd, new);
-	if (c->player == NULL)
-	{
-		c->player = new;
-		c->player->next = NULL;
-		return ;
-	}
-	new->next = c->player;
+	if (c->player != NULL)
+		new->next = c->player;
 	c->player = new;
+	if (c->player == NULL)
+		c->player->next = NULL;
 	close(fd);
 }
 

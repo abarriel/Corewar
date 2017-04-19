@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:29:02 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/19 22:55:27 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/04/20 00:29:13 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int		main(int argc, char **argv)
 
 	core = new_core();
 	parcing(argc, argv, core);
-	print_player(core);
 	init_core(core);
 	if (core->visu == 0)
 	{

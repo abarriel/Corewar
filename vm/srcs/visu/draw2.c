@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcharvol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 11:52:41 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/18 11:52:42 by lcharvol         ###   ########.fr       */
+/*   Updated: 2017/04/20 00:27:57 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void			ft_draw_map(t_env *p)
 		while (i2 < MAP_SIZE_X)
 		{
 			i4 = 0;
-			if (p->core->mem_c[i3] == 10 || p->core->mem_c[i3] == 20 ||
-				p->core->mem_c[i3] == 30 || p->core->mem_c[i3] == 40)
+			if (p->core->mem_c[i3] == 0x11 || p->core->mem_c[i3] == 0x21 ||
+				p->core->mem_c[i3] == 0x31 || p->core->mem_c[i3] == 0x41)
 				i4 = 2;
 			chose_color_case(p, i3);
 			ft_draw_square((((i2) * (size + 1)) + (i4 / 2)) + 18, ((i) *

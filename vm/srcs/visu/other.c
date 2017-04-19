@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   other.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcharvol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 15:42:27 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/18 12:01:11 by lcharvol         ###   ########.fr       */
+/*   Updated: 2017/04/20 00:30:40 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int			go_visu(t_core *core)
 	p->win = mlx_new_window(p->mlx, WIDTH, HEIGHT, "Corewar");
 	p->img = mlx_new_image(p->mlx, WIDTH, HEIGHT);
 	visu(p, core);
-	print_player(core);
 	mlx_loop(p->mlx);
 	return (0);
 }

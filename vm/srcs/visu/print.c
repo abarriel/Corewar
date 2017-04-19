@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:54:33 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/19 22:38:51 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/20 00:35:43 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void			print_players(t_env *p)
 	i = -1;
 	tmp = p->core->player;
 	str = ft_strnew(4);
- 	ft_strncpy(str, tmp->name, 4);
+	ft_strncpy(str, tmp->name, 4);
 	while (++i < 4)
 	{
 		print_players_extented(p, i, str);
@@ -106,7 +106,7 @@ void			print_info(t_env *p)
 	if (p->core->die_cycle > 0)
 		str = ft_itoa(p->core->die_cycle);
 	else
-		str = ft_itoa(0);	
+		str = ft_itoa(0);
 	mlx_string_put(p->mlx, p->win, (HEIGHT + 530), 570, 0x0e74c3c, str);
 }
 

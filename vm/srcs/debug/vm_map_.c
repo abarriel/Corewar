@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 22:54:20 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/20 00:04:53 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/20 00:34:12 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	print_reg(t_core *core)
 
 void	print_color(t_core *core)
 {
-	char	*map;
+	char			*map;
 	char			*color;
 	int				i;
 	int				j;
