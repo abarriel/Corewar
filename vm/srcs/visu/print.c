@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcharvol <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 01:54:33 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/03/24 01:54:36 by lcharvol         ###   ########.fr       */
+/*   Updated: 2017/04/19 22:38:51 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,10 @@ void			print_info(t_env *p)
 	mlx_string_put(p->mlx, p->win, (HEIGHT + 530), 520, 0x0e74c3c, str);
 	str = "CYCLE TO DIE : ";
 	mlx_string_put(p->mlx, p->win, (HEIGHT + 380), 570, 0x0FFFFFF, str);
-	str = ft_itoa(p->core->die_cycle);
+	if (p->core->die_cycle > 0)
+		str = ft_itoa(p->core->die_cycle);
+	else
+		str = ft_itoa(0);	
 	mlx_string_put(p->mlx, p->win, (HEIGHT + 530), 570, 0x0e74c3c, str);
 }
 
