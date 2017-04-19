@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:19:44 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/19 05:56:22 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/19 06:45:31 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ unsigned int return_arg(t_core *core, t_process *process, int mod, int index, in
   }
 if (cde == IND_CODE)
   {
-    res = chatohi(&(core->mem[process->pc + ((index - process->pc) % IDX_MOD) % MEM_SIZE]));
+    res = chatohi(&(core->mem[(process->pc + ((index - process->pc) % IDX_MOD)) % MEM_SIZE]));
 
     //ft_printf("%02x %02x\n", core->mem[index % MEM_SIZE], core->mem[(index+1) % MEM_SIZE]);
   }
@@ -52,8 +52,6 @@ if (cde == IND_CODE)
      {
        res = chatohi(&(core->mem[index % MEM_SIZE]));
      }
-     if (mod == 1)
-      res %= IDX_MOD;
   }
   return(res);
 }
@@ -84,13 +82,13 @@ unsigned int get_n_arg(t_core *core, t_process *process, int arg, int mod)
   cde = apply_mask(cde, arg);
   if (arg == 1)
   {
-    index = process->pc + 2;
+    index = (process->pc + 2) % MEM_SIZE;
     return(return_arg(core, process, mod, index, cde));
   }
   if (arg == 2)
   {
     i = return_good_value((((core->mem[(process->pc + 1) % MEM_SIZE]) & 192)>> 6), process);
-    index = (process->pc + 2) + i;
+    index = ((process->pc + 2) + i) % MEM_SIZE;
     //printf("%02x %02x\n", core->mem[index % MEM_SIZE], core->mem[index % MEM_SIZE + 1]);
     return(return_arg(core, process, mod, index, cde));
   }
