@@ -1,7 +1,7 @@
-.name "Melenchon le brave"
-.comment "Here for destroy Zork"
+.name ""
+.comment ""
 
-l2:		sti r1, 9, %10
+l2:		st r1, 17
 		fork %:out
 		and r4, %0, r3
 

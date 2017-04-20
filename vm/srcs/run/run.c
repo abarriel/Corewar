@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 21:53:55 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/19 21:53:57 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/04/20 17:52:34 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,8 @@ void		run(t_core *core)
 		if (core->dump != -1)
 			core->dump--;
 	}
+	if (core->nb_player == 0)
+		print_res(core);
+	if (core->dump != -1)
+		print_map(core);
 }

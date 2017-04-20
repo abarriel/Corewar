@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 05:27:34 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/16 20:51:31 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/04/20 16:49:22 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	print_winner(t_player *p)
 		(unsigned int)p->nb, p->name);
 }
 
-void	print_is_alive(char *name)
+void	print_is_alive(int nb, char *name)
 {
-	ft_printf("Le joueur %s est en vie\n", name);
+	ft_printf("Le joueur %d(%s) est en vie\n", nb, name);
 }
 
 void	nbr_allready_used(int nb)

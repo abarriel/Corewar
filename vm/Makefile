@@ -6,7 +6,7 @@
 #    By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/25 03:28:37 by lcharvol          #+#    #+#              #
-#    Updated: 2017/03/29 04:48:57 by cseccia          ###   ########.fr        #
+#    Updated: 2017/04/20 17:59:12 by cseccia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC		= vm.c  \
 	debug/tools.c \
 	\
 	init/init_core.c \
+	init/sort_process.c \
 	\
 	run/checker.c \
 	run/exec_op.c \
@@ -43,7 +44,7 @@ SRC		= vm.c  \
 	visu/other.c \
 	visu/other2.c \
 	visu/print.c \
-	
+
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 

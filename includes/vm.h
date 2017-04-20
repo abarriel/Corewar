@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/20 01:27:36 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/04/20 17:58:21 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef struct			s_but
 int						is_a_champ(char *str);
 int						count_live(t_player *players);
 int						checker_arg(t_core *core, t_process *pro);
+t_process				*sort_process(t_core *core);
 int						exec_lld(void *core, void *pro);
 int						exec_live(void *core, void *pro);
 int						exec_add(void *core, void *pro);
@@ -168,6 +169,7 @@ unsigned char			apply_mask(unsigned char cde, int arg);
 unsigned long int		chatoli(char **str);
 unsigned int			get_n_arg(t_core *core, t_process *process, int arg);
 void					print_data(t_core *core);
+void					print_is_alive(int nb, char *name);
 void					print_reg(t_core *core);
 void					print_res(t_core *core);
 void					debug_run(t_core *core);

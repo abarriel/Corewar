@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_core.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abarriel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 22:45:24 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/19 22:46:25 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/04/20 17:57:54 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void		init_player(t_player *p, t_core *c)
 	size_t	petit;
 
 	petit = 0xFFFFFFFF - (c->nb_player);
-	p->nb = c->nb_player + 1;
+	p->nb = c->tmp_id;
+	c->tmp_id = 0;
 	p->magic = 0;
 	p->name = NULL;
 	p->weight = 0;
@@ -104,6 +105,7 @@ void		init_core(t_core *core)
 		tmp_r = tmp_r->next;
 		i++;
 	}
+	core->process = sort_process(core);
 }
 
 t_core		*new_core(void)
@@ -116,6 +118,7 @@ t_core		*new_core(void)
 	ft_bzero(res->mem_c, MEM_SIZE);
 	res->player = NULL;
 	res->process = NULL;
+	res->tmp_id = 0;
 	res->dump = -1;
 	res->debug = 0;
 	res->last_check = 0;

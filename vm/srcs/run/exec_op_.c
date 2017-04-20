@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 06:40:45 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/19 23:50:44 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/20 16:49:29 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	exec_live_(t_player *pla, t_core *cor, t_process *pr)
 		cor->mem_c[(pr->pc + i + 1) % MEM_SIZE] = pla->color * 16 + 4;
 		i++;
 	}
+	print_is_alive(pla->nb, pla->name);
 }
 
 int		exec_live(void *core, void *pro)
