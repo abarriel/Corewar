@@ -107,6 +107,8 @@ static void		handles_code(t_asm *a, t_cmd *c)
 
 void			write_op(t_asm *a, t_lab *l)
 {
+	if (!l)
+		ft_exit("No label found");
 	l->bytes = 0;
 	while (l)
 	{

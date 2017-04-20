@@ -44,14 +44,19 @@ int		check_full_space_line(char *str)
 
 void	header_verif_name_comment(char *line, t_asm *a)
 {
-	while (*(line++) && *line != '"')
-		;
-	line++;
-	while (*(line++))
+	int i;
+	int j;
+
+	i = 0;
+	while (line[i] && line[i] != '"')
+		i++;
+	j = i;
+	i += 1;
+	while (line[i])
 	{
-		if (*line != ' ' && *line != '\0')
-			return (lexical_error(a->count_line, a->len_line -
-				ft_strlen(line)));
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\0')
+			return (lexical_error(a->count_line, i - j));
+		i++;
 	}
 	return ;
 }

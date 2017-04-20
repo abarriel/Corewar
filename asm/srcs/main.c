@@ -18,7 +18,7 @@
 
 void	get_info_asm(char *s, t_asm *a)
 {
-	if ((a->fd_champ = open(s, O_RDONLY)) < 0)
+	if ((a->fd_champ = open(s, O_RDONLY)) <= 0)
 		ft_exit("Cannot Open file");
 	if ((ft_strrncmp(s, "s.", 2)) || ft_strlen(s) == 2)
 		ft_exit("Not good extension/Not good file");
