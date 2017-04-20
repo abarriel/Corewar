@@ -41,7 +41,7 @@ void			header_name(char *line, t_header *h, t_asm *a)
 	i = 0;
 	a->header_passage += 1;
 	skip_space(&line);
-	if (*line != '"' && !ft_strchr(LABEL_CHARS, *line))
+	if (*line != '"')
 		return (lexical_error(a->count_line, a->len_line - ft_strlen(line)));
 	line++;
 	name = header_name_(line, a);
@@ -84,7 +84,7 @@ void			header_comment(char *line, t_header *h, t_asm *a)
 	if (tmp == 1)
 		return (lexical_error(a->count_line, a->len_line - ft_strlen(line)));
 	skip_space(&line);
-	if (*line != '"' && !ft_strchr(LABEL_CHARS, *line))
+	if (*line != '"' )
 		return (lexical_error(a->count_line, a->len_line - ft_strlen(line)));
 	line++;
 	name = header_comment_(line, a);
