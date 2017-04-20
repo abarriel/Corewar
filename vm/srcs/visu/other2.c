@@ -37,9 +37,9 @@ void			print_nb_live(t_env *p)
 	{
 		if (p->core->player)
 		{
-		str = ft_itoa(p->core->player->nb_live);
-		print_nb_live2(p, i, str);
-		p->core->player = p->core->player->next;
+			str = ft_itoa(p->core->player->nb_live);
+			print_nb_live2(p, i, str);
+			p->core->player = p->core->player->next;
 		}
 		i++;
 	}
