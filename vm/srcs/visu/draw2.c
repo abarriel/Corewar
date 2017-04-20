@@ -26,6 +26,11 @@ void			print_info2(t_env *p, char *str)
 	free(str);
 	str = "CYCLE TO DIE : ";
 	mlx_string_put(p->mlx, p->win, (HEIGHT + 380), 570, 0x0FFFFFF, str);
+	if (p->melenchon == 1)
+	{
+		str = "Partie terminée!";
+		mlx_string_put(p->mlx, p->win, (HEIGHT + 380), 620, 0x0FFFFFF, str);
+	}
 }
 
 void			ft_draw_rectangle(int start_x, int start_y, t_env *p)
