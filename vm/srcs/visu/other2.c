@@ -31,20 +31,17 @@ void			print_nb_live(t_env *p)
 	t_player	*tmp;
 	int			i;
 
-	i = -1;
+	i = 0;
 	tmp = p->core->player;
-	str = ft_itoa(p->core->player->nb_live);
-	while (++i < 4)
+	while (i < 4)
 	{
-		if (i >= 0 && i <= 3)
-			print_nb_live2(p, i, str);
-		if (p->core->player->next == NULL)
-			str = "";
-		else
+		if (p->core->player)
 		{
-			p->core->player = p->core->player->next;
-			str = ft_itoa(p->core->player->nb_live);
+		str = ft_itoa(p->core->player->nb_live);
+		print_nb_live2(p, i, str);
+		p->core->player = p->core->player->next;
 		}
+		i++;
 	}
 	p->core->player = tmp;
 }
