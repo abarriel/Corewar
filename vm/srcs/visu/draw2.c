@@ -121,7 +121,8 @@ void			ft_draw_score(t_env *p)
 	{
 		if (p->core->player->nb_live > 0)
 			(i2[i / 50]) = (WIDTH - (HEIGHT) - 150);
-		else if (p->core->player->nb_live == 0 && (i2[i / 50]) > 0)
+		else if (p->core->player->nb_live == 0 &&
+			(i2[i / 50]) > 0 && p->pause == 0)
 			(i2[i / 50])--;
 		p->l = WIDTH - (HEIGHT) - 150;
 		ft_modif_color(20, 20, 20, p);
