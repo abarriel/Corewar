@@ -12,10 +12,6 @@
 
 #include "asm.h"
 
-/*
-** PAS OUBLIER CHAMPIONS AVEC HEADER MAIS INSTRUCTION VIDE
-*/
-
 void	get_info_asm(char *s, t_asm *a)
 {
 	if ((a->fd_champ = open(s, O_RDONLY)) <= 0)
