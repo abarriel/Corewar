@@ -21,7 +21,8 @@ char			*header_name_(char *line, t_asm *a)
 		name = ft_strjoin(name, "\n");
 	while (!ft_strchr(line, '"'))
 	{
-		get_next_line(a->fd_champ, &line);
+		if ((get_next_line(a->fd_champ, &line)) == 0)
+			ft_exit("Only name.. wrong champ");
 		name = ft_strjoin(name, line);
 		a->count_line++;
 		if (ft_strchr(name, '"'))
@@ -61,7 +62,8 @@ char			*header_comment_(char *line, t_asm *a)
 		name = ft_strjoin(name, "\n");
 	while (!ft_strchr(line, '"'))
 	{
-		get_next_line(a->fd_champ, &line);
+		if ((get_next_line(a->fd_champ, &line)) == 0)
+			ft_exit("Only comment.. wrong champ");
 		name = ft_strjoin(name, line);
 		a->count_line++;
 		if (ft_strchr(name, '"'))
@@ -103,7 +105,8 @@ void			header_champ(t_asm *a, t_header *h)
 	header_magic_code(h);
 	while (a->header_passage != 2)
 	{
-		get_next_line(a->fd_champ, &line);
+		if (get_next_line(a->fd_champ, &line) == 0)
+			ft_exit("Empty file or Wrong header ?");
 		if (*line != COMMENT_CHAR)
 			header_parser(line, h, a);
 		a->count_line++;

@@ -42,7 +42,7 @@ INCLUDES = ../includes/asm.h ../includes/op.h
 ALL_FLAGS = -Wall -Wextra -Werror
 CFLAGS	=  $(ALL_FLAGS) -I../includes/ -I../libft/includes/
 
-all:  makefile libft  $(INCLUDES) $(NAME)
+all: $(INCLUDES) makefile libft   $(NAME)
 
 libft:
 	@make -C ../libft
