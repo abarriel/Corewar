@@ -21,6 +21,7 @@ void			print_player_name(t_env *p)
 	i = -1;
 	tmp = p->core->player;
 	str = tmp->name;
+	str[5] = '\0';
 	while (++i < 4)
 	{
 		if (i >= 0 && i <= 3)
@@ -31,6 +32,7 @@ void			print_player_name(t_env *p)
 		{
 			p->core->player = p->core->player->next;
 			str = p->core->player->name;
+			str[5] = '\0';
 		}
 	}
 	p->core->player = tmp;
@@ -63,12 +65,14 @@ void			print_players(t_env *p)
 	str = tmp->name;
 	while (++i < 4)
 	{
-		print_players_extented(p, i, str);
+		if (i >= 0 && i <= 3)
+			print_players_extented(p, i, str);
 		if (p->core->player->next == NULL)
 			str = "N/A";
 		else
 		{
-			str = tmp->name;
+			p->core->player = p->core->player->next;
+			str = p->core->player->name;
 		}
 	}
 	p->core->player = tmp;
