@@ -25,6 +25,14 @@ void	get_info_asm(char *s, t_asm *a)
 	ft_strcat(a->cor, ".cor");
 }
 
+void	print_usage(void)
+{
+	ft_putstr("Usage: ./asm [-o] <champion.s>\n");
+	ft_putstr("\t-o : Instead of creating a .cor file, outputs a annotated");
+	ft_putstr(" version of the code to the standard output\n");
+	exit(0);
+}
+
 int		main(int av, char **ac)
 {
 	t_asm				*a;
@@ -36,7 +44,7 @@ int		main(int av, char **ac)
 	a = init_asm();
 	h = init_header();
 	if (av < 2 || av > 3)
-		ft_exit("Usage: ./asm <champion.s>");
+		print_usage();
 	if (!ft_strcmp(ac[b], "-o"))
 		b += 1;
 	get_info_asm(ac[b], a);
