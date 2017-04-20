@@ -12,6 +12,23 @@
 
 #include "vm.h"
 
+void			print_res_visu(t_core *core, t_env *p)
+{
+	t_player	*player;
+	t_player	*winner;
+
+	player = core->player;
+	winner = core->player;
+	p->melenchon = 1;
+	while (player)
+	{
+		if (player->last_live > winner->last_live)
+			winner = player;
+		player = player->next;
+	}
+	print_winner(winner);
+}
+
 void			ft_draw_arena(t_env *p)
 {
 	ft_modif_color(15, 15, 15, p);

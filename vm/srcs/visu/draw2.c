@@ -12,6 +12,22 @@
 
 #include "vm.h"
 
+void			print_info2(t_env *p, char *str)
+{
+	str = "CYCLE / SEC  : ";
+	mlx_string_put(p->mlx, p->win, (HEIGHT + 50), 620, 0x0FFFFFF, str);
+	str = ft_itoa(p->core->cycle_sec);
+	mlx_string_put(p->mlx, p->win, (HEIGHT + 200), 620, 0x0e74c3c, str);
+	free(str);
+	str = "CYCLE DELTA  : ";
+	mlx_string_put(p->mlx, p->win, (HEIGHT + 380), 520, 0x0FFFFFF, str);
+	str = ft_itoa(CYCLE_DELTA);
+	mlx_string_put(p->mlx, p->win, (HEIGHT + 530), 520, 0x0e74c3c, str);
+	free(str);
+	str = "CYCLE TO DIE : ";
+	mlx_string_put(p->mlx, p->win, (HEIGHT + 380), 570, 0x0FFFFFF, str);
+}
+
 void			ft_draw_rectangle(int start_x, int start_y, t_env *p)
 {
 	int			i;
@@ -104,10 +120,7 @@ void			ft_draw_score(t_env *p)
 	while (p->core->player)
 	{
 		if (p->core->player->nb_live > 0)
-		{
-			if ((i2[i / 50]) + 1 <= (WIDTH - (HEIGHT) - 150))
-				(i2[i / 50]) += 5;
-		}
+			(i2[i / 50]) = (WIDTH - (HEIGHT) - 150);
 		else if (p->core->player->nb_live == 0 && (i2[i / 50]) > 0)
 			(i2[i / 50])--;
 		p->l = WIDTH - (HEIGHT) - 150;

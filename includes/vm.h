@@ -93,6 +93,7 @@ typedef struct			s_env
 {
 	t_core			*core;
 	int				speed;
+	int				melenchon;
 	int				pause;
 	int				cycle_count;
 	int				h;
@@ -193,6 +194,9 @@ void					check_button_hit2(int button, int x, int y, t_env *p);
 void					ft_draw_rectangle(int start_x, int start_y, t_env *p);
 void					ft_draw_square(int start_x, int start_y,
 	int size, t_env *p);
+void					print_info2(t_env *p, char *str);
+void					print_res_visu(t_core *core, t_env *p);
+void					print_player_name2(t_env *p, int i, char *str);
 void					ft_draw_score(t_env *p);
 void					ft_draw_map(t_env *p);
 void					modif_color_for_player(t_env *p, int i);

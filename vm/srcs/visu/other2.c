@@ -12,6 +12,19 @@
 
 #include "vm.h"
 
+void			print_nb_live2(t_env *p, int i, char *str)
+{
+	if (i == 0)
+		mlx_string_put(p->mlx, p->win, 1350, 750, 0x0e74c3c, str);
+	if (i == 1)
+		mlx_string_put(p->mlx, p->win, 1350, 950, 0x2ecc71, str);
+	if (i == 2)
+		mlx_string_put(p->mlx, p->win, 1700, 750, 0x03498db, str);
+	if (i == 3)
+		mlx_string_put(p->mlx, p->win, 1700, 950, 0x0f1c40f, str);
+	free(str);
+}
+
 void			print_nb_live(t_env *p)
 {
 	char		*str;
@@ -23,13 +36,8 @@ void			print_nb_live(t_env *p)
 	str = ft_itoa(p->core->player->nb_live);
 	while (++i < 4)
 	{
-		if (i == 0 || i == 1)
-			mlx_string_put(p->mlx, p->win, 1350, 750 + (200 * i), 0x0e74c3c,
-				str);
-		if (i == 2)
-			mlx_string_put(p->mlx, p->win, 1700, 750, 0x03498db, str);
-		if (i == 3)
-			mlx_string_put(p->mlx, p->win, 1700, 950, 0x0f1c40f, str);
+		if (i >= 0 && i <= 3)
+			print_nb_live2(p, i, str);
 		if (p->core->player->next == NULL)
 			str = "";
 		else
@@ -63,4 +71,16 @@ void			check_button_hit2(int button, int x, int y, t_env *p)
 			p->core->cycle_sec += 5;
 		}
 	}
+}
+
+void			print_player_name2(t_env *p, int i, char *str)
+{
+	if (i == 0)
+		mlx_string_put(p->mlx, p->win, 1300, 700, 0x0e74c3c, str);
+	if (i == 1)
+		mlx_string_put(p->mlx, p->win, 1300, 900, 0x2ecc71, str);
+	if (i == 2)
+		mlx_string_put(p->mlx, p->win, 1650, 700, 0x03498db, str);
+	if (i == 3)
+		mlx_string_put(p->mlx, p->win, 1650, 900, 0x0f1c40f, str);
 }
