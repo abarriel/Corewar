@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 05:41:30 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/20 16:57:26 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/20 23:14:32 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int			ft_get_flag(t_core *c, int argc, char **argv, int i)
 	return (i);
 }
 
-int				already_use(t_core *core, int i)
+int			already_use(t_core *core, int i)
 {
 	t_player *p;
 
@@ -92,24 +92,6 @@ int				already_use(t_core *core, int i)
 		p = p->next;
 	}
 	return (0);
-}
-
-void			find_player_nb(t_core *core)
-{
-	int i;
-	t_player *p;
-
-	i = 1;
-	p = core->player;
-	while (p)
-	{
-		while (already_use(core, i))
-			i++;
-		if (p->nb == 0)
-			p->nb = i;
-		i++;
-		p = p->next;
-	}
 }
 
 t_core		*parcing(int argc, char **argv, t_core *c)

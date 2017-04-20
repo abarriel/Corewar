@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 05:45:22 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/20 17:55:33 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/20 23:13:22 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	print_usage(void)
 {
-	ft_printf("Usage: ./corewar [-dump N -n N -v -debug N] <champion1.cor> <...>\n\n");
-	ft_printf("    -dump nbr_cycles : Au bout de nbr_cycles cycles ");
-	ft_printf("d’exécution, dump la mémoire sur la sortie standard,");
-	ft_printf(" puis quitte la partie.\n");
-	ft_printf("    -debug           : Debug avec plusieurs option\n");
-	ft_printf("    -n numer         : Fixe le numéro du prochain joueur.\n");
-	ft_printf("    -v               : inter face graphique mlx\n");
+	ft_putstr("Usage: ./corewar [-dump N -n N -f -debug N]");
+	ft_putstr("<champion1.cor> <...>\n\n");
+	ft_putstr("    -dump nbr_cycles : Au bout de nbr_cycles cycles ");
+	ft_putstr("d’exécution, dump la mémoire sur la sortie standard,");
+	ft_putstr(" puis quitte la partie.\n");
+	ft_putstr("    -debug           : Debug avec plusieurs option\n");
+	ft_putstr("    -n numer         : Fixe le numéro du prochain joueur.\n");
+	ft_putstr("    -v               : inter face graphique mlx\n");
 	exit(0);
 }
 

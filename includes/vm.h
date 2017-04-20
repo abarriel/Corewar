@@ -6,7 +6,7 @@
 /*   By: lcharvol <lcharvol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 03:31:31 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/20 17:58:21 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/20 23:16:13 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,8 @@ unsigned char			*cp_reg(unsigned char *dest, unsigned char *src);
 unsigned char			*get_n_reg(t_core *core, t_process *process, int arg);
 unsigned char			apply_mask(unsigned char cde, int arg);
 unsigned long int		chatoli(char **str);
-unsigned int			get_n_arg(t_core *core, t_process *process, int arg);
+unsigned int			get_n_arg(t_core *core, t_process *process,
+		int arg, int md);
 void					print_data(t_core *core);
 void					print_is_alive(int nb, char *name);
 void					print_reg(t_core *core);
@@ -185,6 +186,7 @@ void					exec_op(t_core *core, t_process *pro);
 void					insert_in_reg(unsigned char *reg, int index,
 	unsigned int cpy);
 void					print_usage(void);
+void					find_player_nb(t_core *core);
 void					init_player(t_player *p, t_core *c);
 void					error_executable(void);
 void					init_core(t_core *core);

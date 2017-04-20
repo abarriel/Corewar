@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 08:19:44 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/19 20:55:42 by abarriel         ###   ########.fr       */
+/*   Updated: 2017/04/20 22:27:41 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,16 @@ unsigned int	return_arg(t_core *core, t_process *process, int index, int cde)
 		res = chatoi(process->reg[res - 1]);
 		return (res);
 	}
-	if (cde == IND_CODE)
-		res = chatohi(&(core->mem[(process->pc +
-		((index - process->pc) % IDX_MOD)) % MEM_SIZE]));
-	if (cde == DIR_CODE)
+	if (cde == IND_CODE && core->tmp_id != 2)
 	{
-		if (!process->op->l_size)
+		res = (chatohi(&(core->mem[index % MEM_SIZE])));
+		res = chatoi(&(core->mem[(process->pc + res) % MEM_SIZE]));
+		if (core->tmp_id != 1)
+			res %= IDX_MOD;
+	}
+	if (cde == DIR_CODE || core->tmp_id == 2)
+	{
+		if (!process->op->l_size && cde == DIR_CODE)
 			res = chatoi(&(core->mem[index % MEM_SIZE]));
 		else
 			res = chatohi(&(core->mem[index % MEM_SIZE]));
@@ -62,12 +66,13 @@ unsigned char	return_good_value(unsigned char cde, t_process *process)
 	return (0);
 }
 
-unsigned int	get_n_arg(t_core *core, t_process *process, int arg)
+unsigned int	get_n_arg(t_core *core, t_process *process, int arg, int md)
 {
 	unsigned char	cde;
 	unsigned char	i;
 	int				index;
 
+	core->tmp_id = md;
 	cde = apply_mask(core->mem[(process->pc + 1) % MEM_SIZE], arg);
 	if (arg == 1)
 		return (return_arg(core, process, (process->pc + 2) % MEM_SIZE, cde));

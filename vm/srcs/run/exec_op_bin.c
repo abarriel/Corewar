@@ -6,7 +6,7 @@
 /*   By: abarriel <abarriel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 20:18:59 by abarriel          #+#    #+#             */
-/*   Updated: 2017/04/19 23:37:36 by cseccia          ###   ########.fr       */
+/*   Updated: 2017/04/20 22:20:55 by cseccia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	exec_and(void *core, void *pro)
 
 	cr = (t_core*)core;
 	pr = (t_process*)pro;
-	res = get_n_arg(cr, pr, 1) & get_n_arg(cr, pr, 2);
+	res = get_n_arg(cr, pr, 1, 0) & get_n_arg(cr, pr, 2, 0);
 	if (res == 0)
 		pr->carry = 1;
 	else
@@ -73,7 +73,7 @@ int	exec_or(void *core, void *pro)
 
 	cr = (t_core*)core;
 	pr = (t_process*)pro;
-	res = get_n_arg(cr, pr, 1) | get_n_arg(cr, pr, 2);
+	res = get_n_arg(cr, pr, 1, 0) | get_n_arg(cr, pr, 2, 0);
 	if (res == 0)
 		pr->carry = 1;
 	else
@@ -90,7 +90,7 @@ int	exec_xor(void *core, void *pro)
 
 	cr = (t_core*)core;
 	pr = (t_process*)pro;
-	res = get_n_arg(cr, pr, 1) ^ get_n_arg(cr, pr, 2);
+	res = get_n_arg(cr, pr, 1, 0) ^ get_n_arg(cr, pr, 2, 0);
 	if (res == 0)
 		pr->carry = 1;
 	else
