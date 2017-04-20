@@ -84,7 +84,7 @@ void			header_comment(char *line, t_header *h, t_asm *a)
 	if (tmp == 1)
 		return (lexical_error(a->count_line, a->len_line - ft_strlen(line)));
 	skip_space(&line);
-	if (*line != '"' )
+	if (*line != '"')
 		return (lexical_error(a->count_line, a->len_line - ft_strlen(line)));
 	line++;
 	name = header_comment_(line, a);
