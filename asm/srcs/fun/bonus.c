@@ -90,13 +90,13 @@ void	write_cmd_fun(t_cmd *c)
 	index = 0;
 	while (c)
 	{
-		ft_printf("\t \e[38;5;6m%d \e[38;5;9m%4s\e[38;5;94m%7s",
-			c->bytes, c->op, "Codage");
+		ft_printf("\t \e[38;5;6m%d (%d) \e[38;5;9m%4s\e[38;5;94m%7s",
+			c->t_bytes - c->bytes, c->bytes, c->op, "Codage");
 		while (ft_strcmp(g_op[index].mnemonique, c->op))
 			index++;
 		write_arg_fun(c, g_op[index]);
 		ft_putchar('\n');
-		ft_printf("{7}\t%#5.02x", g_op[index].code);
+		ft_printf("{7}\t      %#5.02x", g_op[index].code);
 		if (g_op[index].nbr_args != 1)
 			ft_printf("{9}   %#02.2x ", c->barg);
 		else

@@ -1,5 +1,5 @@
-.name "KillerZork"
-.comment "I'M ALIIIIVE"
+.name "Melenchon le brave"
+.comment "Here for destroy Zork"
 
 l2:		sti r1, 9, %10
 		fork %:out
