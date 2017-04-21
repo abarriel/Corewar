@@ -99,6 +99,7 @@ t_core		*parcing(int argc, char **argv, t_core *c)
 	int i;
 
 	i = 0;
+	c->nb_player = 0;
 	if (argc <= 1)
 		print_usage();
 	while (++i < argc)

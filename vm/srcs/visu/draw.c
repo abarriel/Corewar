@@ -26,6 +26,7 @@ void			print_res_visu(t_core *core, t_env *p)
 			winner = player;
 		player = player->next;
 	}
+	p->winnername = winner->name;
 	print_winner(winner);
 }
 

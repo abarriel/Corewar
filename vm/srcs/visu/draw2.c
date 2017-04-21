@@ -28,8 +28,10 @@ void			print_info2(t_env *p, char *str)
 	mlx_string_put(p->mlx, p->win, (HEIGHT + 380), 570, 0x0FFFFFF, str);
 	if (p->melenchon == 1)
 	{
-		str = "Partie terminée!";
+		str = "Winner: ";
 		mlx_string_put(p->mlx, p->win, (HEIGHT + 380), 620, 0x0FFFFFF, str);
+		str = p->winnername;
+		mlx_string_put(p->mlx, p->win, (HEIGHT + 480), 620, 0x0FFFFFF, str);
 	}
 }
 
