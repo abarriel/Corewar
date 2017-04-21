@@ -53,7 +53,7 @@ static int	ft_loop_key_hook(t_env *p)
 			cycle_sec_tmp--;
 		}
 	}
-	if (p->core->die_cycle <= 0 && p->melenchon == 0)
+	if (p->core->die_cycle <= CYCLE_DELTA && p->melenchon == 0)
 		print_res_visu(p->core, p);
 	ft_draw(p);
 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
@@ -77,7 +77,7 @@ int			ft_key_hook(int keycode, t_env *p)
 		else if (p->pause == 0)
 			p->pause = 1;
 	}
-	if (keycode == RIGHT)
+	if (keycode == RIGHT && p->core->cycle_sec <= 2000)
 		p->core->cycle_sec++;
 	if (keycode == LEFT)
 	{

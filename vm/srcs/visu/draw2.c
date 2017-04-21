@@ -14,7 +14,7 @@
 
 void			print_info2(t_env *p, char *str)
 {
-	str = "CYCLE / SEC  : ";
+	str = "CYCLE SPEED : ";
 	mlx_string_put(p->mlx, p->win, (HEIGHT + 50), 620, 0x0FFFFFF, str);
 	str = ft_itoa(p->core->cycle_sec);
 	mlx_string_put(p->mlx, p->win, (HEIGHT + 200), 620, 0x0e74c3c, str);

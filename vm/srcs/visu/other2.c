@@ -65,7 +65,8 @@ void			check_button_hit2(int button, int x, int y, t_env *p)
 			p->but->btn4_s = 80;
 			p->but->btn4_px = (HEIGHT) + 480;
 			p->but->btn4_py = (HEIGHT) - 125;
-			p->core->cycle_sec += 5;
+			if ((p->core->cycle_sec + 5) <= 2005)
+				p->core->cycle_sec += 5;
 		}
 	}
 }
