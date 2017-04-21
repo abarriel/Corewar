@@ -92,6 +92,7 @@ typedef struct			s_core
 typedef struct			s_env
 {
 	t_core			*core;
+	char 			*winnername;
 	int				speed;
 	int				melenchon;
 	int				pause;
