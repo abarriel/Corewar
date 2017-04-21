@@ -169,6 +169,7 @@ unsigned char			apply_mask(unsigned char cde, int arg);
 unsigned long int		chatoli(char **str);
 unsigned int			get_n_arg(t_core *core, t_process *process,
 		int arg, int md);
+int						already_use(t_core *core, int i);
 void					print_data(t_core *core);
 void					print_is_alive(int nb, char *name);
 void					print_reg(t_core *core);
