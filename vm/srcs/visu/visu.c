@@ -6,7 +6,7 @@
 /*   By: lcharvol <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 10:13:08 by lcharvol          #+#    #+#             */
-/*   Updated: 2017/04/18 14:56:06 by lcharvol         ###   ########.fr       */
+/*   Updated: 2017/04/21 16:26:17 by lcharvol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ void		check_button_hit(int button, int x, int y, t_env *p)
 static int	ft_loop_key_hook(t_env *p)
 {
 	int		cycle_sec_tmp;
+	int		cycle_tmp;
 
 	cycle_sec_tmp = p->core->cycle_sec;
 	mlx_destroy_image(p->mlx, p->img);
 	p->img = mlx_new_image(p->mlx, WIDTH, HEIGHT);
 	p->ret = mlx_get_data_addr(p->img, &(p->bits_per_pixel),
 		&(p->size_line), &(p->endian));
+	cycle_tmp = p->core->cycle;
 	if (p->pause == 0 && p->core->nb_player != 0 && p->core->dump != 0)
 	{
 		while (cycle_sec_tmp != 0)
@@ -53,7 +55,7 @@ static int	ft_loop_key_hook(t_env *p)
 			cycle_sec_tmp--;
 		}
 	}
-	if (p->core->die_cycle <= CYCLE_DELTA && p->melenchon == 0)
+	if (cycle_tmp == p->core->cycle && p->pause == 0 && p->melenchon == 0)
 		print_res_visu(p->core, p);
 	ft_draw(p);
 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
