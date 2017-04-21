@@ -20,7 +20,7 @@ void	print_usage(void)
 	ft_putstr("d’exécution, dump la mémoire sur la sortie standard,");
 	ft_putstr(" puis quitte la partie.\n");
 	ft_putstr("    -debug           : Debug avec plusieurs option\n");
-	ft_putstr("    -n numer         : Fixe le numéro du prochain joueur.\n");
+	ft_putstr("    -n number         : Fixe le numéro du prochain joueur.\n");
 	ft_putstr("    -f               : interface graphique mlx\n");
 	exit(0);
 }
