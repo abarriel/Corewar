@@ -42,6 +42,12 @@ int		real_int(unsigned int nb)
 int		uns_int(int nb)
 {
 	if (nb < 0)
+	{
+		if (nb > -2048)
+			return (nb + 4096);
 		return (nb + 4096);
+	}
+	if (nb > 2047)
+		return (nb - 4096);
 	return (nb);
 }

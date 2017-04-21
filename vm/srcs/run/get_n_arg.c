@@ -36,8 +36,8 @@ unsigned int	return_arg(t_core *core, t_process *process, int index, int cde)
 	}
 	if (cde == IND_CODE && core->tmp_id != 2)
 	{
-		res = (chatohi(&(core->mem[index % MEM_SIZE])));
-		res = chatoi(&(core->mem[(process->pc + res) % MEM_SIZE]));
+		res = (unsigned short int)chatohi(&(core->mem[index % MEM_SIZE]));
+		res = chatoi(&(core->mem[uns_int((process->pc + res) % MEM_SIZE)]));
 		if (core->tmp_id != 1)
 			res %= IDX_MOD;
 	}

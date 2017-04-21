@@ -65,8 +65,9 @@ int		exec_st(void *core, void *pro)
 		insert_in_reg(get_n_reg(cr, pr, 2), 0, res);
 	else
 	{
-		insert_in_color(cr->mem_c, (pr->pc + get_n_arg(cr, pr, 2, 2))
-			% IDX_MOD, pr->player->color * 16 + 2, 4);
+		insert_in_color(cr->mem_c, ((unsigned short int)(pr->pc +
+			((short int)get_n_arg(cr, pr, 2, 2) % IDX_MOD))
+		% MEM_SIZE) % MEM_SIZE, pr->player->color * 16 + 2, 4);
 		insert_in_reg(cr->mem, ((unsigned short int)(pr->pc +
 			((short int)get_n_arg(cr, pr, 2, 2) % IDX_MOD))
 		% MEM_SIZE) % MEM_SIZE, res);
